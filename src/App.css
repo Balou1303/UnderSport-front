@@ -1,38 +1,49 @@
 .card {
     display: flex;
-    height: 200px; /*fixe une hauteur pour que l'image la remplisse */
-    overflow: hidden; /* Pour que l'image ne dépasse pas des coins arrondis */
-    border: 1px solid black;
-    width: 25%;
+    width: 35%; /* Prend presque la moitié de l'écran (laisse un peu de place pour le gap) */
+    min-width: 400px; /* ne devient jamais trop petite sur mobile */
+    height: 220px;
+    border: 1px solid #ccc;
     border-radius: 16px;
-    
+    overflow: hidden;/* Important pour que l'image respecte les arrondis */
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
 }
 
-/* Bloc gauche */
+/* BLOC GAUCHE (IMAGE)*/
 .cardPicture {
-    width: 40%; /* On lui donne 40% de la largeur disponible */
-    /* Pas besoin de height ici, le flex s'en occupe */
+    width: 40%;
+    height: 100%;
 }
 
 .cardPicture img {
     width: 100%;
-    height: 100%; 
-    object-fit: cover; /*elle remplit sans s'écraser */
+    height: 100%;
+    object-fit: cover; /* L'image remplit le bloc sans être déformée */
 }
 
-/* Bloc droit */
+/* BLOC DROIT (TEXTE)*/
 .cardBody {
-    width: 60%; /* Le reste de la place */
-    padding: 20px;/* Pour que le texte ne colle pas à l'image */
+    padding: 15px;
     display: flex;
-    flex-direction: column; /* Pour empiler Titre, Date, Bouton verticalement */
-    justify-content: center; /* Pour centrer verticalement */
+    flex-direction: column;
+    justify-content: center; 
+    align-items: flex-start; 
 }
 
-button {
+.cardBody h2 {
+    margin: 0 0 10px 0; /* Enlève la marge du haut et met un peu d'espace en bas */
+    font-size: 1.2rem;
+}
+
+.cardBody button {
     background-color: #8A5CF5;
-    color: #F8F9FA ;
-    border-radius: 16px;
-    width: 45%;
+    color: #F8F9FA;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    margin-top: 10px;
     font-weight: bold;
+    cursor: pointer;
+    width: auto;
 }
