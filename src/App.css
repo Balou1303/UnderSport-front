@@ -1,0 +1,38 @@
+.card {
+    display: flex;
+    height: 200px; /*fixe une hauteur pour que l'image la remplisse */
+    overflow: hidden; /* Pour que l'image ne dépasse pas des coins arrondis */
+    border: 1px solid black;
+    width: 25%;
+    border-radius: 16px;
+    
+}
+
+/* Bloc gauche */
+.cardPicture {
+    width: 40%; /* On lui donne 40% de la largeur disponible */
+    /* Pas besoin de height ici, le flex s'en occupe */
+}
+
+.cardPicture img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; /*elle remplit sans s'écraser */
+}
+
+/* Bloc droit */
+.cardBody {
+    width: 60%; /* Le reste de la place */
+    padding: 20px;/* Pour que le texte ne colle pas à l'image */
+    display: flex;
+    flex-direction: column; /* Pour empiler Titre, Date, Bouton verticalement */
+    justify-content: center; /* Pour centrer verticalement */
+}
+
+button {
+    background-color: #8A5CF5;
+    color: #F8F9FA ;
+    border-radius: 16px;
+    width: 45%;
+    font-weight: bold;
+}
