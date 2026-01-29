@@ -1,13 +1,13 @@
-.card {
+.article-card {
     display: flex;
-    width: 35%; /* Prend presque la moitié de l'écran (laisse un peu de place pour le gap) */
-    min-width: 400px; /* ne devient jamais trop petite sur mobile */
-    height: 220px;
+    flex-direction: row;
+    width: 48%;
+    height: 250px;
     border: 1px solid #ccc;
     border-radius: 16px;
-    overflow: hidden;/* Important pour que l'image respecte les arrondis */
+    overflow: hidden;       
     background-color: white;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 /* BLOC GAUCHE (IMAGE)*/
@@ -24,26 +24,68 @@
 
 /* BLOC DROIT (TEXTE)*/
 .cardBody {
-    padding: 15px;
+    width: 60%;
+    padding: 20px;    
     display: flex;
     flex-direction: column;
-    justify-content: center; 
-    align-items: flex-start; 
+    justify-content: space-between; 
+    align-items: flex-start;
 }
 
+/* s'assure que le titre ne pousse pas trop */
 .cardBody h2 {
-    margin: 0 0 10px 0; /* Enlève la marge du haut et met un peu d'espace en bas */
     font-size: 1.2rem;
+    margin: 0;
+    
+    /*Coupe le texte s'il dépasse 2 lignes*/
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .cardBody button {
     background-color: #8A5CF5;
-    color: #F8F9FA;
+    color: white;
     border: none;
-    border-radius: 8px;
     padding: 8px 16px;
-    margin-top: 10px;
-    font-weight: bold;
+    border-radius: 8px;
+    font-weight: bold ;
+}
+button:hover{
+   transform: scale(1.02); 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
     cursor: pointer;
-    width: auto;
+    border-color: #8A5CF5;
+}
+/* Version mobile */
+@media (max-width: 768px) {
+    .article-card {
+        width: 100%;        /* La carte prend toute la largeur */
+        margin-bottom: 20px; /* On ajoute de l'espace entre les cartes empilées */
+        height: auto;       /* On laisse la hauteur s'adapter si besoin */
+        min-height: 180px;
+    }
+
+    /* affichage vertical sur téléphone */
+    .article-card {
+        flex-direction: column; 
+        height: auto;
+    }
+    .cardPicture {
+        width: 100%;
+        height: 200px;
+    }
+    .cardBody {
+        width: 100%;
+    }
+   
+}
+.article-card .badge {
+    cursor: pointer;
+    transition: all 0.2s;/* Fluidité de l'animation */
+}
+
+.article-card .badge:hover {
+    transform: scale(1.1);    /* Grossit de 10% */
+    filter: brightness(1.2);  /* Devient 20% plus lumineux (effet "lumière") */
 }
