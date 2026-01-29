@@ -56,7 +56,115 @@ button:hover{
     box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
     cursor: pointer;
     border-color: #8A5CF5;
+    filter: brightness(1.2);
 }
+
+.article-card .badge {
+    cursor: pointer;
+    transition: all 0.2s;/* Fluidité de l'animation */
+    filter: brightness(1.2);
+}
+
+.article-card .badge:hover {
+    transform: scale(1.1);    /* Grossit de 10% */
+    filter: brightness(1.2);  /* Devient 20% plus lumineux (effet "lumière") */
+}
+
+
+/* Hero Section*/
+.hero-card {
+    width: 100%;
+    height: 450px;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+}
+
+/* Un filtre sombre pour que le texte blanc soit lisible sur n'importe quelle photo */
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); /* Dégradé noir vers transparent */
+    color: white;
+}
+
+.hero-overlay h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-summary {
+    font-size: 1.1rem;
+    color: #ddd;
+    max-width: 700px;
+}
+
+.hero-btn {
+    margin-top: 15px;
+    padding: 10px 25px;
+    background-color: #8A5CF5;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: transform 0.2s;
+}
+
+.hero-btn:hover {
+    transform: scale(1.05);
+    background-color: #7040d5;
+}
+
+.hero-overlay h1 {
+    /* ... tes autres lignes ... */
+    
+    /* Une ombre noire solide derrière le texte */
+    text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8); 
+}
+
+.hero-summary {
+    /* ... tes autres lignes ... */
+    
+    /* Une ombre un peu plus légère pour le petit texte */
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    
+    /* On change le padding pour aérer */
+    padding: 60px 40px 40px 40px; 
+    
+    /* LE SECRET EST ICI : */
+    /* On ajoute une couche grise légère PARTOUT (0.3) + le dégradé noir fort en bas */
+    background: linear-gradient(
+        to bottom, 
+        rgba(0,0,0,0.1),       /* Haut : très légèrement grisé (10%) pour casser le blanc pur */
+        rgba(0,0,0,0.4) 50%,   /* Milieu : on commence à assombrir */
+        rgba(0,0,0,0.95) 100%  /* Bas : presque noir total pour que le texte ressorte */
+    );
+    
+    color: white;
+}
+
 /* Version mobile */
 @media (max-width: 768px) {
     .article-card {
@@ -79,13 +187,4 @@ button:hover{
         width: 100%;
     }
    
-}
-.article-card .badge {
-    cursor: pointer;
-    transition: all 0.2s;/* Fluidité de l'animation */
-}
-
-.article-card .badge:hover {
-    transform: scale(1.1);    /* Grossit de 10% */
-    filter: brightness(1.2);  /* Devient 20% plus lumineux (effet "lumière") */
 }
