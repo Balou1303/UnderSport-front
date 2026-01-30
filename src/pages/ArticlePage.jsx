@@ -9,16 +9,16 @@ const ArticlePage = () => {
     
     const [article, setArticle] = useState(null);
 
+    const fetchOneArticle = async () => {
+        try {
+            // On utilise ton service pour récupérer juste CET article
+            const response = await articlesService.getArticleById(id);
+            setArticle(response.data);
+        } catch (error) {
+            console.error("Erreur chargement article", error);
+        }
+    };
     useEffect(() => {
-        const fetchOneArticle = async () => {
-            try {
-                // On utilise ton service pour récupérer juste CET article
-                const response = await articlesService.getArticleById(id);
-                setArticle(response.data);
-            } catch (error) {
-                console.error("Erreur chargement article", error);
-            }
-        };
 
         fetchOneArticle();
     }, [id]); // On relance si l'ID change
