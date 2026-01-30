@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'; // Important pour ne pas recharger la p
 
 const NavBar = () => {
   return (
-    // "bg-dark" et "data-bs-theme='dark'" pour le style sombre UnderSport
     <Navbar expand="lg" className="bg-dark" data-bs-theme="dark">
       <Container>
         {/* LOGO */}

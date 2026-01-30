@@ -1,13 +1,13 @@
-import React from 'react';
 import { Badge } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 const HeroArticle = ({ article }) => {
-    // 1. Sécurité absolue : si pas d'article, on n'affiche rien
+    // si pas d'article, on n'affiche rien
     if (!article) return null;
 
-    const BASE_URL = "http://localhost:3000";
+    const BASE_URL = import.meta.env.VITE_URL_API;
     
-    // 2. Gestion de l'image (évite le bug des guillemets CSS)
+    // Gestion de l'image (évite le bug des guillemets CSS)
     const imageUrl = article.picture 
         ? `${BASE_URL}/${article.picture}` 
         : "https://placehold.co/1200x600/111/white?text=La+Une";
@@ -30,7 +30,7 @@ const HeroArticle = ({ article }) => {
 
                     <h1>{article.title}</h1>
                     
-                    {/* 4. Sécurité sur le contenu (évite le crash si content est null) */}
+                    {/* évite le crash si content est null */}
                     <p className="hero-summary">
                         {article.content ? article.content.substring(0, 150) + "..." : "Lire la suite..."}
                     </p>
@@ -39,7 +39,7 @@ const HeroArticle = ({ article }) => {
                         Par {article.firstName} {article.lastName} | Le {new Date(article.publicationDate).toLocaleDateString()}
                     </div>
 
-                    <button className="hero-btn">Lire le dossier</button>
+                    <Link to={`/article/${article.articleId}`} className="hero-btn">Lire l'article</Link>
                 </div>
             </div>
         </div>

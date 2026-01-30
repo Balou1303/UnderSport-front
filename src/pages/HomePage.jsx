@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import articlesService from "../services/articlesService";
 import ArticlesCards from "../components/ArticlesCards";
 import HeroArticle from "../components/HeroArticle";
-import '../App.css'; // <--- J'ai corrigé la coquille ici !
+import '../App.css';
 
 const HomePage = () => {
     const [articles, setArticles] = useState([]);
@@ -22,7 +22,6 @@ const HomePage = () => {
         fetchArticles();
     }, []);
 
-    // LOGIQUE DE DÉCOUPAGE
     // Si on a des articles, le premier va à la Une
     const featuredArticle = articles.length > 0 ? articles[0] : null;
     
@@ -34,14 +33,14 @@ const HomePage = () => {
             
             <h1 className="mb-4">Bienvenue sur UnderSport</h1>
 
-            {/* 1. SECTION HÉRO (À LA UNE) */}
+            {/* Section "à la une" */}
             {featuredArticle && (
                 <section style={{ marginBottom: '50px' }}>
                     <HeroArticle article={featuredArticle} />
                 </section>
             )}
 
-            {/* 2. LISTE DES AUTRES ARTICLES */}
+            {/* Autres articles */}
             <h2 className="mb-3">Dernières actualités</h2>
             
             <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "space-between" }}>

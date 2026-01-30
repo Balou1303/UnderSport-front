@@ -1,11 +1,13 @@
-import axios from "axios";
+import api from "./api"; 
 
-function getArticles () {
-    return axios.get("http://localhost:3000/api/articles")
+function getArticles() {
+    // Plus besoin de l'URL complète, juste la fin 
+    // Axios ajoute automatiquement "/api" devant.
+    return api.get("/articles"); 
 }
 
-function getEditors () {
-    return axios.get("http://localhost:3000/api/users")
+function getEditors() {
+    return api.get("/users");
 }
 
 export default {
