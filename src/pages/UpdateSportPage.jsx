@@ -1,0 +1,70 @@
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom"; // useParams pour lire l'ID dans l'URL
+import sportsServices from "../services/sportsServices";
+
+const UpdateSportPage = () => {
+    // On récupère l'ID depuis l'URL (ex: /edit/3 -> id = 3)
+    const { id } = useParams(); 
+    const navigate = useNavigate();
+    const [sport, setSport] = useState({ name: "" });
+
+    const fetchSport = async () => {
+        try {
+            const response = await sportsServices.getSportById(id);
+            // On remplit le state avec ce qui vient de la BDD
+            // vérifie si l'API renvoie { data: ... } ou directement l'objet
+            const data = response.data ? response.data : response; 
+            setSport(data); 
+        } catch (error) {
+            console.error("Erreur chargement sport", error);
+        }
+    };
+
+    // Gérer la saisie dans l'input
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        // On garde l'ancien sport (...sport) et on modifie juste le champ qui change
+        setSport({ ...sport, [name]: value });
+    };
+
+    // 5. Envoyer le formulaire (UPDATE)
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // On bloque le rechargement de page
+        try {
+            const response = await sportsServices.updateSport(id, sport);
+            // Si ça marche, on retourne au tableau de bord
+            navigate("/admin/sports");
+        } catch (error) {
+            console.error("Erreur modification", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchSport();
+    }, []);
+
+    return (
+        <div className="p-4">
+            <h1>Modifier le sport</h1>
+            
+            <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Nom du sport</label>
+                    <input 
+                        type="text"
+                        id="name"
+                        name="name"
+                        className="form-control"
+                        value={sport.name || ""} // La valeur vient du State
+                        onChange={handleChange} // Chaque lettre tape met à jour le State
+                        required
+                    />
+                </div>
+
+                <button type="submit" className="btn btn-primary">Valider</button>
+            </form>
+        </div>
+    );
+};
+
+export default UpdateSportPage;

@@ -5,6 +5,7 @@ import ArticlePage from './pages/ArticlePage';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './context/AuthContext';
 import DashboardPage from './pages/DashboardPage';
+import UpdateSportPage from './pages/UpdateSportPage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin/sports" element={<DashboardPage />} />
+          <Route path="/admin/sports/edit/:id" element={<UpdateSportPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

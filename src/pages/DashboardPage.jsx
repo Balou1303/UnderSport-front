@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import sportsServices from "../services/sportsServices";
+import { useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
     const [sports, setSports] = useState([]);
+    const navigate = useNavigate()
 
     const fetchSports = async () => {
         try {
@@ -25,29 +27,49 @@ const DashboardPage = () => {
         }
     };
 
+    const handleEdit = async (id) =>{
+        navigate(`/admin/sports/edit/${id}`)
+    }
+
     useEffect(() => {
         fetchSports()
     }, []);
+    
     return <>
         <div className="p-4">
             <h1>Dashboard - Gestion des Sports</h1>
 
-            {/* Si la liste est vide, on peut afficher un message */}
             {sports.length === 0 && <p>Chargement...</p>}
 
-            <ul>
-                {/* On boucle sur les sports pour les afficher */}
+            <ul className="list-group mt-3">
                 {sports.map((sport) => (
-                    // Chaque élément d'une liste doit avoir une clé unique (key)
-                    // Supposons que ton sport ait un ID et un LABEL ou NOM
-                    <li key={sport.sportId}>
-                        {sport.name}
-                        <button 
-                onClick={() => handleDelete(sport.sportId)} 
-                style={{ color: 'white', backgroundColor: 'red', border: 'none', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer' }}
-            >
-                Supprimer
-            </button>
+                    <li 
+                        key={sport.sportId} 
+                        className="list-group-item d-flex justify-content-between align-items-center"
+                    >
+
+                        {/* Le Nom du sport (à gauche) */}
+                        <span className="fw-bold">{sport.name}</span>
+                        
+                        {/* Le Groupe de Boutons (à droite) */}
+                        <div style={{ display: 'flex', gap: '10px' }}>
+                            
+                            {/* Bouton Edit */}
+                            <button 
+                                onClick={() => handleEdit(sport.sportId)}
+                                className="btn btn-warning btn-sm"
+                            >
+                                Modifier ✏️
+                            </button>
+
+                            {/* Bouton delete */}
+                            <button 
+                                onClick={() => handleDelete(sport.sportId)} 
+                                className="btn btn-danger btn-sm"
+                            >
+                                Supprimer 🗑️
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
