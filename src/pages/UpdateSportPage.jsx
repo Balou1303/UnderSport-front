@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // useParams pour lire l'ID dans l'URL
 import sportsServices from "../services/sportsServices";
+import { toast } from "react-toastify";
 
 const UpdateSportPage = () => {
     // On récupère l'ID depuis l'URL (ex: /edit/3 -> id = 3)
@@ -32,10 +33,10 @@ const UpdateSportPage = () => {
         e.preventDefault(); // On bloque le rechargement de page
         try {
             const response = await sportsServices.updateSport(id, sport);
-            // Si ça marche, on retourne au tableau de bord
+            toast.success("Sport modifié avec succès")
             navigate("/admin/sports");
         } catch (error) {
-            console.error("Erreur modification", error);
+            toast.error("Le sport n'a pas été modifié");
         }
     };
 

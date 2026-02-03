@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import sportsServices from "../services/sportsServices";
+import { toast } from "react-toastify";
 
 const AddSportPage = () => {
     const navigate = useNavigate();
@@ -15,9 +16,10 @@ const AddSportPage = () => {
         e.preventDefault();
         try {
             const response = await sportsServices.addSport(sport);
+            toast.success("Sport ajouté avec succès")
             navigate("/admin/sports");
         } catch (error) {
-            console.error("Erreur modification", error);
+            toast.error("Impossible d'ajouter le sport");
         }
     };
 

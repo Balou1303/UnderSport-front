@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
             if (decoded.exp > Date.now() / 1000) {
                 setIsConnected(true);
                 
-                if (decoded.idRoles === 1) { 
+                if (decoded.idRole === 1) { 
                     setRole("admin");
                 } else {
                     setRole("user");

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import usersService from "../services/usersService";
 import { AuthContext } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import {toast} from 'react-toastify';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ const LoginPage = () => {
 
         } catch (error) {
             console.error("Erreur de connexion", error);
-            alert("Erreur : Email ou mot de passe incorrect");
+            toast.error("Erreur : Email ou mot de passe incorrect");
         }
     }
 

@@ -8,6 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 import UpdateSportPage from './pages/UpdateSportPage';
 import AddSportPage from './pages/AddSportPage';
 import AdminRoute from './components/AdminRoute';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -15,6 +16,13 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <NavBar />
+
+        <ToastContainer
+          position="bottom-right" // En bas à droite
+          autoClose={3000}        // Disparaît au bout de 3 sec
+          theme="colored"         // Style coloré (Vert/Rouge)
+        />
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/article/:id" element={<ArticlePage />} />
@@ -33,7 +41,7 @@ function App() {
               <AdminRoute>
                 <UpdateSportPage />
               </AdminRoute>} />
-              
+
           <Route path="/admin/sports/add"
             element={<AdminRoute>
               <AddSportPage />
