@@ -1,6 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import { jwtDecode } from 'jwt-decode';
-import axios from "axios";
+import api from "../services/api";
 
 export const AuthContext = createContext({
     isConnected: false,
@@ -22,14 +22,16 @@ export const AuthProvider = ({ children }) => {
                 if (decoded.exp > Date.now() / 1000) {
                     setIsConnected(true);
                     setRole(decoded.role);
-                    axios.defaults.headers["Authorization"] = 'Bearer ' + token;
+                    api.defaults.headers["Authorization"] = 'Bearer ' + token;
                 } else {
                     localStorage.removeItem('token');
+                    delete api.defaults.headers['Authorization']
                     setIsConnected(false); // Important de reset
                 }
             } catch (error) {
                 // Si le token est invalide
                 localStorage.removeItem('token');
+                delete api.defaults.headers['Authorization']
                 setIsConnected(false);
             }
         }

@@ -4,6 +4,8 @@ import NavBar from './components/NavBar';
 import ArticlePage from './pages/ArticlePage';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './context/AuthContext';
+import DashboardPage from './pages/DashboardPage';
+
 
 function App() {
   return <>
@@ -14,6 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/article/:id" element={<ArticlePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin/sports" element={<DashboardPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
