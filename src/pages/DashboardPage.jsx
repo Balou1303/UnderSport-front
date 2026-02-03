@@ -73,6 +73,13 @@ const DashboardPage = () => {
                     </li>
                 ))}
             </ul>
+            
+            {/* Bouton add */}
+        <button 
+        className="btn d-flex mt-4"
+        style={{ backgroundColor: '#8A5CF5', color: 'white' }}
+        onClick={()=> navigate("/admin/sports/add")}
+        >Ajouter un sport</button>
         </div>
     </>;
 };

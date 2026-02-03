@@ -16,10 +16,15 @@ function updateSport(id, sportData) {
     return api.put(`/sports/${id}`, sportData)
 }
 
+function addSport(sportData) {
+    return api.post(`/sports`, sportData)
+}
+
 export default {
     getAllSports,
     deleteSport,
     getSportById,
-    updateSport
+    updateSport,
+    addSport
 
 }

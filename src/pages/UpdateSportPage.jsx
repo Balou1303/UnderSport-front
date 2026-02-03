@@ -4,7 +4,7 @@ import sportsServices from "../services/sportsServices";
 
 const UpdateSportPage = () => {
     // On récupère l'ID depuis l'URL (ex: /edit/3 -> id = 3)
-    const { id } = useParams(); 
+    const { id } = useParams();
     const navigate = useNavigate();
     const [sport, setSport] = useState({ name: "" });
 
@@ -13,8 +13,8 @@ const UpdateSportPage = () => {
             const response = await sportsServices.getSportById(id);
             // On remplit le state avec ce qui vient de la BDD
             // vérifie si l'API renvoie { data: ... } ou directement l'objet
-            const data = response.data ? response.data : response; 
-            setSport(data); 
+            const data = response.data ? response.data : response;
+            setSport(data);
         } catch (error) {
             console.error("Erreur chargement sport", error);
         }
@@ -27,7 +27,7 @@ const UpdateSportPage = () => {
         setSport({ ...sport, [name]: value });
     };
 
-    // 5. Envoyer le formulaire (UPDATE)
+    // Envoyer le formulaire (UPDATE)
     const handleSubmit = async (e) => {
         e.preventDefault(); // On bloque le rechargement de page
         try {
@@ -46,11 +46,11 @@ const UpdateSportPage = () => {
     return (
         <div className="p-4">
             <h1>Modifier le sport</h1>
-            
+
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Nom du sport</label>
-                    <input 
+                    <input
                         type="text"
                         id="name"
                         name="name"
@@ -60,8 +60,16 @@ const UpdateSportPage = () => {
                         required
                     />
                 </div>
-
+                <div className="d-flex gap-3 mt-3">
                 <button type="submit" className="btn btn-primary">Valider</button>
+                <button
+                    type="button"
+                    onClick={() => navigate("/admin/sports")}
+                    className="btn btn-secondary"
+                    >
+                    Retour
+                </button>
+                    </div>
             </form>
         </div>
     );
