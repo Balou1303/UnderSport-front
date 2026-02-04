@@ -1,23 +1,37 @@
-import api from "./api"; 
+import api from "./api";
 
 function getArticles() {
-    // Plus besoin de l'URL complète, juste la fin 
-    // Axios ajoute automatiquement "/api" devant.
-    return api.get("/articles"); 
+    return api.get("/articles");
 }
 
 function getArticleById(id) {
     return api.get(`/articles/${id}`);
 }
 
-function getEditors() {
-    return api.get("/users");
+function createArticle(data) {
+    return api.post(`/articles`, data);
+}
+
+function updateArticle(id, data) {
+    return api.put(`/articles/${id}`, data);
+}
+
+const getSportsByArticle = (idArticle) => {
+    return api.get(`/articles/${idArticle}/sports`);
+};
+
+function deleteArticle(id) {
+    return api.delete(`/articles/${id}`);
 }
 
 
 export default {
     getArticles,
     getArticleById,
-    getEditors
+    createArticle,
+    updateArticle,
+    getSportsByArticle,
+    deleteArticle
+
 
 }

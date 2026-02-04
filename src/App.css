@@ -1,4 +1,70 @@
-/* STYLES DES CARTES (Liste articles) */
+:root {
+  /* Le Violet UnderSport */
+  --primary-color: #8A5CF5;
+  --primary-hover: #734bd6; 
+
+  /* Couleurs du Back Office */
+  --sidebar-bg: #111827;    /* Le fameux noir bleuté */
+  --sidebar-text: #9ca3af;  
+  --sidebar-active: #ffffff; 
+  --sidebar-active-bg: rgba(138, 92, 245, 0.2); 
+}
+
+/* Style Bootstrap */
+
+/* Boutons violets partout */
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+  border-color: var(--primary-hover) !important;
+}
+/* Cible UNIQUEMENT les liens qui ont la classe "auth-link" (Connexion/Déconnexion) */
+.navbar-nav .nav-link.auth-link {
+  color: white !important;
+  font-weight: bold !important;
+  border-radius: 5px; 
+  margin-left: 10px;
+  transition: all 0.3s;
+}
+
+/* Au survol de ce bouton spécifique */
+.navbar-nav .nav-link.auth-link:hover {
+  background-color: white !important;
+  color: var(--primary-color) !important; /* Le texte devient violet sur fond blanc */
+}
+
+/* SideBar*/
+
+/* Le fond sombre de la sidebar */
+.custom-sidebar {
+  background-color: var(--sidebar-bg) !important;
+  color: var(--sidebar-text);
+}
+
+/* Les liens dans la sidebar (gris par défaut) */
+.custom-sidebar .nav-link {
+  color: var(--sidebar-text) !important;
+}
+
+/* Les liens dans la sidebar (blanc au survol) */
+.custom-sidebar .nav-link:hover {
+  color: white !important;
+}
+
+/* L'onglet actif (fond violet transparent) */
+.custom-sidebar .nav-link.active {
+  background-color: var(--sidebar-active-bg) !important;
+  color: var(--sidebar-active) !important;
+  border-left: 4px solid var(--primary-color);
+}
+
+
+/* Cards */
+
 .article-card {
     display: flex;
     flex-direction: row;
@@ -12,7 +78,6 @@
     transition: transform 0.2s;
 }
 
-/* Bloc gauche (image) */
 .cardPicture {
     width: 40%;
     height: 100%;
@@ -24,7 +89,6 @@
     object-fit: cover;
 }
 
-/* Bloc droit (texte) */
 .cardBody {
     width: 60%;
     padding: 20px;
@@ -34,7 +98,6 @@
     align-items: flex-start;
 }
 
-/* Titre limité à 2 lignes */
 .cardBody h2 {
     font-size: 1.2rem;
     margin: 0;
@@ -43,7 +106,6 @@
     overflow: hidden;
 }
 
-/* Gestion des Badges (Tags) */
 .article-card .badge {
     cursor: pointer;
     transition: all 0.2s;
@@ -55,8 +117,7 @@
     filter: brightness(1.2);
 }
 
-
-/* HERO SECTION (À LA UNE) */
+/* Hero Section */
 .hero-card {
     width: 100%;
     height: 450px;
@@ -75,21 +136,6 @@
     position: relative;
 }
 
-/* Le filtre sombre pour la lisibilité */
-.hero-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 60px 40px 40px 40px;
-    background: linear-gradient(to bottom,
-            rgba(0, 0, 0, 0.1),
-            rgba(0, 0, 0, 0.4) 50%,
-            rgba(0, 0, 0, 0.95) 100%);
-    color: white;
-}
-
-/* Le filtre sombre sur TOUTE l'image */
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -99,7 +145,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: flex-start; /* permet au btn de ne pas prendre toute l'image */
+    align-items: flex-start;
     padding: 60px 40px 40px 40px;
     background: linear-gradient(to bottom,
             rgba(0, 0, 0, 0.2) 0%,
@@ -115,9 +161,6 @@
     text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.8);
 }
 
-
-
-/* BOUTON HERO */
 .hero-btn {
     background-color: #8A5CF5;
     color: white;
@@ -139,7 +182,6 @@
     box-shadow: 0 5px 15px rgba(138, 92, 245, 0.4);
 }
 
-/* BOUTON CARTE  */
 .card-btn {
     background-color: #8A5CF5;
     color: white;
@@ -162,9 +204,7 @@
     color: white;
 }
 
-
-/* RESPONSIVE (MOBILE) */
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .article-card {
         width: 100%;
@@ -180,9 +220,5 @@
 
     .cardBody {
         width: 100%;
-    }
-
-    .hero-overlay h1 {
-        font-size: 1.8rem;
     }
 }

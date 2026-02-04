@@ -69,7 +69,7 @@ const LoginPage = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100" style={{ backgroundColor: '#8A5CF5', border: 'none' }}>
+                <Button variant="primary" type="submit" className="w-100">
                     Se connecter
                 </Button>
             </Form>

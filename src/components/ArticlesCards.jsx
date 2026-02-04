@@ -3,6 +3,7 @@ import { Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const ArticlesCards = ({ article }) => {
+    // Utilisation de la variable d'environnement pour l'image
     const BASE_URL = import.meta.env.VITE_URL_API;
     const imageUrl = article.picture 
         ? `${BASE_URL}/${article.picture}` 
@@ -17,23 +18,31 @@ const ArticlesCards = ({ article }) => {
             <div className="cardBody">
                 <div>
                     <h2>{article.title}</h2>
-                    
                 </div>
-                    <div style={{ marginBottom: '10px', display: 'flex', gap: '8px' }}>
-                        <Badge bg="secondary">
-                            {article.sportName ? article.sportName : "Sport"}
+
+                {/* ZONE DES BADGES */}
+                <div style={{ marginBottom: '10px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    
+                    {/* 1. BADGE SPORT (Basé sur ton JSON 'sportName') */}
+                    <Badge bg="secondary">
+                        {article.sportName ? article.sportName : "Sport"}
+                    </Badge>
+
+                    {/* 2. BADGE CHAMPIONNAT */}
+                    {article.championshipName && (
+                        <Badge bg="dark">
+                            {article.championshipName}
                         </Badge>
-                        {article.championshipName && (
-                            <Badge bg="secondary">
-                                {article.championshipName}
-                            </Badge>
-                        )}
-                    </div>
+                    )}
+                </div>
 
                 <p>
                     Publié le {new Date(article.publicationDate).toLocaleDateString()}
                     <br />
-                    par <strong>{article.firstName} {article.lastName}</strong>
+                    {/* Sécurité si l'auteur est null comme dans ton JSON */}
+                    {article.firstName && article.lastName && (
+                        <span>par <strong>{article.firstName} {article.lastName}</strong></span>
+                    )}
                 </p>
                 
                 <Link to={`/article/${article.articleId}`} className="card-btn">Lire l'article</Link>
@@ -43,4 +52,3 @@ const ArticlesCards = ({ article }) => {
 };
 
 export default ArticlesCards;
-

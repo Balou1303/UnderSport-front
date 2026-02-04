@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import NavBar from './components/NavBar';
 import ArticlePage from './pages/ArticlePage';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './context/AuthContext';
@@ -11,6 +10,9 @@ import AdminRoute from './components/AdminRoute';
 import { ToastContainer } from 'react-toastify';
 import AdminLayout from './components/AdminLayout';
 import PublicLayout from './components/PublicLayout';
+import DashboardArticles from './pages/DashboardArticles';
+import AddArticlePage from './pages/AddArticlePage';
+import EditArticlePage from './pages/EditArticlePage';
 
 
 function App() {
@@ -42,6 +44,9 @@ function App() {
             <Route path="sports" element={<DashboardPage />} />
             <Route path="sports/add" element={<AddSportPage />} />
             <Route path="sports/edit/:id" element={<UpdateSportPage />} />
+            <Route path="articles" element={<DashboardArticles />} />
+            <Route path="articles/add" element={<AddArticlePage />} />
+            <Route path="/admin/articles/edit/:id" element={<EditArticlePage />} />
           </Route>
 
         </Routes>
