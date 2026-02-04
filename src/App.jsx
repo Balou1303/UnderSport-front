@@ -9,48 +9,44 @@ import UpdateSportPage from './pages/UpdateSportPage';
 import AddSportPage from './pages/AddSportPage';
 import AdminRoute from './components/AdminRoute';
 import { ToastContainer } from 'react-toastify';
+import AdminLayout from './components/AdminLayout';
+import PublicLayout from './components/PublicLayout';
 
 
 function App() {
   return <>
     <AuthProvider>
       <BrowserRouter>
-        <NavBar />
 
         <ToastContainer
-          position="bottom-right" // En bas à droite
-          autoClose={3000}        // Disparaît au bout de 3 sec
-          theme="colored"         // Style coloré (Vert/Rouge)
+          position="bottom-right"
+          autoClose={3000}
+          theme="colored"
         />
 
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/article/:id" element={<ArticlePage />} />
-          <Route path="/login" element={<LoginPage />} />
+          {/* Partie publique */}
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/article/:id" element={<ArticlePage />} />
+            <Route path="/login" element={<LoginPage />} />
+          </Route>
 
-          <Route
-            path="/admin/sports"
-            element={
-              <AdminRoute>
-                <DashboardPage />
-              </AdminRoute>
-            } />
 
-          <Route path="/admin/sports/edit/:id"
-            element={
-              <AdminRoute>
-                <UpdateSportPage />
-              </AdminRoute>} />
-
-          <Route path="/admin/sports/add"
-            element={<AdminRoute>
-              <AddSportPage />
-            </AdminRoute>} />
+          {/* Partie Admin */}
+          <Route path="/admin" element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }>
+            <Route path="sports" element={<DashboardPage />} />
+            <Route path="sports/add" element={<AddSportPage />} />
+            <Route path="sports/edit/:id" element={<UpdateSportPage />} />
+          </Route>
 
         </Routes>
       </BrowserRouter>
     </AuthProvider>
-
   </>
 }
 
