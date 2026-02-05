@@ -12,7 +12,6 @@ const AddArticlePage = () => {
     const [article, setArticle] = useState({
         title: "",
         content: "",
-        picture: "",
         idChampionship: "",
         idSport: ""
     });
@@ -20,6 +19,7 @@ const AddArticlePage = () => {
     // State des listes
     const [sports, setSports] = useState([]);
     const [championships, setChampionships] = useState([]);
+    const [picture, setPicture] = useState(null);
 
     const fetchSports = async () => {
         try {
@@ -33,7 +33,7 @@ const AddArticlePage = () => {
     const fetchChampionships = async () => {
         try {
             const response = await championshipsService.getAllChampionships();
-            setChampionships(response.data ? response.data : response);
+            setChampionships(response.data);
         } catch (error) {
             toast.error("Erreur chargement championnats");
         }
@@ -49,22 +49,28 @@ const AddArticlePage = () => {
         setArticle({ ...article, [name]: value });
     };
 
+    const handlePictureChange = (e) => {
+        setPicture(e.target.files[0]);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Préparation des données pour le format SQL
-            const dataToSend = {
-                title: article.title,
-                content: article.content,
-                picture: article.picture,
-                // Convertit les Strings en Nombres (Int) pour le Back
-                idChampionship: parseInt(article.idChampionship),
-                sports: [parseInt(article.idSport)], 
-                // La date au format SQL (YYYY-MM-DD HH:mm:ss) OBLIGATOIRE pour l'envoi
-                publicationDate: new Date().toISOString().slice(0, 19).replace('T', ' ')
-            };
+            const formData = new FormData();
+            formData.append('title', article.title);
+            formData.append('content', article.content);
+            formData.append('idChampionship', article.idChampionship);
+            formData.append('sports', article.idSport);
 
-            await articlesService.createArticle(dataToSend);
+            // La date au format SQL (YYYY-MM-DD HH:mm:ss) OBLIGATOIRE pour l'envoi
+            const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+            formData.append('publicationDate', date);
+
+            if (picture) {
+                formData.append('image', picture);
+            }
+
+            await articlesService.createArticle(formData);
             toast.success("Article publié avec succès ! 🎉");
             navigate("/admin/articles");
 
@@ -81,7 +87,7 @@ const AddArticlePage = () => {
         <div className="p-4">
             <h1>Nouvel Article ✍️</h1>
             <form onSubmit={handleSubmit}>
-                
+
                 <div className="mb-3">
                     <label className="form-label">Titre</label>
                     <input type="text" name="title" className="form-control" value={article.title} onChange={handleChange} required />
@@ -93,8 +99,14 @@ const AddArticlePage = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Image (URL)</label>
-                    <input type="text" name="picture" className="form-control" placeholder="https://..." value={article.picture} onChange={handleChange} />
+                    <label className="form-label">Image de l'article</label>
+                    <input 
+                        type="file" 
+                        name="image" 
+                        className="form-control" 
+                        accept="image/*" // N'accepte que les images
+                        onChange={handlePictureChange} 
+                    />
                 </div>
 
                 {/* Select Sport */}

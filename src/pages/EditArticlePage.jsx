@@ -9,44 +9,40 @@ const EditArticlePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    // Pour construire l'URL de l'image 
+    const API_URL = import.meta.env.VITE_URL_API;
+    const SERVER_URL = API_URL ? API_URL.replace('/api', '') : '';
+
+    const [newPicture, setNewPicture] = useState(null);
+
     // State du formulaire
     const [article, setArticle] = useState({
         title: "",
         content: "",
-        picture: "",
+        picture: "", // L'ancienne URL (texte)
         idChampionship: "",
         idSport: ""
     });
 
-    // States des listes déroulantes
     const [sports, setSports] = useState([]);
     const [championships, setChampionships] = useState([]);
 
     const fetchAllData = async () => {
         try {
-            // charge les listes Sports & Championnats
             const sportsResp = await sportsServices.getAllSports();
             setSports(sportsResp.data ? sportsResp.data : sportsResp);
 
             const champResp = await championshipsService.getAllChampionships();
             setChampionships(champResp.data ? champResp.data : champResp);
-            console.log(champResp);
-            
 
-            // charge l'article à modifier
             const articleResp = await articlesService.getArticleById(id);
             const articleData = articleResp.data;
 
-            // C. ASTUCE : On charge le sport lié à cet article pour pré-remplir le select
-            // (Car l'article seul ne contient pas forcément l'info du sport)
             const linkedSportResp = await articlesService.getSportsByArticle(id);
-
-            // Si un sport est lié, on prend son ID, sinon chaîne vide
             const currentSportId = (linkedSportResp.data && linkedSportResp.data.length > 0)
                 ? linkedSportResp.data[0].sportId
                 : "";
 
-            //  met tout dans le formulaire
             setArticle({
                 title: articleData.title,
                 content: articleData.content,
@@ -64,25 +60,41 @@ const EditArticlePage = () => {
     useEffect(() => {
         fetchAllData();
     }, [id]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setArticle({ ...article, [name]: value });
     };
 
+
+    const handlePictureChange = (e) => {
+        setNewPicture(e.target.files[0]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const dataToSend = {
-                title: article.title,
-                content: article.content,
-                picture: article.picture,
-                idChampionship: parseInt(article.idChampionship),
-                sports: [parseInt(article.idSport)]
-            };
+            const formData = new FormData();
+            
+            formData.append('title', article.title);
+            formData.append('content', article.content);
+            formData.append('idChampionship', article.idChampionship);
+            formData.append('sports', article.idSport);
 
-            await articlesService.updateArticle(id, dataToSend);
+            // LOGIQUE IMPORTANTE POUR L'IMAGE
+            // Correction : On utilise bien 'newPicture'
+            if (newPicture) {
+                // CAS 1 : Nouvelle image sélectionnée -> on envoie le fichier
+                formData.append('image', newPicture);
+            } else {
+                // CAS 2 : Pas de changement -> on renvoie l'ancienne URL
+                formData.append('picture', article.picture);
+            }
 
-            toast.success("Article modifié avec succès ! 💾");
+            // Correction : On envoie 'formData' (pas dataToSend qui n'existe pas)
+            await articlesService.updateArticle(id, formData);
+
+            toast.success("Article modifié avec succès !");
             navigate("/admin/articles");
 
         } catch (error) {
@@ -106,12 +118,34 @@ const EditArticlePage = () => {
                     <textarea name="content" className="form-control" rows="5" value={article.content} onChange={handleChange} required />
                 </div>
 
+                {/* --- ZONE IMAGE CORRIGÉE --- */}
                 <div className="mb-3">
-                    <label className="form-label">Image (URL)</label>
-                    <input type="text" name="picture" className="form-control" value={article.picture} onChange={handleChange} />
-                </div>
+                    <label className="form-label">Image de l'article</label>
+                    
+                    {/* Prévisualisation de l'image actuelle */}
+                    {article.picture && !newPicture && (
+                        <div className="mb-2">
+                            <p className="small text-muted">Image actuelle :</p>
+                            <img 
+                                src={`${SERVER_URL}${article.picture}`} 
+                                alt="Actuelle" 
+                                style={{ width: "150px", objectFit: "cover", borderRadius: "5px" }} 
+                            />
+                        </div>
+                    )}
 
-                {/* Select sport */}
+                    {/* Input TYPE FILE (et pas text) */}
+                    <input 
+                        type="file" 
+                        name="image" 
+                        className="form-control" 
+                        accept="image/*"
+                        onChange={handlePictureChange} 
+                    />
+                    <div className="form-text">Laisser vide pour conserver l'image actuelle.</div>
+                </div>
+                {/* --------------------------- */}
+
                 <div className="mb-3">
                     <label className="form-label">Sport lié</label>
                     <select name="idSport" className="form-select" value={article.idSport} onChange={handleChange} required>
@@ -122,7 +156,6 @@ const EditArticlePage = () => {
                     </select>
                 </div>
 
-                {/* Select championnat */}
                 <div className="mb-3">
                     <label className="form-label">Championnat lié</label>
                     <select name="idChampionship" className="form-select" value={article.idChampionship} onChange={handleChange} >
