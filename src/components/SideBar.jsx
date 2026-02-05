@@ -23,6 +23,16 @@ const SideBar = () => {
             
             <ul className="nav nav-pills flex-column mb-auto">
                 
+                
+
+                {(role === "admin" || role === "redacteur") && (
+                    <li className="nav-item mb-2">
+                        <Link to="/admin/articles" className={`nav-link ${isActive('/admin/articles')}`}>
+                            📝 Gestion Articles
+                        </Link>
+                    </li>
+                )}
+
                 {role === "admin" && (
                     <li className="nav-item mb-2">
                         {/* On utilise la fonction isActive pour colorier l'onglet courant */}
@@ -32,10 +42,11 @@ const SideBar = () => {
                     </li>
                 )}
 
-                {(role === "admin" || role === "redacteur") && (
+                {role === "admin" && (
                     <li className="nav-item mb-2">
-                        <Link to="/admin/articles" className={`nav-link ${isActive('/admin/articles')}`}>
-                            📝 Gestion Articles
+                        {/* On utilise la fonction isActive pour colorier l'onglet courant */}
+                        <Link to="/admin/users" className={`nav-link ${isActive('/admin/users')}`}>
+                             Gestion Utilisateurs
                         </Link>
                     </li>
                 )}

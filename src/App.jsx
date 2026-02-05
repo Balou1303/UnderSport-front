@@ -14,6 +14,7 @@ import DashboardArticles from './pages/DashboardArticles';
 import AddArticlePage from './pages/AddArticlePage';
 import EditArticlePage from './pages/EditArticlePage';
 import RegisterPage from './pages/RegisterPage';
+import UserAdminRolePage from './pages/UserAdminRolePage';
 
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
             <Route path="sports/edit/:id" element={<UpdateSportPage />} />
             <Route path="articles" element={<DashboardArticles />} />
             <Route path="articles/add" element={<AddArticlePage />} />
-            <Route path="/admin/articles/edit/:id" element={<EditArticlePage />} />
+            <Route path="articles/edit/:id" element={<EditArticlePage />} />
+            <Route path="users" element={<UserAdminRolePage />} />
           </Route>
 
         </Routes>

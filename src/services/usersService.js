@@ -17,10 +17,14 @@ function createUser(user) {
     return api.post("users", user);
 };
 
+function updateRole(id, idRole) {
+    return api.patch(`/users/role/${id}`, { idRole });
+}
 
 export default {
     getAllUsers,
     login,
     logout,
-    createUser
+    createUser,
+    updateRole
 }

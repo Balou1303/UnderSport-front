@@ -23,7 +23,6 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Appel API
             const response = await usersService.login(credentials);
             const token = response.data.token;
 
@@ -31,7 +30,7 @@ const LoginPage = () => {
 
             const decoded = jwtDecode(token);
             if (decoded.idRole === 1) {
-                navigate('/admin/sports');
+                navigate('/admin/articles');
             } else {
                 navigate('/');
             }
