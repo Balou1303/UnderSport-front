@@ -1,42 +1,188 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* STYLES DES CARTES (Liste articles) */
+.article-card {
+    display: flex;
+    flex-direction: row;
+    width: 48%;
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Bloc gauche (image) */
+.cardPicture {
+    width: 40%;
+    height: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.cardPicture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Bloc droit (texte) */
+.cardBody {
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-.card {
-  padding: 2em;
+/* Titre limité à 2 lignes */
+.cardBody h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.read-the-docs {
-  color: #888;
+/* Gestion des Badges (Tags) */
+.article-card .badge {
+    cursor: pointer;
+    transition: all 0.2s;
+    filter: brightness(1.2);
+}
+
+.article-card .badge:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+
+/* HERO SECTION (À LA UNE) */
+.hero-card {
+    width: 100%;
+    height: 450px;
+    margin-bottom: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
+}
+
+/* Le filtre sombre pour la lisibilité */
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 60px 40px 40px 40px;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.4) 50%,
+            rgba(0, 0, 0, 0.95) 100%);
+    color: white;
+}
+
+/* Le filtre sombre sur TOUTE l'image */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start; /* permet au btn de ne pas prendre toute l'image */
+    padding: 60px 40px 40px 40px;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.2) 0%,
+            rgba(0, 0, 0, 0.5) 60%,
+            rgba(0, 0, 0, 0.95) 100%);
+    color: white;
+}
+
+.hero-summary {
+    font-size: 1.1rem;
+    color: #ddd;
+    max-width: 700px;
+    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* BOUTON HERO */
+.hero-btn {
+    background-color: #8A5CF5;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    padding: 10px 25px;
+    margin-top: 20px;
+}
+
+.hero-btn:hover {
+    transform: scale(1.05);
+    background-color: #7040d5;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(138, 92, 245, 0.4);
+}
+
+/* BOUTON CARTE  */
+.card-btn {
+    background-color: #8A5CF5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.card-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(138, 92, 245, 0.3);
+    cursor: pointer;
+    filter: brightness(1.1);
+    color: white;
+}
+
+
+/* RESPONSIVE (MOBILE) */
+
+@media (max-width: 768px) {
+    .article-card {
+        width: 100%;
+        margin-bottom: 20px;
+        min-height: auto;
+        flex-direction: column;
+    }
+
+    .cardPicture {
+        width: 100%;
+        height: 200px;
+    }
+
+    .cardBody {
+        width: 100%;
+    }
+
+    .hero-overlay h1 {
+        font-size: 1.8rem;
+    }
 }
