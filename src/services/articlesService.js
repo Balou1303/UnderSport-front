@@ -16,13 +16,17 @@ function updateArticle(id, data) {
     return api.put(`/articles/${id}`, data);
 }
 
-const getSportsByArticle = (idArticle) => {
+function getSportsByArticle(idArticle) {
     return api.get(`/articles/${idArticle}/sports`);
 };
 
 function deleteArticle(id) {
     return api.delete(`/articles/${id}`);
 }
+
+function defineFeatured(id) {
+    return api.patch(`/articles/${id}/featured`);
+};
 
 
 export default {
@@ -31,7 +35,8 @@ export default {
     createArticle,
     updateArticle,
     getSportsByArticle,
-    deleteArticle
+    deleteArticle,
+    defineFeatured
 
 
 }

@@ -31,6 +31,27 @@ const DashboardArticles = () => {
         }
     };
 
+    const handleFeatured = async (id) => {
+        try {
+            await articlesService.defineFeatured(id);
+
+            // On met à jour l'affichage localement sans recharger la page
+            setArticles(articles.map(article => {
+                // Celui qu'on a cliqué devient 1 (True), les autres deviennent 0 (False)
+                if (article.articleId === id) {
+                    return { ...article, isFeatured: 1 };
+                } else {
+                    return { ...article, isFeatured: 0 };
+                }
+            }));
+
+            toast.success("Article mis à la Une ! 🌟");
+        } catch (error) {
+            console.error(error);
+            toast.error("Erreur lors de la mise à la une");
+        }
+    };
+
     useEffect(() => {
         fetchArticles();
     }, []);
@@ -73,18 +94,37 @@ const DashboardArticles = () => {
                             </td>
 
                             <td style={{ width: '180px' }}>
-                                <button
-                                    className="btn btn-sm btn-warning me-2"
-                                    onClick={() => navigate(`/admin/articles/edit/${article.articleId}`)}
-                                >
-                                    ✏️
-                                </button>
-                                <button
-                                    className="btn btn-sm btn-danger"
-                                    onClick={() => handleDelete(article.articleId, article.title)}
-                                >
-                                    🗑️
-                                </button>
+                                <div className="d-flex gap-2 align-items-center">
+
+
+                                    {/* article à la une */}
+                                    <button
+                                    style={{ minWidth: "90px" }}
+                                        className={`btn btn-sm ${article.isFeatured ? "btn-outline-secondary" : "btn-outline-secondary"} me-2`}
+                                        onClick={() => handleFeatured(article.articleId)}
+                                        title="Mettre à la une"
+                                    >
+                                        {article.isFeatured ? "⭐​" : "☆"}
+                                    </button>
+
+                                    {/* modifier l'article */}
+                                    <button
+                                        className="btn btn-sm btn-warning me-2"
+                                        onClick={() => navigate(`/admin/articles/edit/${article.articleId}`)}
+                                        title="Modifier l'article"
+                                    >
+                                        ✏️
+                                    </button>
+
+                                    {/* supprimer l'article */}
+                                    <button
+                                        className="btn btn-sm btn-danger me-2"
+                                        onClick={() => handleDelete(article.articleId, article.title)}
+                                        title="Supprimer l'article"
+                                    >
+                                        🗑️
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     ))}
