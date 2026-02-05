@@ -15,7 +15,7 @@ const EditArticlePage = () => {
         content: "",
         picture: "",
         idChampionship: "",
-        idSport: "" // pour stocker l'ID du sport actuel
+        idSport: ""
     });
 
     // States des listes déroulantes
@@ -30,6 +30,8 @@ const EditArticlePage = () => {
 
             const champResp = await championshipsService.getAllChampionships();
             setChampionships(champResp.data ? champResp.data : champResp);
+            console.log(champResp);
+            
 
             // charge l'article à modifier
             const articleResp = await articlesService.getArticleById(id);
@@ -123,7 +125,7 @@ const EditArticlePage = () => {
                 {/* Select championnat */}
                 <div className="mb-3">
                     <label className="form-label">Championnat lié</label>
-                    <select name="idChampionship" className="form-select" value={article.idChampionship} onChange={handleChange} required>
+                    <select name="idChampionship" className="form-select" value={article.idChampionship} onChange={handleChange} >
                         <option value="">-- Choisir un championnat --</option>
                         {championships.map(champ => (
                             <option key={champ.championshipId} value={champ.championshipId}>{champ.name}</option>

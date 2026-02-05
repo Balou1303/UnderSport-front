@@ -111,7 +111,7 @@ const AddArticlePage = () => {
                 {/* Select Championnat */}
                 <div className="mb-3">
                     <label className="form-label">Championnat lié</label>
-                    <select name="idChampionship" className="form-select" onChange={handleChange} required>
+                    <select name="idChampionship" className="form-select" onChange={handleChange}>
                         <option value="">Selectionnez un championnat</option>
                         {championships.map(champ => (
                             <option key={champ.championshipId} value={champ.championshipId}>{champ.name}</option>

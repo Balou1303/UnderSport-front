@@ -10,9 +10,7 @@ const HomePage = () => {
     const fetchArticles = async () => {
         try {
             const response = await articlesService.getArticles();
-            // Petite sécurité : on vérifie si c'est response.data ou response tout court
-            const data = response.data ? response.data : response; 
-            setArticles(data);
+            setArticles(response.data);
         } catch (error) {
             console.error("Erreur lors du chargement :", error);
         }
