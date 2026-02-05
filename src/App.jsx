@@ -13,6 +13,7 @@ import PublicLayout from './components/PublicLayout';
 import DashboardArticles from './pages/DashboardArticles';
 import AddArticlePage from './pages/AddArticlePage';
 import EditArticlePage from './pages/EditArticlePage';
+import RegisterPage from './pages/RegisterPage';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/article/:id" element={<ArticlePage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
           </Route>
 
 

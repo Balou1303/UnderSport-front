@@ -13,10 +13,14 @@ function logout() {
     delete api.defaults.headers['Authorization'];
 };
 
+function createUser(user) {
+    return api.post("users", user);
+};
 
 
 export default {
     getAllUsers,
     login,
-    logout
+    logout,
+    createUser
 }
