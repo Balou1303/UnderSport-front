@@ -1,4 +1,3 @@
-import React from 'react';
 import { Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ const ArticlesCards = ({ article }) => {
     return (
         <div className="article-card">
             <div className="cardPicture">
-                <img src={imageUrl} alt={article.title} />
+                <img src={imageUrl} alt={article.title} className="card-img-fixed"/>
             </div>
 
             <div className="cardBody">
@@ -25,7 +24,6 @@ const ArticlesCards = ({ article }) => {
                 {/* ZONE DES BADGES */}
                 <div style={{ marginBottom: '10px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                     
-                    {/* 1. BADGE SPORT (Basé sur ton JSON 'sportName') */}
                     <Badge bg="secondary">
                         {article.sportName ? article.sportName : "Sport"}
                     </Badge>

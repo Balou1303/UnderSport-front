@@ -207,18 +207,47 @@
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .article-card {
-        width: 100%;
-        margin-bottom: 20px;
-        min-height: auto;
-        flex-direction: column;
-    }
+    display: flex;
+    flex-direction: column; 
+    width: 100%;            /*  prend toute la place de la colonne Bootstrap */
+    height: 100%;           /* Pour que toutes les cartes aient la même hauteur */
+    border: 1px solid #e5e7eb; /* Bordure plus douce */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .cardPicture {
-        width: 100%;
-        height: 200px;
-    }
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Ombre plus forte au survol */
+}
 
-    .cardBody {
-        width: 100%;
-    }
+.cardPicture {
+    width: 100%;
+    height: 200px;
+}
+
+.cardPicture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Coupe proprement l'image */
+}
+
+.cardBody {
+    width: 100%;   /* Le corps prend toute la largeur aussi */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;  /* Remplit le vide si la carte est grande */
+    justify-content: space-between; /* Pousse le bouton en bas */
+}
+
+.cardBody h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1f2937;
+}
 }

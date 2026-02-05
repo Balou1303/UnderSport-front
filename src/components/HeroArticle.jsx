@@ -5,14 +5,15 @@ const HeroArticle = ({ article }) => {
     // si pas d'article, on n'affiche rien
     if (!article) return null;
 
-    const BASE_URL = import.meta.env.VITE_URL_API;
-    
-    // Gestion de l'image (évite le bug des guillemets CSS)
-    const imageUrl = article.picture 
-        ? `${BASE_URL}/${article.picture}` 
-        : "https://placehold.co/1200x600/111/white?text=La+Une";
+    const API_URL = import.meta.env.VITE_URL_API;
+    const SERVER_URL = API_URL ? API_URL.replace('/api', '') : '';
 
-    // 3. Gestion des tags (évite le crash si sportName est null)
+    // Construction de l'URL de l'image
+    const imageUrl = article.picture 
+        ? `${SERVER_URL}${article.picture}` 
+        : "https://placehold.co/1200x600/1a1a1a/white?text=A+la+Une";
+
+    //  Gestion des tags (évite le crash si sportName est null)
     const tags = article.sportName ? article.sportName.split(',') : [];
 
     return (

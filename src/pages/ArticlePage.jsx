@@ -4,14 +4,13 @@ import articlesService from "../services/articlesService";
 import { Container, Badge } from "react-bootstrap"; // Un peu de style
 
 const ArticlePage = () => {
-    // 1. On récupère l'ID qui est dans l'URL (ex: /article/42 -> id = 42)
+    // récupère l'ID qui est dans l'URL (ex: /article/42 -> id = 42)
     const { id } = useParams(); 
     
     const [article, setArticle] = useState(null);
 
     const fetchOneArticle = async () => {
         try {
-            // On utilise ton service pour récupérer juste CET article
             const response = await articlesService.getArticleById(id);
             setArticle(response.data);
         } catch (error) {
@@ -21,17 +20,21 @@ const ArticlePage = () => {
     useEffect(() => {
 
         fetchOneArticle();
-    }, [id]); // On relance si l'ID change
+    }, [id]); // relance si l'ID change
 
-    // Si ça charge encore, on affiche un petit texte
+    // Si ça charge encore, affiche un petit texte
     if (!article) return <p>Chargement...</p>;
 
     // Construction de l'URL de l'image (comme sur la Home)
-    const imageUrl = article.picture 
-        ? `${import.meta.env.VITE_URL_API}/${article.picture}` 
-        : "https://placehold.co/1200x600?text=Pas+d'image";
+    const API_URL = import.meta.env.VITE_URL_API;
+    const SERVER_URL = API_URL ? API_URL.replace('/api', '') : '';
 
-    return (
+    // Construction de l'URL de l'image
+    const imageUrl = article.picture 
+        ? `${SERVER_URL}${article.picture}` 
+        : "https://placehold.co/1200x600/1a1a1a/white?text=A+la+Une";
+
+    return <>
         <Container className="mt-5">
             {/* En-tête de l'article */}
             <div className="text-center mb-5">
@@ -46,18 +49,16 @@ const ArticlePage = () => {
             <img 
                 src={imageUrl} 
                 alt={article.title} 
-                style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', borderRadius: '10px' }} 
+                style={{ width: '100%', maxHeight: '500px', objectFit: 'cover', objectPosition: 'top', borderRadius: '10px' }} 
                 className="mb-4"
             />
 
             {/* Contenu du texte */}
             <div className="article-content" style={{ fontSize: '1.2rem', lineHeight: '1.8' }}>
-                {/* Attention : pour l'instant on affiche le texte brut. 
-                    Plus tard, on verra comment gérer les sauts de ligne */}
                 {article.content}
             </div>
         </Container>
-    );
+</>
 };
 
 export default ArticlePage;
