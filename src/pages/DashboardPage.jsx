@@ -39,7 +39,7 @@ const DashboardPage = () => {
 
     return <>
         <div className="p-4">
-            <h1>Dashboard - Gestion des Sports</h1>
+            <h1> Gestion des Sports</h1>
 
             {sports.length === 0 && <p>Chargement...</p>}
 
