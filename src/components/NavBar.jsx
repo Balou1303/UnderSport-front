@@ -26,7 +26,7 @@ const NavBar = () => {
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 
             {isConnected && role === "admin" && (
-              <Nav.Link as={Link} to="/admin/articles">Dashboard</Nav.Link>
+              <Nav.Link as={Link} to="/admin">Dashboard</Nav.Link>
             )}
             
             {isConnected ? (

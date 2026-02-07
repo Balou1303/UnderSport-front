@@ -28,6 +28,10 @@ function defineFeatured(id) {
     return api.patch(`/articles/${id}/featured`);
 };
 
+function getStats(){
+    return api.get('/articles/stats');
+}
+
 
 export default {
     getArticles,
@@ -36,7 +40,8 @@ export default {
     updateArticle,
     getSportsByArticle,
     deleteArticle,
-    defineFeatured
+    defineFeatured,
+    getStats
 
 
 }

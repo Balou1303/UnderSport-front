@@ -15,6 +15,7 @@ import AddArticlePage from './pages/AddArticlePage';
 import EditArticlePage from './pages/EditArticlePage';
 import RegisterPage from './pages/RegisterPage';
 import UserAdminRolePage from './pages/UserAdminRolePage';
+import SportsAdmin from './pages/SportAdminPage';
 
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
               <AdminLayout />
             </AdminRoute>
           }>
-            <Route path="sports" element={<DashboardPage />} />
+            <Route index element={<DashboardPage />} />
+            <Route path="sports" element={<SportsAdmin />} />
             <Route path="sports/add" element={<AddSportPage />} />
             <Route path="sports/edit/:id" element={<UpdateSportPage />} />
             <Route path="articles" element={<DashboardArticles />} />

@@ -1,89 +1,66 @@
+// src/pages/DashboardPage.jsx
 import { useEffect, useState } from "react";
-import sportsServices from "../services/sportsServices";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Card, Row, Col } from "react-bootstrap";
+import articlesService from "../services/articlesService";
 
 const DashboardPage = () => {
-    const [sports, setSports] = useState([]);
-    const navigate = useNavigate()
-
-    const fetchSports = async () => {
-        try {
-            const response = await sportsServices.getAllSports();
-            const data = response.data ? response.data : response;
-            setSports(data);
-        } catch (error) {
-            console.error("Erreur lors du chargement :", error);
-        }
-    };
-
-    const handleDelete = async (id, sportName) => {
-        if (!window.confirm(`Etes-vous sûr de vouloir supprimer "${sportName}" ?`))
-            return;
-        try {
-            const response = await sportsServices.deleteSport(id);
-            setSports(currentSport => currentSport.filter(s => s.sportId !== id));
-            toast.success(`Le sport "${sportName}" a été supprimé ! 🗑️`);
-        } catch (error) {
-            toast.error(`Erreur lors de la suppression de ${sportName}`);
-        }
-    };
-
-    const handleEdit = async (id) => {
-        navigate(`/admin/sports/edit/${id}`)
-    }
+    const [stats, setStats] = useState({
+        articlesLastWeek: 0,
+        articlesLastMonth: 0,
+        totalViews: 0
+    });
 
     useEffect(() => {
-        fetchSports()
+        const fetchStats = async () => {
+            try {
+                const response = await articlesService.getStats();
+                console.log("Stats reçues du Backend :", response.data);
+                
+                setStats(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        fetchStats();
     }, []);
 
-    return <>
+    return (
         <div className="p-4">
-            <h1> Gestion des Sports</h1>
+            <h2 className="mb-4">Tableau de Bord </h2>
 
-            {sports.length === 0 && <p>Chargement...</p>}
+            <Row className="mb-4">
+                {/* Carte Semaine */}
+                <Col md={4}>
+                    <Card className="text-center shadow-sm border-primary mb-3">
+                        <Card.Body>
+                            <h3 className="text-primary fw-bold">{stats.articlesLastWeek}</h3>
+                            <Card.Text className="text-muted">Articles (7 jours)</Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
 
-            <ul className="list-group mt-3">
-                {sports.map((sport) => (
-                    <li
-                        key={sport.sportId}
-                        className="list-group-item d-flex justify-content-between align-items-center"
-                    >
+                {/* Carte Mois */}
+                <Col md={4}>
+                    <Card className="text-center shadow-sm border-success mb-3">
+                        <Card.Body>
+                            <h3 className="text-success fw-bold">{stats.articlesLastMonth}</h3>
+                            <Card.Text className="text-muted">Articles (30 jours)</Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
 
-                        {/* Le Nom du sport (à gauche) */}
-                        <span className="fw-bold">{sport.name}</span>
-
-                        {/* Le Groupe de Boutons (à droite) */}
-                        <div style={{ display: 'flex', gap: '10px' }}>
-
-                            {/* Bouton Edit */}
-                            <button
-                                onClick={() => handleEdit(sport.sportId)}
-                                className="btn btn-warning btn-sm"
-                            >
-                                Modifier ✏️
-                            </button>
-
-                            {/* Bouton delete */}
-                            <button
-                                onClick={() => handleDelete(sport.sportId, sport.name)}
-                                className="btn btn-danger btn-sm"
-                            >
-                                Supprimer 🗑️
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-
-            {/* Bouton add */}
-            <button
-                className="btn d-flex mt-4"
-                style={{ backgroundColor: '#8A5CF5', color: 'white' }}
-                onClick={() => navigate("/admin/sports/add")}
-            >Ajouter un sport</button>
+                {/* Carte Vues Totales */}
+                <Col md={4}>
+                    <Card className="text-center shadow-sm border-warning mb-3">
+                        <Card.Body>
+                            <h3 className="text-warning fw-bold">{stats.totalViews}</h3>
+                            <Card.Text className="text-muted">Vues Totales</Card.Text>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
         </div>
-    </>;
+    );
 };
 
 export default DashboardPage;
