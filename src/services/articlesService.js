@@ -4,9 +4,11 @@ function getArticles() {
     return api.get("/articles");
 }
 
-function getArticleById(id) {
-    return api.get(`/articles/${id}`);
-}
+function getArticleById(id, isAdmin = false) {
+    // Si isAdmin est true, on ajoute ?admin=true à l'URL
+    const url = isAdmin ? `/articles/${id}?admin=true` : `/articles/${id}`;
+    return api.get(url);
+};
 
 function createArticle(data) {
     return api.post(`/articles`, data);
@@ -28,7 +30,7 @@ function defineFeatured(id) {
     return api.patch(`/articles/${id}/featured`);
 };
 
-function getStats(){
+function getStats() {
     return api.get('/articles/stats');
 }
 

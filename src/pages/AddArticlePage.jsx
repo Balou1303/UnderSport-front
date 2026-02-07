@@ -62,7 +62,7 @@ const AddArticlePage = () => {
             formData.append('title', article.title);
             formData.append('content', article.content);
             formData.append('idChampionship', article.idChampionship);
-            formData.append('idSports', article.idSport);
+            formData.append('idSport', article.idSport);
 
             // La date au format SQL (YYYY-MM-DD HH:mm:ss) OBLIGATOIRE pour l'envoi
             const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
