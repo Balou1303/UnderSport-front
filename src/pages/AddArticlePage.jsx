@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import articlesService from "../services/articlesService";
-import sportsServices from "../services/sportsServices";
+import sportsServices from "../services/sportsService";
 import championshipsService from "../services/championshipsService";
 
 const AddArticlePage = () => {
@@ -30,23 +30,25 @@ const AddArticlePage = () => {
         }
     };
 
-    const fetchChampionships = async () => {
-        try {
-            const response = await championshipsService.getAllChampionships();
-            setChampionships(response.data);
-        } catch (error) {
-            toast.error("Erreur chargement championnats");
-        }
-    };
-
-    useEffect(() => {
-        fetchSports();
-        fetchChampionships();
-    }, []);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setArticle({ ...article, [name]: value });
+    };
+
+    const handleSportChange = async (e) => {
+        const sportId = e.target.value;
+        setArticle({ ...article, idSport: sportId, idChampionship: "" });
+        setChampionships([]);
+
+        if (sportId) {
+            try {
+                const response = await championshipsService.getChampionshipsBySport(sportId);
+                setChampionships(response.data);
+            } catch (error) {
+                console.error(error);
+                toast.error("Impossible de charger les championnats liés");
+            }
+        }
     };
 
     const handlePictureChange = (e) => {
@@ -60,7 +62,7 @@ const AddArticlePage = () => {
             formData.append('title', article.title);
             formData.append('content', article.content);
             formData.append('idChampionship', article.idChampionship);
-            formData.append('sports', article.idSport);
+            formData.append('idSports', article.idSport);
 
             // La date au format SQL (YYYY-MM-DD HH:mm:ss) OBLIGATOIRE pour l'envoi
             const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -83,7 +85,11 @@ const AddArticlePage = () => {
         }
     };
 
-    return (
+    useEffect(() => {
+        fetchSports();
+    }, []);
+
+    return <>
         <div className="p-4">
             <h1>Nouvel Article ✍️</h1>
             <form onSubmit={handleSubmit}>
@@ -100,41 +106,52 @@ const AddArticlePage = () => {
 
                 <div className="mb-3">
                     <label className="form-label">Image de l'article</label>
-                    <input 
-                        type="file" 
-                        name="image" 
-                        className="form-control" 
-                        accept="image/*" // N'accepte que les images
-                        onChange={handlePictureChange} 
-                    />
+                    <input type="file" className="form-control" accept="image/*" onChange={handlePictureChange} />
                 </div>
 
-                {/* Select Sport */}
-                <div className="mb-3">
-                    <label className="form-label">Sport lié</label>
-                    <select name="idSport" className="form-select" onChange={handleChange} required>
-                        <option value="">Selectionnez un sport</option>
-                        {sports.map(sport => (
-                            <option key={sport.sportId} value={sport.sportId}>{sport.name}</option>
-                        ))}
-                    </select>
-                </div>
+                <div className="row">
+                    {/* Select Sport */}
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Sport lié</label>
+                        <select 
+                            name="idSport" 
+                            className="form-select" 
+                            value={article.idSport} 
+                            onChange={handleSportChange} // <--- C'est LA correction importante
+                            required
+                        >
+                            <option value="">Selectionnez un sport</option>
+                            {sports.map(sport => (
+                                <option key={sport.sportId} value={sport.sportId}>{sport.name}</option>
+                            ))}
+                        </select>
+                    </div>
 
-                {/* Select Championnat */}
-                <div className="mb-3">
-                    <label className="form-label">Championnat lié</label>
-                    <select name="idChampionship" className="form-select" onChange={handleChange}>
-                        <option value="">Selectionnez un championnat</option>
-                        {championships.map(champ => (
-                            <option key={champ.championshipId} value={champ.championshipId}>{champ.name}</option>
-                        ))}
-                    </select>
+                    {/* Select Championnat */}
+                    <div className="col-md-6 mb-3">
+                        <label className="form-label">Championnat</label>
+                        <select 
+                            name="idChampionship" // Important pour le handleChange
+                            className="form-select" 
+                            value={article.idChampionship} 
+                            onChange={handleChange} // Ici un handleChange classique suffit
+                            disabled={!article.idSport} 
+                            required
+                        >
+                            <option value="">
+                                {!article.idSport ? "-- Sélectionnez un sport d'abord --" : "-- Choisir un championnat --"}
+                            </option>
+                            {championships.map(c => (
+                                <option key={c.championshipId} value={c.championshipId}>{c.name}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary mt-3">Publier l'article</button>
             </form>
         </div>
-    );
+    </>
 };
 
 export default AddArticlePage;

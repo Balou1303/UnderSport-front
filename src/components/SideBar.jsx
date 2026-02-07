@@ -57,6 +57,14 @@ const SideBar = () => {
                     </li>
                 )}
 
+                {role === "admin" && (
+                    <li className="nav-item mb-2">
+                        <Link to="/admin/championships" className={`nav-link ${isActive('/admin/championships')}`}>
+                            🏅 Gestion Championnats
+                        </Link>
+                    </li>
+                )}
+
                 {/* Rôles */}
                 {role === "admin" && (
                     <li className="nav-item mb-2">

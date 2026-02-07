@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import sportsServices from "../services/sportsServices";
+import sportsServices from "../services/sportsService";
 import { toast } from "react-toastify";
 
 const AddSportPage = () => {

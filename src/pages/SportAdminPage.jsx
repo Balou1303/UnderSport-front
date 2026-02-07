@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import sportsServices from "../services/sportsServices"; 
+import sportsServices from "../services/sportsService"; 
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -39,7 +39,7 @@ const SportsAdmin = () => {
 
     return <>
         <div className="p-4">
-            <h1> Gestion des Sports 🏀</h1>
+            <h1> Gestion des Sports</h1>
 
             {sports.length === 0 && <p>Chargement...</p>}
 

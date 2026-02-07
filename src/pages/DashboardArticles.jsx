@@ -10,8 +10,7 @@ const DashboardArticles = () => {
     const fetchArticles = async () => {
         try {
             const response = await articlesService.getArticles();
-            const data = response.data ? response.data : response;
-            setArticles(data);
+            setArticles(response.data);
 
         } catch (error) {
             console.error(error);
@@ -19,13 +18,12 @@ const DashboardArticles = () => {
         }
     };
 
-    // Suppression
     const handleDelete = async (id, title) => {
         if (!window.confirm(`Supprimer l'article "${title}" ?`)) return;
         try {
             await articlesService.deleteArticle(id);
             setArticles(articles.filter(a => a.articleId !== id));
-            toast.success("Article supprimé ! 🗑️");
+            toast.success("Article supprimé !");
         } catch (error) {
             toast.error("Erreur lors de la suppression");
         }
@@ -45,7 +43,7 @@ const DashboardArticles = () => {
                 }
             }));
 
-            toast.success("Article mis à la Une ! 🌟");
+            toast.success("Article mis à la Une !");
         } catch (error) {
             console.error(error);
             toast.error("Erreur lors de la mise à la une");
@@ -59,7 +57,7 @@ const DashboardArticles = () => {
     return (
         <div className="p-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1>Gestion des Articles 📝</h1>
+                <h1>Gestion des Articles</h1>
                 <button
                     className="btn btn-primary"
                     onClick={() => navigate('/admin/articles/add')}
@@ -74,6 +72,8 @@ const DashboardArticles = () => {
                         <th>Titre</th>
                         <th>Auteur</th>
                         <th>Date de Publication</th>
+                        <th>Date de mise à jour</th>
+                        <th className="text-center">Vues</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -91,6 +91,13 @@ const DashboardArticles = () => {
 
                             <td>
                                 {new Date(article.publicationDate).toLocaleDateString()}
+                            </td>
+                            <td>
+                                {new Date(article.updateDate).toLocaleDateString()}
+                            </td>
+
+                            <td className="text-center fw-bold text-primary">
+                                {article.views}
                             </td>
 
                             <td style={{ width: '180px' }}>

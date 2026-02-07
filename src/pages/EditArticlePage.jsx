@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import articlesService from "../services/articlesService";
-import sportsServices from "../services/sportsServices";
+import sportsServices from "../services/sportsService";
 import championshipsService from "../services/championshipsService";
 
 const EditArticlePage = () => {
@@ -105,7 +105,7 @@ const EditArticlePage = () => {
 
     return (
         <div className="p-4">
-            <h1>Modifier l'article #{id} ✏️</h1>
+            <h1>Modifier l'article "{article.title}" </h1>
             <form onSubmit={handleSubmit}>
 
                 <div className="mb-3">

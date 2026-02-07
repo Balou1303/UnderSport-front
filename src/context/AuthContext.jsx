@@ -5,26 +5,28 @@ import api from "../services/api";
 export const AuthContext = createContext({
     isConnected: false,
     role: 'USER',
-    login: () => {},
-    logout: () => {}
+    loading: true,
+    login: () => { },
+    logout: () => { }
 });
 
 export const AuthProvider = ({ children }) => {
     const [isConnected, setIsConnected] = useState(false);
     const [role, setRole] = useState('USER');
+    const [loading, setLoading] = useState(true);
 
     // Fonction centrale pour gérer la connexion
     const login = (token) => {
-        localStorage.setItem("token", token); // On stocke
-        api.defaults.headers["Authorization"] = 'Bearer ' + token; // On configure Axios
+        localStorage.setItem("token", token); // stocke
+        api.defaults.headers["Authorization"] = 'Bearer ' + token; // configure Axios
 
         try {
             const decoded = jwtDecode(token);
             // On met à jour le State IMMÉDIATEMENT
             if (decoded.exp > Date.now() / 1000) {
                 setIsConnected(true);
-                
-                if (decoded.idRole === 1) { 
+
+                if (decoded.idRole === 1) {
                     setRole("admin");
                 } else {
                     setRole("user");
@@ -47,12 +49,13 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            login(token); //  réutilise la fonction login
+            login(token);
+            setLoading(false);
         }
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isConnected, role, login, logout }}>
+        <AuthContext.Provider value={{ isConnected, role, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     );

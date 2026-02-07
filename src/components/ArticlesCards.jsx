@@ -4,16 +4,17 @@ import { Link } from 'react-router-dom';
 const ArticlesCards = ({ article }) => {
     // Utilisation de la variable d'environnement pour l'image
     const API_URL = import.meta.env.VITE_URL_API;
-    // 2. On crée l'URL "Racine" du serveur (ex: http://localhost:3000)
+    //  On crée l'URL "Racine" du serveur (ex: http://localhost:3000)
     // Astuce : On enlève le "/api" de la fin s'il est présent pour avoir juste la racine
     const SERVER_URL = API_URL.replace('/api', '');
-    const imageUrl = article.picture 
-        ? `${SERVER_URL}${article.picture}` 
+    const imageUrl = article.picture
+        ? `${SERVER_URL}${article.picture}`
         : "https://placehold.co/600x400/8A5CF5/white?text=UnderSport";
-    return (
+
+    return <>
         <div className="article-card">
             <div className="cardPicture">
-                <img src={imageUrl} alt={article.title} className="card-img-fixed"/>
+                <img src={imageUrl} alt={article.title} className="card-img-fixed" />
             </div>
 
             <div className="cardBody">
@@ -23,12 +24,12 @@ const ArticlesCards = ({ article }) => {
 
                 {/* ZONE DES BADGES */}
                 <div style={{ marginBottom: '10px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    
+
                     <Badge bg="secondary">
                         {article.sportName ? article.sportName : "Sport"}
                     </Badge>
 
-                    {/* 2. BADGE CHAMPIONNAT */}
+                    {/* BADGE CHAMPIONNAT */}
                     {article.championshipName && (
                         <Badge bg="dark">
                             {article.championshipName}
@@ -44,11 +45,11 @@ const ArticlesCards = ({ article }) => {
                         <span>par <strong>{article.firstName} {article.lastName}</strong></span>
                     )}
                 </p>
-                
+
                 <Link to={`/article/${article.articleId}`} className="card-btn">Lire l'article</Link>
             </div>
         </div>
-    );
+    </>
 };
 
 export default ArticlesCards;

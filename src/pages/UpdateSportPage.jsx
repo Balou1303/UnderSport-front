@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; // useParams pour lire l'ID dans l'URL
-import sportsServices from "../services/sportsServices";
+import sportsServices from "../services/sportsService";
 import { toast } from "react-toastify";
 
 const UpdateSportPage = () => {

@@ -14,8 +14,6 @@ const DashboardPage = () => {
         const fetchStats = async () => {
             try {
                 const response = await articlesService.getStats();
-                console.log("Stats reçues du Backend :", response.data);
-                
                 setStats(response.data);
             } catch (error) {
                 console.error(error);

@@ -16,7 +16,7 @@ const HeroArticle = ({ article }) => {
     //  Gestion des tags (évite le crash si sportName est null)
     const tags = article.sportName ? article.sportName.split(',') : [];
 
-    return (
+    return <>
         <div className="hero-card">
             {/* Ajout des guillemets dans l'URL pour éviter les bugs CSS */}
             <div className="hero-image" style={{ backgroundImage: `url("${imageUrl}")` }}>
@@ -28,6 +28,7 @@ const HeroArticle = ({ article }) => {
                         ))}
                          {article.championshipName && <Badge bg="info">{article.championshipName}</Badge>}
                     </div>
+        
 
                     <h1>{article.title}</h1>
                     
@@ -44,7 +45,7 @@ const HeroArticle = ({ article }) => {
                 </div>
             </div>
         </div>
-    );
+    </>;
 };
 
 export default HeroArticle;
