@@ -19,19 +19,19 @@ const SideBar = () => {
         return location.pathname.startsWith(path) ? "active" : "";
     };
 
-    return (
+    return <>
         <div className="d-flex flex-column flex-shrink-0 p-3 custom-sidebar" style={{ width: "280px", minHeight: "100vh" }}>
-            
-            <span className="fs-4 mb-3 fw-bold text-white">Dashboard ⚙️</span>
-            
+
+            <span className="fs-4 mb-3 fw-bold text-white">Dashboard</span>
+
             <div className="badge bg-secondary mb-3 align-self-start">
                 {role === 'admin' ? 'Administrateur' : 'Rédacteur'}
             </div>
-            
-            <hr style={{ borderColor: 'gray' }}/>
-            
+
+            <hr style={{ borderColor: 'gray' }} />
+
             <ul className="nav nav-pills flex-column mb-auto">
-                
+
                 {/* Statistiques */}
                 <li className="nav-item mb-2">
                     <Link to="/admin" className={`nav-link ${isActive('/admin')}`}>
@@ -69,16 +69,16 @@ const SideBar = () => {
                 {role === "admin" && (
                     <li className="nav-item mb-2">
                         <Link to="/admin/users" className={`nav-link ${isActive('/admin/users')}`}>
-                             👥 Gestion Rôles
+                            👥 Gestion Rôles
                         </Link>
                     </li>
                 )}
 
             </ul>
-            <hr style={{ borderColor: 'gray' }}/>
+            <hr style={{ borderColor: 'gray' }} />
             <Link to="/" className="btn btn-outline-light w-100">⬅️ Retour Site</Link>
         </div>
-    );
+    </>;
 }
 
 export default SideBar;

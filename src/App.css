@@ -204,6 +204,27 @@
     color: white;
 }
 
+/* --- Style de lecture "Magazine" (Corps d'article brut) --- */
+.article-body {
+    font-size: 1.15rem;           /* Taille confortable pour les yeux */
+    line-height: 1.8;             /* Espace généreux entre les lignes */
+    color: #374151;               /* Gris foncé, moins agressif que le noir pur */
+    white-space: pre-wrap;        /* L'astuce MAGIQUE qui respecte les vrais sauts de ligne ! */
+    margin-bottom: 3rem;
+    font-family: 'Georgia', serif; /* Jolie police de journal pour contraster avec ta typo moderne */
+}
+
+/* La Lettrine : on attrape la première lettre du premier paragraphe ! */
+.article-body::first-letter {
+    font-size: 6.0rem;            /* Énorme lettre */
+    font-weight: bold;
+    color: var(--primary-color);  /* violet UnderSport */
+    float: left;                  /* Permet au texte suivant d'enrouler la lettre */
+    line-height: 1;               /* Resserre la lettre */
+    margin-right: 10px;           /* Espace entre la lettrine et le reste du mot */
+}
+
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .article-card {
@@ -250,4 +271,18 @@
     margin-bottom: 10px;
     color: #1f2937;
 }
+    /* --- Ajustements du Hero sur mobile --- */
+    .hero-card {
+        height: 250px; /* On réduit la hauteur pour l'iPhone */
+        border-radius: 10px; 
+    }
+    
+    .hero-overlay h1 {
+        font-size: 1.8rem !important; 
+    }
+    
+    .hero-overlay p {
+        font-size: 1rem !important; 
+    }
+
 }
