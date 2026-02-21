@@ -25,7 +25,7 @@ const SideBar = () => {
             <span className="fs-4 mb-3 fw-bold text-white">Dashboard</span>
 
             <div className="badge bg-secondary mb-3 align-self-start">
-                {role === 'admin' ? 'Administrateur' : 'Rédacteur'}
+                {role === 'admin' ? 'Administrateur' : 'Journaliste'}
             </div>
 
             <hr style={{ borderColor: 'gray' }} />
@@ -40,7 +40,7 @@ const SideBar = () => {
                 </li>
 
                 {/* Articles */}
-                {(role === "admin" || role === "redacteur") && (
+                {(role === "admin" || role === "journaliste") && (
                     <li className="nav-item mb-2">
                         <Link to="/admin/articles" className={`nav-link ${isActive('/admin/articles')}`}>
                             📝 Gestion Articles

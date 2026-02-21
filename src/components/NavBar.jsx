@@ -25,20 +25,20 @@ const NavBar = () => {
             <Nav.Link as={Link} to="/sports">Sports</Nav.Link>
             <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
 
-            {isConnected && role === "admin" && (
-              <Nav.Link as={Link} to="/admin">Dashboard</Nav.Link>
+            {isConnected && (role === "admin" || role === "journaliste") && (
+              <Nav.Link as={Link} to={role === "admin" ? "/admin" : "/admin/articles"}>Dashboard</Nav.Link>
             )}
-            
+
             {isConnected ? (
-                // CAS A : CONNECTÉ
-                <Nav.Link onClick={handleLogout} className="nav-link btn-link auth-link">
-                  Se déconnecter
-                </Nav.Link>
+              // CAS A : CONNECTÉ
+              <Nav.Link onClick={handleLogout} className="nav-link btn-link auth-link">
+                Se déconnecter
+              </Nav.Link>
             ) : (
-                // CAS B : PAS CONNECTÉ
-                <Nav.Link as={Link} to="/login" className="nav-link auth-link">
-                  Se connecter
-                </Nav.Link>
+              // CAS B : PAS CONNECTÉ
+              <Nav.Link as={Link} to="/login" className="nav-link auth-link">
+                Se connecter
+              </Nav.Link>
             )}
 
           </Nav>

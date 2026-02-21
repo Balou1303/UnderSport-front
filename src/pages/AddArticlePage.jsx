@@ -27,7 +27,7 @@ const AddArticlePage = () => {
     const fetchSports = async () => {
         try {
             const response = await sportsServices.getAllSports();
-            setSports(response.data ? response.data : response);
+            setSports(response.data);
         } catch (error) {
             toast.error("Erreur chargement sports");
         }

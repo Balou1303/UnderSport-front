@@ -28,6 +28,8 @@ export const AuthProvider = ({ children }) => {
 
                 if (decoded.idRole === 1) {
                     setRole("admin");
+                } else if (decoded.idRole === 2) {
+                    setRole("journaliste");
                 } else {
                     setRole("user");
                 }

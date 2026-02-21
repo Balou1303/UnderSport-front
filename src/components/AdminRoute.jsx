@@ -15,7 +15,7 @@ const AdminRoute = ({ children }) => {
         );
     }
 
-    if (!isConnected || role !== "admin") {
+    if (!isConnected || (role !== "admin" && role !== "journaliste")) {
         return <Navigate to="/" replace />
     }
     return children

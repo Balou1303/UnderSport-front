@@ -4,6 +4,11 @@ function getArticles() {
     return api.get("/articles");
 }
 
+// Récupère les articles pour le back-office en envoyant le Token
+function getDashboardArticles() {
+    return api.get("/articles/dashboard");
+}
+
 function getArticleById(id, isAdmin = false) {
     // Si isAdmin est true, on ajoute ?admin=true à l'URL
     const url = isAdmin ? `/articles/${id}?admin=true` : `/articles/${id}`;
@@ -37,6 +42,7 @@ function getStats() {
 
 export default {
     getArticles,
+    getDashboardArticles,
     getArticleById,
     createArticle,
     updateArticle,

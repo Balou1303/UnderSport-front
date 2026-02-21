@@ -9,7 +9,7 @@ const DashboardArticles = () => {
 
     const fetchArticles = async () => {
         try {
-            const response = await articlesService.getArticles();
+            const response = await articlesService.getDashboardArticles();
             setArticles(response.data);
 
         } catch (error) {
@@ -106,7 +106,7 @@ const DashboardArticles = () => {
 
                                     {/* article à la une */}
                                     <button
-                                    style={{ minWidth: "90px" }}
+                                        style={{ minWidth: "90px" }}
                                         className={`btn btn-sm ${article.isFeatured ? "btn-outline-secondary" : "btn-outline-secondary"} me-2`}
                                         onClick={() => handleFeatured(article.articleId)}
                                         title="Mettre à la une"
