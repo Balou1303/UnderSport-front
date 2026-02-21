@@ -1,15 +1,22 @@
 import { Outlet } from 'react-router-dom';
-import NavBar from './NavBar'; // On déplace la NavBar ici
+import NavBar from './NavBar';
+import Footer from './Footer';
 
 const PublicLayout = () => {
-    return <>
-            {/* La NavBar ne s'affichera que dans ce Layout */}
+    return (
+        <div className="d-flex flex-column min-vh-100">
+            {/* La NavBar en haut */}
             <NavBar />
-            
-            {/* Le contenu de la page (Home, Article, etc.) */}
-            <Outlet />
-        </>
-  
+
+            {/* Le contenu (qui prend tout l'espace restant) */}
+            <main className="flex-grow-1 mb-5">
+                <Outlet />
+            </main>
+
+            {/* Le Footer toujours repoussé en bas */}
+            <Footer />
+        </div>
+    );
 };
 
 export default PublicLayout;

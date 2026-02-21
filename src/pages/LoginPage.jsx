@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import usersService from "../services/usersService";
 import { AuthContext } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -68,9 +68,13 @@ const LoginPage = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100">
+                <Button variant="primary" type="submit" className="w-100 mb-3">
                     Se connecter
                 </Button>
+
+                <div className="text-center mt-3">
+                    Pas encore de compte ? <Link to="/register" className="text-decoration-none fw-bold">S'inscrire</Link>
+                </div>
             </Form>
         </Container>
     </>;

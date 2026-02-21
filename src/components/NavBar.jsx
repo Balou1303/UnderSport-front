@@ -37,7 +37,7 @@ const NavBar = () => {
             ) : (
               // CAS B : PAS CONNECTÉ
               <Nav.Link as={Link} to="/login" className="nav-link auth-link">
-                Se connecter
+                Se connecter / S'inscrire
               </Nav.Link>
             )}
 
