@@ -12,10 +12,7 @@ const UpdateSportPage = () => {
     const fetchSport = async () => {
         try {
             const response = await sportsServices.getSportById(id);
-            // On remplit le state avec ce qui vient de la BDD
-            // vérifie si l'API renvoie { data: ... } ou directement l'objet
-            const data = response.data ? response.data : response;
-            setSport(data);
+            setSport(response.data);
         } catch (error) {
             console.error("Erreur chargement sport", error);
         }

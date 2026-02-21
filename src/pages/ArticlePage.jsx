@@ -70,20 +70,19 @@ const ArticlePage = () => {
 
                 </div>
             </div>
-        <div className="row justify-content-center">
-    <div className="col-12 col-lg-8">
-        <div className="article-body">
-    {article.content}
-</div>
-     
-        {/* Button */}
-        <div className="text-center mt-5">
-            <a href="/" className="card-btn">
-                Retour aux articles
-            </a>
-        </div>
-    </div>
-</div>
+            <div className="row justify-content-center">
+                <div className="col-12 col-lg-8">
+                    <div className="article-body" dangerouslySetInnerHTML={{ __html: article.content }}>
+                    </div>
+
+                    {/* Button */}
+                    <div className="text-center mt-5">
+                        <a href="/" className="card-btn">
+                            Retour aux articles
+                        </a>
+                    </div>
+                </div>
+            </div>
         </Container>
     </>
 };

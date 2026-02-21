@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import articlesService from "../services/articlesService";
 import sportsServices from "../services/sportsService";
 import championshipsService from "../services/championshipsService";
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
 
 const EditArticlePage = () => {
     const { id } = useParams();
@@ -63,14 +65,18 @@ const EditArticlePage = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setArticle({ ...article, [name]: value });
+        setArticle(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleContentChange = (value) => {
+        setArticle(prev => ({ ...prev, content: value }));
     };
 
     const handleSportChange = async (e) => {
         const sportId = e.target.value;
 
         // Met à jour le sport et on vide le championnat (car il ne correspond plus)
-        setArticle({ ...article, idSport: sportId, idChampionship: "" });
+        setArticle(prev => ({ ...prev, idSport: sportId, idChampionship: "" }));
         setChampionships([]); // On vide la liste temporairement
 
         // Si un sport est choisi, va chercher ses championnats
@@ -130,7 +136,12 @@ const EditArticlePage = () => {
 
                 <div className="mb-3">
                     <label className="form-label">Contenu</label>
-                    <textarea name="content" className="form-control" rows="5" value={article.content} onChange={handleChange} required />
+                    <ReactQuill
+                        theme="snow"
+                        value={article.content}
+                        onChange={handleContentChange}
+                        style={{ height: '300px', marginBottom: '50px' }}
+                    />
                 </div>
 
                 {/* Image */}

@@ -4,6 +4,9 @@ import { toast } from "react-toastify";
 import articlesService from "../services/articlesService";
 import sportsServices from "../services/sportsService";
 import championshipsService from "../services/championshipsService";
+import ReactQuill from 'react-quill-new';
+import 'react-quill-new/dist/quill.snow.css';
+
 
 const AddArticlePage = () => {
     const navigate = useNavigate();
@@ -35,9 +38,13 @@ const AddArticlePage = () => {
         setArticle({ ...article, [name]: value });
     };
 
+    const handleContentChange = (value) => {
+        setArticle(prev => ({ ...prev, content: value }));
+    };
+
     const handleSportChange = async (e) => {
         const sportId = e.target.value;
-        setArticle({ ...article, idSport: sportId, idChampionship: "" });
+        setArticle(prev => ({ ...prev, idSport: sportId, idChampionship: "" }));
         setChampionships([]);
 
         if (sportId) {
@@ -100,8 +107,13 @@ const AddArticlePage = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label">Contenu</label>
-                    <textarea name="content" className="form-control" rows="5" value={article.content} onChange={handleChange} required />
+                    <label className="form-label">Contenu de l'article</label>
+                    <ReactQuill
+                        theme="snow"
+                        value={article.content}
+                        onChange={handleContentChange}
+                        style={{ height: '300px', marginBottom: '50px' }}
+                    />
                 </div>
 
                 <div className="mb-3">
@@ -113,11 +125,11 @@ const AddArticlePage = () => {
                     {/* Select Sport */}
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Sport lié</label>
-                        <select 
-                            name="idSport" 
-                            className="form-select" 
-                            value={article.idSport} 
-                            onChange={handleSportChange} // <--- C'est LA correction importante
+                        <select
+                            name="idSport"
+                            className="form-select"
+                            value={article.idSport}
+                            onChange={handleSportChange}
                             required
                         >
                             <option value="">Selectionnez un sport</option>
@@ -130,13 +142,12 @@ const AddArticlePage = () => {
                     {/* Select Championnat */}
                     <div className="col-md-6 mb-3">
                         <label className="form-label">Championnat</label>
-                        <select 
+                        <select
                             name="idChampionship" // Important pour le handleChange
-                            className="form-select" 
-                            value={article.idChampionship} 
+                            className="form-select"
+                            value={article.idChampionship}
                             onChange={handleChange} // Ici un handleChange classique suffit
-                            disabled={!article.idSport} 
-                            required
+                            disabled={!article.idSport}
                         >
                             <option value="">
                                 {!article.idSport ? "-- Sélectionnez un sport d'abord --" : "-- Choisir un championnat --"}
