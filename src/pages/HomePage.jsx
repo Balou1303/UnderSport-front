@@ -10,9 +10,7 @@ const HomePage = () => {
     const fetchArticles = async () => {
         try {
             const response = await articlesService.getArticles();
-            // Petite sécurité : on vérifie si c'est response.data ou response tout court
-            const data = response.data ? response.data : response; 
-            setArticles(data);
+            setArticles(response.data);
         } catch (error) {
             console.error("Erreur lors du chargement :", error);
         }
@@ -24,13 +22,13 @@ const HomePage = () => {
 
     // Si on a des articles, le premier va à la Une
     const featuredArticle = articles.length > 0 ? articles[0] : null;
-    
+
     // Les autres vont dans la liste standard
     const standardArticles = articles.length > 1 ? articles.slice(1) : [];
 
-    return (
+    return <>
         <div className="container" style={{ marginTop: '20px' }}>
-            
+
             <h1 className="mb-4">Bienvenue sur UnderSport</h1>
 
             {/* Section "à la une" */}
@@ -42,7 +40,7 @@ const HomePage = () => {
 
             {/* Autres articles */}
             <h2 className="mb-3">Dernières actualités</h2>
-            
+
             <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "space-between" }}>
                 {standardArticles.map((article) => (
                     <ArticlesCards
@@ -51,9 +49,9 @@ const HomePage = () => {
                     />
                 ))}
             </div>
-            
+
         </div>
-    );
+    </>
 }
 
 export default HomePage;

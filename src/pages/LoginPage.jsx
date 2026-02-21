@@ -4,50 +4,40 @@ import { useNavigate } from "react-router-dom";
 import usersService from "../services/usersService";
 import { AuthContext } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
+import {toast} from 'react-toastify';
 
 const LoginPage = () => {
-    const [login, setLogin] = useState({
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
+
+    const [credentials, setCredentials] = useState({
         email: "",
         password: ""
     });
 
-    const navigate = useNavigate();
-
-    // On récupère les fonctions du Context pour mettre à jour l'app globalement
-    const { setIsConnected, setRole } = useContext(AuthContext);
-
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setLogin({ ...login, [name]: value });
+        setCredentials({ ...credentials, [name]: value });
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Appel API
-            const response = await usersService.login(login);
+            const response = await usersService.login(credentials);
             const token = response.data.token;
 
-            // Stockage du token
-            localStorage.setItem('token', token);
+            login(token)
 
-            // Configuration d'Axios pour les futures requêtes
-            axios.defaults.headers["Authorization"] = 'Bearer ' + token;
-
-            // Décodage pour récupérer le rôle
             const decoded = jwtDecode(token);
-
-            //Mise à jour du Contexte Global (Le "Cerveau")
-            setIsConnected(true);
-            setRole(decoded.role);
-
-            // Redirection vers l'accueil
-            navigate('/');
+            if (decoded.idRole === 1) {
+                navigate('/admin/articles');
+            } else {
+                navigate('/');
+            }
 
         } catch (error) {
             console.error("Erreur de connexion", error);
-            alert("Erreur : Email ou mot de passe incorrect");
+            toast.error("Erreur : Email ou mot de passe incorrect");
         }
     }
 
@@ -62,7 +52,7 @@ const LoginPage = () => {
                         type="email"
                         name="email"
                         placeholder="nom@exemple.com"
-                        value={login.email}
+                        value={credentials.email}
                         onChange={handleChange}
                     />
                 </Form.Group>
@@ -73,12 +63,12 @@ const LoginPage = () => {
                         type="password"
                         name="password"
                         placeholder="Votre mot de passe"
-                        value={login.password}
+                        value={credentials.password}
                         onChange={handleChange}
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100" style={{ backgroundColor: '#8A5CF5', border: 'none' }}>
+                <Button variant="primary" type="submit" className="w-100">
                     Se connecter
                 </Button>
             </Form>

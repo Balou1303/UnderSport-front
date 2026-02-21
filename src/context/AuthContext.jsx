@@ -1,43 +1,64 @@
 import { useState, createContext, useEffect } from "react";
 import { jwtDecode } from 'jwt-decode';
-import axios from "axios";
+import api from "../services/api";
 
 export const AuthContext = createContext({
     isConnected: false,
-    setIsConnected: () => {},
     role: 'USER',
-    setRole: () => {}
+    loading: true,
+    login: () => { },
+    logout: () => { }
 });
 
 export const AuthProvider = ({ children }) => {
     const [isConnected, setIsConnected] = useState(false);
     const [role, setRole] = useState('USER');
+    const [loading, setLoading] = useState(true);
 
+    // Fonction centrale pour gérer la connexion
+    const login = (token) => {
+        localStorage.setItem("token", token); // stocke
+        api.defaults.headers["Authorization"] = 'Bearer ' + token; // configure Axios
+
+        try {
+            const decoded = jwtDecode(token);
+            // On met à jour le State IMMÉDIATEMENT
+            if (decoded.exp > Date.now() / 1000) {
+                setIsConnected(true);
+
+                if (decoded.idRole === 1) {
+                    setRole("admin");
+                } else if (decoded.idRole === 2) {
+                    setRole("journaliste");
+                } else {
+                    setRole("user");
+                }
+            }
+        } catch (error) {
+            logout(); // Si le token est pourri, on déconnecte tout
+        }
+    };
+
+    // Fonction centrale pour gérer la déconnexion
+    const logout = () => {
+        localStorage.removeItem("token");
+        delete api.defaults.headers["Authorization"];
+        setIsConnected(false);
+        setRole("USER");
+    };
+
+    // Au chargement, vérifie s'il y a déjà un token
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            try {
-                const decoded = jwtDecode(token);
-                // Vérif date expiration
-                if (decoded.exp > Date.now() / 1000) {
-                    setIsConnected(true);
-                    setRole(decoded.role);
-                    axios.defaults.headers["Authorization"] = 'Bearer ' + token;
-                } else {
-                    localStorage.removeItem('token');
-                    setIsConnected(false); // Important de reset
-                }
-            } catch (error) {
-                // Si le token est invalide
-                localStorage.removeItem('token');
-                setIsConnected(false);
-            }
+            login(token);
+            setLoading(false);
         }
-    }, [])
+    }, []);
 
     return (
-        <AuthContext.Provider value={{ isConnected, setIsConnected, role, setRole }}>
+        <AuthContext.Provider value={{ isConnected, role, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
-    )
-}
+    );
+};
