@@ -19,7 +19,11 @@ import SportsAdmin from './pages/SportAdminPage';
 import DashBoardChampionship from './pages/DashboardChampionships';
 import AddChampionship from './pages/AddChampionship';
 import EditChampionship from './pages/EditChampionship';
-
+import DashboardLegends from './pages/DashboardLegends';
+import AddLegendPage from './pages/AddLegendPage';
+import LegendsPage from './pages/LegendsPage';
+import EditLegendPage from './pages/EditLegendPage';
+import LegendDetailsPage from './pages/LegendDetailsPage';
 
 function App() {
   return <>
@@ -37,6 +41,8 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/article/:id" element={<ArticlePage />} />
+            <Route path="/legends" element={<LegendsPage />} />
+            <Route path="/legends/:id" element={<LegendDetailsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
           </Route>
@@ -59,6 +65,9 @@ function App() {
             <Route path="championships" element={<DashBoardChampionship />} />
             <Route path="championships/add" element={<AddChampionship />} />
             <Route path="championships/edit/:id" element={<EditChampionship />} />
+            <Route path="legends" element={<DashboardLegends />} />
+            <Route path="legends/add" element={<AddLegendPage />} />
+            <Route path="legends/edit/:id" element={<EditLegendPage />} />
           </Route>
 
         </Routes>

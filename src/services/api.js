@@ -15,9 +15,12 @@ api.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             const currentPath = window.location.pathname;
 
-            // 🛡️ Bouée de sauvetage : Si l'utilisateur est en train d'écrire un article
-            if (currentPath.includes('/admin/articles/add') || currentPath.includes('/admin/articles/edit')) {
-                toast.error("🚨 Votre session a expiré ! Copiez votre texte (Ctrl+C) en sécurité avant de rafraîchir la page, sinon il sera perdu !", {
+            // Si l'utilisateur est en train d'écrire un contenu long
+            if (currentPath.includes('/admin/articles/add') ||
+                currentPath.includes('/admin/articles/edit') ||
+                currentPath.includes('/admin/legends/add') ||
+                currentPath.includes('/admin/legends/edit')) {
+                toast.error("Votre session a expiré ! Copiez votre texte (Ctrl+C) en sécurité avant de rafraîchir la page ou de vous reconnecter, sinon il sera perdu !", {
                     autoClose: false, // Le message reste affiché tant qu'on ne le ferme pas
                     position: "top-center"
                 });

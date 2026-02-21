@@ -23,7 +23,7 @@ const NavBar = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Accueil</Nav.Link>
             <Nav.Link as={Link} to="/sports">Sports</Nav.Link>
-            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/legends">Légendes</Nav.Link>
 
             {isConnected && (role === "admin" || role === "journaliste") && (
               <Nav.Link as={Link} to={role === "admin" ? "/admin" : "/admin/articles"}>Dashboard</Nav.Link>
