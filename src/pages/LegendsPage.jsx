@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import legendsService from "../services/legendsService";
-import { Container, Row, Col, Card, Badge, Form, InputGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Form, InputGroup } from "react-bootstrap";
+import LegendCard from "../components/LegendCard";
 import { toast } from "react-toastify";
 
 const LegendsPage = () => {
@@ -84,43 +84,7 @@ const LegendsPage = () => {
             <Row className="gy-4">
                 {filteredLegends.map((legend) => (
                     <Col key={legend.legendId} md={6} lg={4} xl={3}>
-                        <Link to={`/legends/${legend.legendId}`} className="text-decoration-none">
-                            <Card className="h-100 border-0 legend-card" style={{ transition: 'all 0.3s ease', boxShadow: "0 6px 12px rgba(0,0,0,0.08)", borderRadius: "16px", overflow: "hidden" }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-5px)';
-                                    e.currentTarget.style.boxShadow = '0 0 25px var(--primary-color)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = '0 6px 12px rgba(0,0,0,0.08)';
-                                }}>
-                                <div style={{ height: "250px", overflow: "hidden", backgroundColor: "#f8f9fa", borderBottom: "4px solid var(--primary-color)" }}>
-                                    {legend.photo ? (
-                                        <Card.Img
-                                            variant="top"
-                                            src={`${SERVER_URL}${legend.photo}`}
-                                            alt={`${legend.firstname} ${legend.lastname}`}
-                                            style={{ height: "100%", width: "100%", objectFit: "cover", objectPosition: "top center" }}
-                                        />
-                                    ) : (
-                                        <div className="w-100 h-100 d-flex justify-content-center align-items-center text-muted fs-5">
-                                            Photo indisponible
-                                        </div>
-                                    )}
-                                </div>
-                                <Card.Body className="text-center d-flex flex-column justify-content-center py-4 bg-white">
-                                    <Card.Title className="fw-bold fs-4 mb-2 text-dark text-decoration-none d-flex flex-column">
-                                        <span className="fs-5 text-muted fw-normal">{legend.firstname}</span>
-                                        <span className="text-uppercase" style={{ color: "var(--primary-color)", fontSize: "1.6rem" }}>{legend.lastname}</span>
-                                    </Card.Title>
-                                    <div>
-                                        <Badge bg="dark" className="px-3 py-2 rounded-pill mt-2 shadow-sm" style={{ backgroundColor: "#111827", fontSize: "0.9rem" }}>
-                                            {legend.sportName}
-                                        </Badge>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </Link>
+                        <LegendCard legend={legend} />
                     </Col>
                 ))}
 

@@ -48,13 +48,13 @@ const ArticlePage = () => {
 
             {/* Grande Image */}
             {/* La grande "boîte" qui fige la hauteur à 450px */}
-            <div className="hero-card mb-5">
+            <div className="heroCard mb-5">
 
                 {/* L'image de fond (qui prendra 100% des 450px) */}
-                <div className="hero-image" style={{ backgroundImage: `url(${imageUrl})` }}></div>
+                <div className="heroImage" style={{ backgroundImage: `url(${imageUrl})` }}></div>
 
                 {/* Le calque noir transparent au dessus */}
-                <div className="hero-overlay">
+                <div className="heroOverlay">
 
                     <Badge bg="primary" className="mb-3 fs-6 px-3 py-2">
                         {article.championshipName}
@@ -72,12 +72,12 @@ const ArticlePage = () => {
             </div>
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8">
-                    <div className="article-body" dangerouslySetInnerHTML={{ __html: article.content }}>
+                    <div className="articleBody" dangerouslySetInnerHTML={{ __html: article.content }}>
                     </div>
 
                     {/* Button */}
                     <div className="text-center mt-5">
-                        <a href="/" className="card-btn">
+                        <a href="/" className="cardBtn">
                             Retour aux articles
                         </a>
                     </div>

@@ -1,5 +1,5 @@
 import { Badge } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const HeroArticle = ({ article }) => {
     // si pas d'article, on n'affiche rien
@@ -9,31 +9,31 @@ const HeroArticle = ({ article }) => {
     const SERVER_URL = API_URL ? API_URL.replace('/api', '') : '';
 
     // Construction de l'URL de l'image
-    const imageUrl = article.picture 
-        ? `${SERVER_URL}${article.picture}` 
+    const imageUrl = article.picture
+        ? `${SERVER_URL}${article.picture}`
         : "https://placehold.co/1200x600/1a1a1a/white?text=A+la+Une";
 
     //  Gestion des tags (évite le crash si sportName est null)
     const tags = article.sportName ? article.sportName.split(',') : [];
 
     return <>
-        <div className="hero-card">
+        <div className="heroCard">
             {/* Ajout des guillemets dans l'URL pour éviter les bugs CSS */}
-            <div className="hero-image" style={{ backgroundImage: `url("${imageUrl}")` }}>
-                <div className="hero-overlay">
+            <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}>
+                <div className="heroOverlay">
                     <div style={{ marginBottom: '15px' }}>
                         <Badge bg="primary" className="me-2">À LA UNE</Badge>
                         {tags.map((tag, i) => (
-                             <Badge key={i} bg="dark" className="me-1">{tag.trim()}</Badge>
+                            <Badge key={i} bg="dark" className="me-1">{tag.trim()}</Badge>
                         ))}
-                         {article.championshipName && <Badge bg="info">{article.championshipName}</Badge>}
+                        {article.championshipName && <Badge bg="info">{article.championshipName}</Badge>}
                     </div>
-        
+
 
                     <h1>{article.title}</h1>
-                    
+
                     {/* évite le crash si content est null */}
-                    <p className="hero-summary">
+                    <p className="heroSummary">
                         {article.content ? article.content.substring(0, 150) + "..." : "Lire la suite..."}
                     </p>
 
@@ -41,7 +41,7 @@ const HeroArticle = ({ article }) => {
                         Par {article.firstName} {article.lastName} | Le {new Date(article.publicationDate).toLocaleDateString()}
                     </div>
 
-                    <Link to={`/article/${article.articleId}`} className="hero-btn">Lire l'article</Link>
+                    <Link to={`/article/${article.articleId}`} className="heroBtn">Lire l'article</Link>
                 </div>
             </div>
         </div>

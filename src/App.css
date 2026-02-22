@@ -81,7 +81,7 @@
 
 /* Cards */
 
-.article-card {
+.articleCard {
     display: flex;
     flex-direction: row;
     width: 48%;
@@ -122,19 +122,105 @@
     overflow: hidden;
 }
 
-.article-card .badge {
+.articleCard .badge {
     cursor: pointer;
     transition: all 0.2s;
     filter: brightness(1.2);
 }
 
-.article-card .badge:hover {
+.articleCard .badge:hover {
     transform: scale(1.1);
     filter: brightness(1.2);
 }
 
+/* Legend Card */
+
+.legend-card {
+    display: flex;
+    flex-direction: column;
+    height: 380px;
+    border-radius: 16px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.legend-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px var(--primary-color);
+}
+
+.legendCardPicture {
+    width: 100%;
+    height: 250px;
+    border-bottom: 4px solid var(--primary-color);
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.legendCardPicture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.legendCardPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d;
+    font-size: 1.25rem;
+}
+
+.legendCardBody {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: white;
+}
+
+.legendCardBody h2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+}
+
+.legendFirstname {
+    font-size: 1.25rem;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.legendLastname {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.legendBadges {
+    margin-top: 0.5rem;
+}
+
+.legendBadge {
+    background-color: #111827 !important;
+    font-size: 0.9rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 50rem !important;
+}
+
 /* Hero Section */
-.hero-card {
+.heroCard {
     width: 100%;
     height: 450px;
     margin-bottom: 40px;
@@ -144,7 +230,7 @@
     position: relative;
 }
 
-.hero-image {
+.heroImage {
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -152,7 +238,7 @@
     position: relative;
 }
 
-.hero-overlay {
+.heroOverlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -170,14 +256,14 @@
     color: white;
 }
 
-.hero-summary {
+.heroSummary {
     font-size: 1.1rem;
     color: #ddd;
     max-width: 700px;
     text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.8);
 }
 
-.hero-btn {
+.heroBtn {
     background-color: #8A5CF5;
     color: white;
     border: none;
@@ -190,7 +276,7 @@
     margin-top: 20px;
 }
 
-.hero-btn:hover {
+.heroBtn:hover {
     transform: scale(1.05);
     background-color: #7040d5;
     color: white;
@@ -198,7 +284,7 @@
     box-shadow: 0 5px 15px rgba(138, 92, 245, 0.4);
 }
 
-.card-btn {
+.cardBtn {
     background-color: #8A5CF5;
     color: white;
     border: none;
@@ -212,7 +298,7 @@
     margin-top: 10px;
 }
 
-.card-btn:hover {
+.cardBtn:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(138, 92, 245, 0.3);
     cursor: pointer;
@@ -221,7 +307,7 @@
 }
 
 /* --- Style de lecture "Magazine" (Corps d'article) --- */
-.article-body {
+.articleBody {
     font-size: 1.15rem;
     /* Taille confortable pour les yeux */
     line-height: 1.8;
@@ -233,8 +319,8 @@
     /* Jolie police de journal pour contraster avec ta typo moderne */
 }
 
-/* Pare-feu contre les copier/coller (efface les fonds noirs de code ou ChatGPT) */
-.article-body * {
+/* Pare-feu contre les copier/coller (efface les fonds noirs) */
+.articleBody * {
     background-color: transparent !important;
     color: #374151 !important;
     /* Force le texte en gris foncé */
@@ -247,7 +333,7 @@
 }
 
 /* La Lettrine : on cible UNIQUEMENT le premier paragraphe, pas les titres ! */
-.article-body>p:first-of-type::first-letter {
+.articleBody>p:first-of-type::first-letter {
     font-size: 6.0rem;
     /* Énorme lettre */
     font-weight: bold;
@@ -264,7 +350,7 @@
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .article-card {
+    .articleCard {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -280,7 +366,7 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .article-card:hover {
+    .articleCard:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         /* Ombre plus forte au survol */
@@ -318,17 +404,17 @@
     }
 
     /* --- Ajustements du Hero sur mobile --- */
-    .hero-card {
+    .heroCard {
         height: 250px;
         /* On réduit la hauteur pour l'iPhone */
         border-radius: 10px;
     }
 
-    .hero-overlay h1 {
+    .heroOverlay h1 {
         font-size: 1.8rem !important;
     }
 
-    .hero-overlay p {
+    .heroOverlay p {
         font-size: 1rem !important;
     }
 

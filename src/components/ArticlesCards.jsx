@@ -12,7 +12,7 @@ const ArticlesCards = ({ article }) => {
         : "https://placehold.co/600x400/8A5CF5/white?text=UnderSport";
 
     return <>
-        <div className="article-card">
+        <div className="articleCard">
             <div className="cardPicture">
                 <img src={imageUrl} alt={article.title} className="card-img-fixed" />
             </div>
@@ -46,7 +46,7 @@ const ArticlesCards = ({ article }) => {
                     )}
                 </p>
 
-                <Link to={`/article/${article.articleId}`} className="card-btn">Lire l'article</Link>
+                <Link to={`/article/${article.articleId}`} className="cardBtn">Lire l'article</Link>
             </div>
         </div>
     </>
