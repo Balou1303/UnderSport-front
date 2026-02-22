@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const LegendsPage = () => {
     const [legends, setLegends] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
+    const [searchLegend, setSearchLegend] = useState("");
     const [selectedSport, setSelectedSport] = useState("");
 
     const API_URL = import.meta.env.VITE_URL_API;
@@ -20,11 +20,11 @@ const LegendsPage = () => {
     const filteredLegends = useMemo(() => {
         return legends.filter(legend => {
             const fullName = `${legend.firstname || ""} ${legend.lastname || ""}`.toLowerCase();
-            const matchesSearch = fullName.includes(searchTerm.toLowerCase());
+            const matchesSearch = fullName.includes(searchLegend.toLowerCase());
             const matchesSport = selectedSport === "" || legend.sportName === selectedSport;
             return matchesSearch && matchesSport;
         });
-    }, [legends, searchTerm, selectedSport]);
+    }, [legends, searchLegend, selectedSport]);
 
     const fetchLegends = async () => {
         try {
@@ -60,8 +60,8 @@ const LegendsPage = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="Rechercher une légende..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
+                                value={searchLegend}
+                                onChange={(e) => setSearchLegend(e.target.value)}
                                 className="border-start-0 ps-0"
                             />
                         </InputGroup>
