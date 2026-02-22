@@ -97,9 +97,9 @@ const AddLegendPage = () => {
         fetchSports();
     }, []);
 
-    return (
+    return <>
         <div className="p-4">
-            <h1>Nouvelle Légende 🌟</h1>
+            <h1>Nouvelle Légende</h1>
             <form onSubmit={handleSubmit} className="mt-4">
                 <div className="row">
                     <div className="col-md-6 mb-3">
@@ -126,7 +126,7 @@ const AddLegendPage = () => {
                         value={legend.description}
                         onChange={handleChange}
                         placeholder="Rédigez un résumé de sa carrière..."
-                        required
+                        
                     ></textarea>
                 </div>
 
@@ -193,7 +193,7 @@ const AddLegendPage = () => {
                 <button type="button" className="btn btn-secondary ms-3" onClick={() => navigate("/admin/legends")}>Annuler</button>
             </form>
         </div>
-    );
+    </>;
 };
 
 export default AddLegendPage;

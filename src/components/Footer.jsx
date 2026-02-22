@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-    return (
+    return <>
         <footer className="bg-dark text-light py-4 mt-auto" data-bs-theme="dark">
             <Container>
                 <Row className="gy-4 justify-content-between">
@@ -47,7 +47,7 @@ const Footer = () => {
                 </Row>
             </Container>
         </footer>
-    );
+    </>;
 };
 
 export default Footer;

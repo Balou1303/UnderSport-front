@@ -41,7 +41,7 @@ const UpdateSportPage = () => {
         fetchSport();
     }, []);
 
-    return (
+    return <>
         <div className="p-4">
             <h1>Modifier le sport</h1>
 
@@ -70,7 +70,7 @@ const UpdateSportPage = () => {
                     </div>
             </form>
         </div>
-    );
+    </>;
 };
 
 export default UpdateSportPage;

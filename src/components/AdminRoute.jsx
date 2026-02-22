@@ -6,13 +6,13 @@ const AdminRoute = ({ children }) => {
     const { isConnected, role, loading } = useContext(AuthContext);
 
     if (loading) {
-        return (
+        return <>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <div className="spinner-border text-primary" role="status">
                     <span className="visually-hidden">Chargement...</span>
                 </div>
             </div>
-        );
+        </>;
     }
 
     if (!isConnected || (role !== "admin" && role !== "journaliste")) {

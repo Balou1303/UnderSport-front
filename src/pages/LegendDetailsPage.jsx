@@ -38,7 +38,35 @@ const LegendDetailsPage = () => {
     if (loading) return <Container className="mt-5 text-center"><h2>Chargement...</h2></Container>;
     if (!legend) return null;
 
-    return (
+    const collective = achievements.filter(a => a.type === 'collective' || !a.type);
+    const individual = achievements.filter(a => a.type === 'individual');
+    const honorary = achievements.filter(a => a.type === 'honorary');
+
+    const renderAchievementGroup = (list, title, icon, color) => {
+        if (list.length === 0) return null;
+        return (
+            <div className="mb-5">
+                <h4 className="mb-3 d-flex align-items-center fw-bold" style={{ color: color }}>
+                    <span className="me-2 fs-3">{icon}</span> {title}
+                </h4>
+                <Row className="g-3">
+                    {list.map((achiev, index) => (
+                        <Col sm={6} md={6} xl={4} key={index}>
+                            <Card className="h-100 border-0 text-center bg-white" style={{ transition: "transform 0.2s", borderBottom: `4px solid ${index % 2 === 0 ? color : "#111827"}`, boxShadow: "0 6px 12px rgba(0,0,0,0.08)" }}>
+                                <Card.Body className="d-flex flex-column justify-content-center py-4">
+                                    <div className="display-4 mb-2" style={{ color: color }}>{icon}</div>
+                                    <h5 className="fw-bold text-dark mb-1">{achiev.label}</h5>
+                                    <span className="text-muted fw-bold fs-5">{achiev.years}</span>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </div>
+        );
+    };
+
+    return <>
         <Container className="my-5">
             {/* Bouton retour avec le style principal */}
             <button className="btn btn-primary mb-4 shadow-sm" onClick={() => navigate("/legends")}>
@@ -102,19 +130,11 @@ const LegendDetailsPage = () => {
                             <span className="me-2 fs-2">🏆</span> L'Armoire à Trophées
                         </h3>
                         {achievements.length > 0 ? (
-                            <Row className="g-3">
-                                {achievements.map((achiev, index) => (
-                                    <Col sm={6} md={6} xl={4} key={index}>
-                                        <Card className="h-100 border-0 text-center" style={{ transition: "transform 0.2s", backgroundColor: "#ffffff", borderBottom: `4px solid ${index % 2 === 0 ? "var(--primary-color)" : "#111827"}`, boxShadow: "0 6px 12px rgba(0,0,0,0.08)" }}>
-                                            <Card.Body className="d-flex flex-column justify-content-center py-4">
-                                                <div className="display-4 mb-2" style={{ color: "var(--primary-color)" }}>🏆</div>
-                                                <h5 className="fw-bold text-dark mb-1">{achiev.label}</h5>
-                                                <span className="text-muted fw-bold fs-5">{achiev.years}</span>
-                                            </Card.Body>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
+                            <>
+                                {renderAchievementGroup(collective, "Trophées Collectifs", "🏆", "var(--primary-color)")}
+                                {renderAchievementGroup(individual, "Récompenses Individuelles", "🥇", "#eab308")}
+                                {renderAchievementGroup(honorary, "Mentions Honorifiques", "⭐", "#3b82f6")}
+                            </>
                         ) : (
                             <div className="p-4 border-0 rounded-4 text-center text-muted bg-white shadow-sm">
                                 Aucun palmarès n'a encore été enregistré pour ce joueur.
@@ -124,7 +144,7 @@ const LegendDetailsPage = () => {
                 </Col>
             </Row>
         </Container>
-    );
+    </>;
 };
 
 export default LegendDetailsPage;

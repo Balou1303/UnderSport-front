@@ -14,7 +14,7 @@ const NavBar = () => {
     navigate('/login')
   };
 
-  return (
+  return <>
     <Navbar expand="lg" className="bg-dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand as={Link} to="/">UnderSport 🏀</Navbar.Brand>
@@ -45,7 +45,7 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  </>;
 }
 
 export default NavBar;

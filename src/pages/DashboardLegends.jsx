@@ -34,7 +34,7 @@ const DashboardLegends = () => {
         fetchLegends();
     }, []);
 
-    return (
+    return <>
         <div className="p-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h1>Gestion des Légendes</h1>
@@ -100,7 +100,7 @@ const DashboardLegends = () => {
                 </tbody>
             </table>
         </div>
-    );
+    </>;
 };
 
 export default DashboardLegends;

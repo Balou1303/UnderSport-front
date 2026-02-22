@@ -48,8 +48,8 @@ const SportsAdmin = () => {
                     <li key={sport.sportId} className="list-group-item d-flex justify-content-between align-items-center">
                         <span className="fw-bold">{sport.name}</span>
                         <div style={{ display: 'flex', gap: '10px' }}>
-                            <button onClick={() => handleEdit(sport.sportId)} className="btn btn-warning btn-sm">Modifier ✏️</button>
-                            <button onClick={() => handleDelete(sport.sportId, sport.name)} className="btn btn-danger btn-sm">Supprimer 🗑️</button>
+                            <button onClick={() => handleEdit(sport.sportId)} className="btn btn-warning btn-sm" title="Modifier">✏️</button>
+                            <button onClick={() => handleDelete(sport.sportId, sport.name)} className="btn btn-danger btn-sm" title="Supprimer">🗑️</button>
                         </div>
                     </li>
                 ))}

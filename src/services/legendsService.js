@@ -28,6 +28,10 @@ const addAchievementToLegend = (id, data) => {
     return api.post(`/legends/${id}/achievements`, data);
 };
 
+const removeAchievementFromLegend = (id, idAchievement, years) => {
+    return api.delete(`/legends/${id}/achievements/${idAchievement}/${years}`);
+};
+
 export default {
     getAllLegends,
     getLegendById,
@@ -35,5 +39,6 @@ export default {
     updateLegend,
     deleteLegend,
     getAchievementsByLegendId,
-    addAchievementToLegend
+    addAchievementToLegend,
+    removeAchievementFromLegend
 };

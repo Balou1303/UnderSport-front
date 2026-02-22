@@ -3,7 +3,7 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 
 const PublicLayout = () => {
-    return (
+    return <>
         <div className="d-flex flex-column min-vh-100">
             {/* La NavBar en haut */}
             <NavBar />
@@ -16,7 +16,7 @@ const PublicLayout = () => {
             {/* Le Footer toujours repoussé en bas */}
             <Footer />
         </div>
-    );
+    </>;
 };
 
 export default PublicLayout;

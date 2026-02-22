@@ -70,6 +70,18 @@ const EditLegendPage = () => {
         setNewAchievements(newArr);
     };
 
+    const handleDeleteExistingAchievement = async (idAchievement, years) => {
+        if (!window.confirm("Voulez-vous vraiment retirer ce palmarès de cette légende ?")) return;
+
+        try {
+            await legendsService.removeAchievementFromLegend(id, idAchievement, years);
+            setExistingAchievements(existingAchievements.filter(a => !(a.achievementId === idAchievement && a.years === years)));
+            toast.success("Palmarès retiré avec succès");
+        } catch (error) {
+            toast.error("Erreur lors de la suppression du palmarès");
+        }
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setLegend({ ...legend, [name]: value });
@@ -122,7 +134,7 @@ const EditLegendPage = () => {
         fetchData();
     }, [id]);
 
-    return (
+    return <>
         <div className="p-4">
             <h1>Modifier la Légende ✏️</h1>
             <form onSubmit={handleSubmit} className="mt-4">
@@ -163,7 +175,7 @@ const EditLegendPage = () => {
                         value={legend.description || ""}
                         onChange={handleChange}
                         placeholder="Rédigez un résumé de sa carrière..."
-                        required
+
                     ></textarea>
                 </div>
 
@@ -189,11 +201,18 @@ const EditLegendPage = () => {
 
                 {existingAchievements.length > 0 && (
                     <div className="mb-4">
-                        <label className="form-label text-muted fw-bold mb-2">Trophées déjà enregistrés (Immuables)</label>
+                        <label className="form-label text-muted fw-bold mb-2">Trophées déjà enregistrés (Modifiables via le bouton de suppression)</label>
                         <div className="d-flex flex-wrap gap-2">
                             {existingAchievements.map((ach, idx) => (
-                                <span key={idx} className="badge bg-secondary px-3 py-2 shadow-sm" style={{ fontSize: "0.9rem" }}>
+                                <span key={idx} className="badge bg-secondary px-3 py-2 shadow-sm d-flex align-items-center" style={{ fontSize: "0.9rem" }}>
                                     🏆 {ach.years} - {ach.label}
+                                    <button
+                                        type="button"
+                                        className="btn-close btn-close-white ms-2"
+                                        aria-label="Remove"
+                                        style={{ fontSize: "0.6rem" }}
+                                        onClick={() => handleDeleteExistingAchievement(ach.achievementId, ach.years)}
+                                    ></button>
                                 </span>
                             ))}
                         </div>
@@ -244,7 +263,7 @@ const EditLegendPage = () => {
                 <button type="button" className="btn btn-secondary ms-3" onClick={() => navigate("/admin/legends")}>Annuler</button>
             </form>
         </div>
-    );
+    </>;
 };
 
 export default EditLegendPage;

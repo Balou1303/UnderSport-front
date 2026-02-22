@@ -24,6 +24,7 @@ import AddLegendPage from './pages/AddLegendPage';
 import LegendsPage from './pages/LegendsPage';
 import EditLegendPage from './pages/EditLegendPage';
 import LegendDetailsPage from './pages/LegendDetailsPage';
+import DashboardAchievements from './pages/DashboardAchievements';
 
 function App() {
   return <>
@@ -68,6 +69,7 @@ function App() {
             <Route path="legends" element={<DashboardLegends />} />
             <Route path="legends/add" element={<AddLegendPage />} />
             <Route path="legends/edit/:id" element={<EditLegendPage />} />
+            <Route path="achievements" element={<DashboardAchievements />} />
           </Route>
 
         </Routes>

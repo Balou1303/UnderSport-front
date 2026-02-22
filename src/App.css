@@ -24,6 +24,19 @@
     border-color: var(--primary-hover) !important;
 }
 
+/* Boutons "Outline" violets */
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    background-color: transparent !important;
+}
+
+.btn-outline-primary:hover {
+    color: white !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
 /* Cible UNIQUEMENT les liens qui ont la classe "auth-link" (Connexion/Déconnexion) */
 .navbar-nav .nav-link.auth-link {
     color: white !important;

@@ -54,7 +54,7 @@ const DashboardArticles = () => {
         fetchArticles();
     }, []);
 
-    return (
+    return <>
         <div className="p-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h1>Gestion des Articles</h1>
@@ -138,7 +138,7 @@ const DashboardArticles = () => {
                 </tbody>
             </table>
         </div>
-    );
+    </>;
 }
 
 export default DashboardArticles;
