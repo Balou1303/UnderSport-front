@@ -428,3 +428,82 @@
 .footer-link:hover {
     color: white !important;
 }
+
+/* --- MATCH CENTER --- */
+
+/* Le tableau de classement stylisé */
+.standingsTable {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    /* Espace entre les lignes pour un effet "carte" */
+    width: 100%;
+}
+
+.standingsTable thead th {
+    border: none;
+    color: #6c757d;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+}
+
+.standingsTable tbody tr {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.standingsTable tbody tr td {
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+    padding: 12px 10px;
+}
+
+.standingsTable tbody tr td:first-child {
+    border-left: 1px solid #f3f4f6;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.standingsTable tbody tr td:last-child {
+    border-right: 1px solid #f3f4f6;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.standingsTable tbody tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(138, 92, 245, 0.15);
+    /* Ombre aux couleurs UnderSport */
+    z-index: 2;
+    position: relative;
+    background-color: #fcfbfe;
+}
+
+/* Les cartes des derniers / prochains matchs */
+.matchCard {
+    background-color: white;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.matchCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(138, 92, 245, 0.2);
+    border-color: var(--primary-color);
+}
+
+.matchScore {
+    background-color: var(--sidebar-bg);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 1.1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}

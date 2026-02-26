@@ -25,6 +25,7 @@ import LegendsPage from './pages/LegendsPage';
 import EditLegendPage from './pages/EditLegendPage';
 import LegendDetailsPage from './pages/LegendDetailsPage';
 import DashboardAchievements from './pages/DashboardAchievements';
+import MatchsPage from './pages/MatchsPage';
 
 function App() {
   return <>
@@ -44,6 +45,7 @@ function App() {
             <Route path="/article/:id" element={<ArticlePage />} />
             <Route path="/legends" element={<LegendsPage />} />
             <Route path="/legends/:id" element={<LegendDetailsPage />} />
+            <Route path="/matchs" element={<MatchsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
           </Route>
