@@ -22,6 +22,7 @@ const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Accueil</Nav.Link>
+            <Nav.Link as={Link} to="/matchs">Matchs</Nav.Link>
             <Nav.Link as={Link} to="/sports">Sports</Nav.Link>
             <Nav.Link as={Link} to="/legends">Légendes</Nav.Link>
 
