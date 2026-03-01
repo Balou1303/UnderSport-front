@@ -9,9 +9,6 @@ const LegendsPage = () => {
     const [searchLegend, setSearchLegend] = useState("");
     const [selectedSport, setSelectedSport] = useState("");
 
-    const API_URL = import.meta.env.VITE_URL_API;
-    const SERVER_URL = API_URL ? API_URL.replace('/api', '') : '';
-
     const uniqueSports = useMemo(() => {
         const sports = legends.map(l => l.sportName).filter(Boolean);
         return [...new Set(sports)].sort();
@@ -41,36 +38,37 @@ const LegendsPage = () => {
     }, []);
 
     return <>
-        <Container className="my-5">
-            <h1 className="text-center mb-5 fw-bold text-uppercase" style={{ color: "var(--primary-color)" }}>
-                Légendes du Sport 🏆
-            </h1>
-            <p className="text-center text-muted mb-5">
-                Découvrez les profils des sportifs et sportives qui ont marqué l'histoire de leur discipline à jamais.
-            </p>
+        <Container className="py-5">
+            <div className="mb-5 text-center">
+                <h6 className="text-uppercase fw-bold text-primary mb-2" style={{ letterSpacing: '3px' }}>Le Panthéon</h6>
+                <h1 className="fw-800 display-3 mb-3" style={{ letterSpacing: '-2px' }}>LÉGENDES DU <span className="text-primary">SPORT</span></h1>
+                <p className="text-muted mx-auto" style={{ maxWidth: '600px', fontSize: '1.1rem' }}>
+                    Plongez dans l'histoire des plus grands athlètes qui ont redéfini les limites de l'excellence.
+                </p>
+            </div>
 
             {/* Barre de recherche et filtre par sport */}
             <Row className="mb-5 justify-content-center">
-                <Col md={8} lg={6}>
-                    <div className="d-flex flex-column flex-md-row gap-3">
-                        <InputGroup className="flex-grow-1 shadow-sm">
-                            <InputGroup.Text className="bg-white border-end-0">
+                <Col lg={8}>
+                    <div className="p-4 bg-white rounded-4 shadow-sm border d-flex flex-column flex-md-row gap-3">
+                        <InputGroup className="flex-grow-1 border-0 bg-light rounded-3 overflow-hidden">
+                            <InputGroup.Text className="bg-transparent border-0 ps-3">
                                 🔍
                             </InputGroup.Text>
                             <Form.Control
                                 type="text"
-                                placeholder="Rechercher une légende..."
+                                placeholder="Rechercher une icône..."
                                 value={searchLegend}
                                 onChange={(e) => setSearchLegend(e.target.value)}
-                                className="border-start-0 ps-0"
+                                className="bg-transparent border-0 py-2"
                             />
                         </InputGroup>
 
                         <Form.Select
                             value={selectedSport}
                             onChange={(e) => setSelectedSport(e.target.value)}
-                            className="shadow-sm"
-                            style={{ minWidth: "200px" }}
+                            className="bg-light border-0 rounded-3 py-2 fw-bold"
+                            style={{ minWidth: "180px", cursor: 'pointer' }}
                         >
                             <option value="">Tous les sports</option>
                             {uniqueSports.map(sport => (
@@ -81,7 +79,7 @@ const LegendsPage = () => {
                 </Col>
             </Row>
 
-            <Row className="gy-4">
+            <Row className="g-4">
                 {filteredLegends.map((legend) => (
                     <Col key={legend.legendId} md={6} lg={4} xl={3}>
                         <LegendCard legend={legend} />
@@ -89,10 +87,12 @@ const LegendsPage = () => {
                 ))}
 
                 {filteredLegends.length === 0 && (
-                    <Col>
-                        <p className="text-center text-muted py-5">
-                            Aucune légende ne correspond à votre recherche.
-                        </p>
+                    <Col xs={12}>
+                        <div className="py-5 text-center">
+                            <div className="display-1 mb-3">🏅</div>
+                            <h3 className="text-muted">Aucune légende trouvée</h3>
+                            <button className="btn btn-link text-primary fw-bold" onClick={() => { setSearchLegend(""); setSelectedSport("") }}>Rétablir les filtres</button>
+                        </div>
                     </Col>
                 )}
             </Row>

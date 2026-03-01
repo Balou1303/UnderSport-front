@@ -33,7 +33,7 @@ const ArticlePage = () => {
             <div className="heroCard mb-5" style={{ height: '550px' }}>
                 <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}></div>
                 <div className="heroOverlay">
-                    <div className="hero-meta">
+                    <div className="heroMeta">
                         {article.sportName || "Sport"} {article.championshipName && `• ${article.championshipName.toUpperCase()}`}
                     </div>
 
@@ -59,7 +59,16 @@ const ArticlePage = () => {
 
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8">
-                    <div className="articleBody shadow-sm p-4 p-md-5 bg-white rounded-4" dangerouslySetInnerHTML={{ __html: article.content }}>
+                    <div
+                        className="articleBody shadow-sm p-4 p-md-5 bg-white rounded-4"
+                        dangerouslySetInnerHTML={{
+                            __html: article.content
+                                ? article.content
+                                    .replace(/&shy;|\u00AD|\u2010|\u2011|\u200B/g, '')
+                                    .replace(/&nbsp;|\u00A0|\u202F/g, ' ')
+                                : ""
+                        }}
+                    >
                     </div>
 
                     <div className="text-center mt-5">

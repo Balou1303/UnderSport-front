@@ -15,26 +15,26 @@ const NavBar = () => {
   };
 
   return <>
-    <Navbar expand="lg" className="custom-navbar px-3" variant="dark" sticky="top">
+    <Navbar expand="lg" className="customNavbar px-3" variant="dark" sticky="top">
       <Container>
-        <Navbar.Brand as={Link} to="/">UNDER<span>SPORT</span></Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="navbarBrand">UNDER<span>SPORT</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center">
-            <Nav.Link as={Link} to="/">Accueil</Nav.Link>
-            <Nav.Link as={Link} to="/matchs">Matchs</Nav.Link>
-            <Nav.Link as={Link} to="/legends">Légendes</Nav.Link>
+            <Nav.Link as={Link} to="/" className="navLink">Accueil</Nav.Link>
+            <Nav.Link as={Link} to="/matchs" className="navLink">Matchs</Nav.Link>
+            <Nav.Link as={Link} to="/legends" className="navLink">Légendes</Nav.Link>
 
             {isConnected && (role === "admin" || role === "journaliste") && (
-              <Nav.Link as={Link} to={role === "admin" ? "/admin" : "/admin/articles"}>Dashboard</Nav.Link>
+              <Nav.Link as={Link} to={role === "admin" ? "/admin" : "/admin/articles"} className="navLink">Dashboard</Nav.Link>
             )}
 
             {isConnected ? (
-              <Nav.Link onClick={handleLogout} className="auth-button">
+              <Nav.Link onClick={handleLogout} className="authButton">
                 Déconnexion
               </Nav.Link>
             ) : (
-              <Nav.Link as={Link} to="/login" className="auth-button">
+              <Nav.Link as={Link} to="/login" className="authButton">
                 Connexion / Inscription
               </Nav.Link>
             )}

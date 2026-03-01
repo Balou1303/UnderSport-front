@@ -31,7 +31,6 @@
 
 body {
     background-color: var(--bg-color) !important;
-    color: #1e293b;
 }
 
 /* Style Bootstrap */
@@ -68,7 +67,7 @@ body {
 }
 
 /* NavBar Premium */
-.custom-navbar {
+.customNavbar {
     background-color: rgba(15, 23, 42, 0.9) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -77,30 +76,30 @@ body {
     transition: var(--transition-smooth);
 }
 
-.navbar-brand {
+.navbarBrand {
     font-weight: 800 !important;
     letter-spacing: -1px;
     font-size: 1.5rem !important;
     color: white !important;
 }
 
-.navbar-brand span {
+.navbarBrand span {
     color: var(--primary-color);
 }
 
-.nav-link {
+.navLink {
+    text-decoration: none !important;
     font-weight: 500 !important;
-    margin: 0 5px;
     transition: var(--transition-fast) !important;
     color: rgba(255, 255, 255, 0.8) !important;
 }
 
-.nav-link:hover {
+.navLink:hover {
     color: var(--primary-color) !important;
 }
 
 /* Bouton Connexion Spécifique */
-.auth-button {
+.authButton {
     background-color: var(--primary-color) !important;
     color: white !important;
     border-radius: 30px !important;
@@ -110,7 +109,7 @@ body {
     box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3) !important;
 }
 
-.auth-button:hover {
+.authButton:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(138, 92, 245, 0.4) !important;
     background-color: var(--primary-hover) !important;
@@ -119,26 +118,33 @@ body {
 /* SideBar*/
 
 /* Le fond sombre de la sidebar */
-.custom-sidebar {
+.customSidebar {
     background-color: var(--sidebar-bg) !important;
     color: var(--sidebar-text);
 }
 
-/* Les liens dans la sidebar (gris par défaut) */
-.custom-sidebar .nav-link {
+/* Les liens dans la sidebar */
+.customSidebar .navLink {
+    display: block !important;
+    padding: 12px 20px !important;
     color: var(--sidebar-text) !important;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
 }
 
 /* Les liens dans la sidebar (blanc au survol) */
-.custom-sidebar .nav-link:hover {
+.customSidebar .navLink:hover {
     color: white !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* L'onglet actif (fond violet transparent) */
-.custom-sidebar .nav-link.active {
+.customSidebar .navLink.active {
     background-color: var(--sidebar-active-bg) !important;
     color: var(--sidebar-active) !important;
     border-left: 4px solid var(--primary-color);
+    font-weight: 700 !important;
 }
 
 
@@ -229,7 +235,7 @@ body {
 
 /* Legend Card */
 
-.legend-card {
+.legendCard {
     display: flex;
     flex-direction: column;
     height: 380px;
@@ -241,7 +247,7 @@ body {
     border: none;
 }
 
-.legend-card:hover {
+.legendCard:hover {
     transform: scale(1.03);
     box-shadow: 0 10px 25px var(--primary-color);
 }
@@ -315,8 +321,11 @@ body {
 
 /* Hero Section */
 .heroCard {
+    display: block;
+    /* Important car c'est un Link maintenant */
     width: 100%;
-    height: 500px;
+    min-height: 500px;
+    height: auto;
     margin-bottom: 50px;
     border-radius: 30px;
     overflow: hidden;
@@ -325,13 +334,34 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+@media (max-width: 768px) {
+    .heroCard {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        border-radius: 20px;
+        background-color: #0f172a;
+    }
+}
+
 .heroImage {
     width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
-    position: relative;
+    position: absolute;
+    inset: 0;
+    /* Remplace top/left/etc pour plus de robustesse */
     transition: var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+    .heroImage {
+        position: relative;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
 }
 
 .heroCard:hover .heroImage {
@@ -341,35 +371,58 @@ body {
 .heroOverlay {
     position: absolute;
     inset: 0;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 60px;
+    padding: clamp(1.5rem, 5vw, 4rem);
     background: linear-gradient(to top,
-            rgba(15, 23, 42, 0.95) 0%,
-            rgba(15, 23, 42, 0.6) 50%,
+            rgba(15, 23, 42, 0.98) 0%,
+            rgba(15, 23, 42, 0.7) 40%,
+            rgba(15, 23, 42, 0.3) 70%,
             transparent 100%);
     color: white;
 }
 
+@media (max-width: 768px) {
+    .heroOverlay {
+        position: relative;
+        inset: auto;
+        background: #0f172a;
+        padding: 20px 15px;
+        /* Réduction du padding */
+        z-index: 1;
+    }
+}
+
 .heroOverlay h1 {
-    font-size: 3.5rem !important;
-    font-weight: 800 !important;
+    font-size: clamp(1.8rem, 8vw, 3.5rem);
+    font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 20px;
+    margin-bottom: 0.75rem;
+    /* Réduction du margin h1 */
     letter-spacing: -1.5px;
 }
 
 .heroSummary {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     color: #cbd5e1;
     max-width: 800px;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 1rem;
+    /* Réduction du margin summary */
 }
 
-.hero-meta {
+@media (max-width: 768px) {
+    .heroSummary {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+.heroMeta {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -424,43 +477,38 @@ body {
 /* --- Style de lecture "Magazine" (Corps d'article) --- */
 .articleBody {
     font-size: 1.15rem;
-    /* Taille confortable pour les yeux */
     line-height: 1.8;
-    /* Espace généreux entre les lignes */
-    color: #374151;
-    /* Gris foncé, moins agressif que le noir pur */
+    color: #1e293b;
     margin-bottom: 3rem;
-    font-family: 'Georgia', serif;
-    /* Jolie police de journal pour contraster avec ta typo moderne */
+    font-family: 'Outfit', sans-serif;
+    text-align: left !important;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    -moz-hyphens: none !important;
+    -ms-hyphens: none !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    text-rendering: optimizeLegibility;
 }
 
 /* Pare-feu contre les copier/coller (efface les fonds noirs) */
 .articleBody * {
     background-color: transparent !important;
-    color: #374151 !important;
-    /* Force le texte en gris foncé */
+    color: inherit !important;
     white-space: normal !important;
-    /* CASSE absolument les lignes sans fin */
-    word-wrap: break-word !important;
-    /* Coupe les mots s'ils sont trop longs */
-    font-family: inherit !important;
-    /* Empêche les polices moches de s'imposer */
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    -moz-hyphens: none !important;
+    -ms-hyphens: none !important;
+    text-align: left !important;
 }
 
-/* La Lettrine : on cible UNIQUEMENT le premier paragraphe, pas les titres ! */
-.articleBody>p:first-of-type::first-letter {
-    font-size: 6.0rem;
-    /* Énorme lettre */
-    font-weight: bold;
-    color: var(--primary-color);
-    /* violet UnderSport */
-    float: left;
-    /* Permet au texte suivant d'enrouler la lettre */
-    line-height: 1;
-    /* Resserre la lettre */
-    margin-right: 10px;
-    /* Espace entre la lettrine et le reste du mot */
-}
+
 
 
 /* RESPONSIVE */
@@ -667,14 +715,15 @@ body {
 }
 
 /* Badge violet UnderSport */
-.badge-undersport {
+.badgeUndersport {
     background-color: var(--primary-color) !important;
     color: white !important;
     border: none !important;
 }
-/* --- MODULE L�GENDES PREMIUM --- */
 
-.legend-card-premium {
+/* --- MODULE LÉGENDES PREMIUM --- */
+
+.legendCardPremium {
     background-color: white;
     border-radius: 28px;
     overflow: hidden;
@@ -687,13 +736,13 @@ body {
     text-decoration: none !important;
 }
 
-.legend-card-premium:hover {
+.legendCardPremium:hover {
     transform: translateY(-12px);
     box-shadow: var(--hover-shadow);
     border-color: var(--primary-color);
 }
 
-.legend-img-wrapper {
+.legendImgWrapper {
     width: 100%;
     height: 380px;
     overflow: hidden;
@@ -701,7 +750,7 @@ body {
     background-color: #f1f5f9;
 }
 
-.legend-img-wrapper img {
+.legendImgWrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -709,11 +758,11 @@ body {
     transition: var(--transition-smooth);
 }
 
-.legend-card-premium:hover .legend-img-wrapper img {
+.legendCardPremium:hover .legendImgWrapper img {
     transform: scale(1.08);
 }
 
-.legend-info {
+.legendInfo {
     padding: 25px;
     text-align: center;
     background: white;
@@ -723,7 +772,7 @@ body {
     justify-content: center;
 }
 
-.legend-firstname {
+.legendFirstnamePremium {
     display: block;
     font-size: 0.85rem;
     color: var(--primary-color);
@@ -733,7 +782,7 @@ body {
     margin-bottom: 4px;
 }
 
-.legend-lastname {
+.legendLastnamePremium {
     display: block;
     font-size: 1.7rem;
     font-weight: 800;
@@ -742,7 +791,7 @@ body {
     line-height: 1.1;
 }
 
-.legend-sport-tag {
+.legendSportTag {
     display: inline-block;
     background-color: #f1f5f9;
     color: #475569;
@@ -756,19 +805,19 @@ body {
 }
 
 /* Detail Page Premium */
-.legend-detail-hero {
+.legendDetailHero {
     background-color: var(--sidebar-bg);
     border-radius: 40px;
     padding: 50px;
     color: white;
     box-shadow: var(--medium-shadow);
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
     position: relative;
     margin-top: 20px;
 }
 
-.legend-detail-hero::before {
+.legendDetailHero::before {
     content: "";
     position: absolute;
     top: -50%;
@@ -779,17 +828,17 @@ body {
     pointer-events: none;
 }
 
-.legend-detail-photo {
+.legendDetailPhoto {
     border-radius: 24px;
-    border: 6px solid rgba(255,255,255,0.1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    border: 6px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     width: 100%;
     max-height: 550px;
     object-fit: cover;
     object-position: top;
 }
 
-.bio-card {
+.bioCard {
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -797,7 +846,7 @@ body {
     padding: 30px;
 }
 
-.achievement-card {
+.achievementCard {
     background: white !important;
     border-radius: 24px !important;
     border: 1px solid #f1f5f9 !important;
@@ -805,7 +854,7 @@ body {
     transition: var(--transition-fast) !important;
 }
 
-.achievement-card:hover {
+.achievementCard:hover {
     transform: translateY(-5px) !important;
     box-shadow: var(--medium-shadow) !important;
     border-color: var(--primary-color) !important;

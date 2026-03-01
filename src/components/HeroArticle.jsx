@@ -17,34 +17,33 @@ const HeroArticle = ({ article }) => {
     const tags = article.sportName ? article.sportName.split(',') : [];
 
     return <>
-        <div className="heroCard">
-            {/* Ajout des guillemets dans l'URL pour éviter les bugs CSS */}
-            <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}>
-                <div className="heroOverlay">
-                    <div className="hero-meta">
-                        À LA UNE {tags.length > 0 && `• ${tags[0].toUpperCase()}`}
-                    </div>
-
-                    <h1>{article.title}</h1>
-
-                    <p className="heroSummary">
-                        {article.content ? article.content.substring(0, 150) + "..." : "Lire la suite..."}
-                    </p>
-
-                    <div className="d-flex align-items-center gap-3 mb-4">
-                        <span className="text-white-50 small">
-                            Par <span className="text-white fw-bold">{article.firstName} {article.lastName}</span>
-                        </span>
-                        <span className="text-white-50 small">|</span>
-                        <span className="text-white-50 small">
-                            {new Date(article.publicationDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}
-                        </span>
-                    </div>
-
-                    <Link to={`/article/${article.articleId}`} className="btn btn-primary btn-lg">Lire l'article</Link>
+        <Link to={`/article/${article.articleId}`} className="heroCard text-decoration-none">
+            {/* Image en haut sur mobile, fond sur desktop */}
+            <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}></div>
+            <div className="heroOverlay">
+                <div className="heroMeta">
+                    À LA UNE {tags.length > 0 && `• ${tags[0].toUpperCase()}`}
                 </div>
+
+                <h1 className="text-white">{article.title}</h1>
+
+                <p className="heroSummary">
+                    {article.content ? article.content.substring(0, 150) + "..." : "Lire la suite..."}
+                </p>
+
+                <div className="d-flex align-items-center gap-2 mb-3">
+                    <span className="text-white-50 small">
+                        Par <span className="text-white fw-bold">{article.firstName} {article.lastName}</span>
+                    </span>
+                    <span className="text-white-50 small">|</span>
+                    <span className="text-white-50 small">
+                        {new Date(article.publicationDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}
+                    </span>
+                </div>
+
+                <span className="btn btn-primary btn-lg heroBtn">Lire l'article</span>
             </div>
-        </div>
+        </Link>
     </>;
 };
 

@@ -7,30 +7,27 @@ const LegendCard = ({ legend }) => {
 
     return (
         <Link to={`/legends/${legend.legendId}`} className="text-decoration-none">
-            <div className="legend-card">
-                <div className="legendCardPicture">
+            <div className="legendCardPremium">
+                <div className="legendImgWrapper">
                     {legend.photo ? (
                         <img
                             src={`${SERVER_URL}${legend.photo}`}
                             alt={`${legend.firstname} ${legend.lastname}`}
                         />
                     ) : (
-                        <div className="legendCardPlaceholder">
+                        <div className="d-flex align-items-center justify-content-center h-100 bg-light text-muted">
                             Photo indisponible
                         </div>
                     )}
                 </div>
 
-                <div className="legendCardBody">
-                    <h2>
-                        <span className="legendFirstname">{legend.firstname}</span>
-                        <span className="legendLastname">{legend.lastname}</span>
-                    </h2>
-
-                    <div className="legendBadges">
-                        <Badge bg="dark" className="legendBadge">
+                <div className="legendInfo">
+                    <span className="legendFirstnamePremium">{legend.firstname}</span>
+                    <span className="legendLastnamePremium">{legend.lastname}</span>
+                    <div>
+                        <span className="legendSportTag">
                             {legend.sportName}
-                        </Badge>
+                        </span>
                     </div>
                 </div>
             </div>

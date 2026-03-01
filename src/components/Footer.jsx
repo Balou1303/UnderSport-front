@@ -19,10 +19,10 @@ const Footer = () => {
                     <Col md={6} lg={3}>
                         <h5 className="fw-bold mb-3 text-uppercase text-white">Navigation</h5>
                         <ul className="list-unstyled">
-                            <li className="mb-2"><Link to="/" className="text-white-50 text-decoration-none footer-link">Accueil</Link></li>
-                            <li className="mb-2"><Link to="/sports" className="text-white-50 text-decoration-none footer-link">Tous les Sports</Link></li>
-                            <li className="mb-2"><Link to="/contact" className="text-white-50 text-decoration-none footer-link">Contact</Link></li>
-                            <li className="mb-2"><Link to="/login" className="text-white-50 text-decoration-none footer-link">Espace Rédacteur</Link></li>
+                            <li className="mb-2"><Link to="/" className="text-white-50 text-decoration-none footerLink">Accueil</Link></li>
+                            <li className="mb-2"><Link to="/sports" className="text-white-50 text-decoration-none footerLink">Tous les Sports</Link></li>
+                            <li className="mb-2"><Link to="/contact" className="text-white-50 text-decoration-none footerLink">Contact</Link></li>
+                            <li className="mb-2"><Link to="/login" className="text-white-50 text-decoration-none footerLink">Espace Rédacteur</Link></li>
                         </ul>
                     </Col>
 
@@ -30,9 +30,9 @@ const Footer = () => {
                     <Col md={6} lg={3}>
                         <h5 className="fw-bold mb-3 text-uppercase text-white">Informations Légales</h5>
                         <ul className="list-unstyled">
-                            <li className="mb-2"><Link to="/mentions-legales" className="text-white-50 text-decoration-none footer-link">Mentions Légales</Link></li>
-                            <li className="mb-2"><Link to="/politique-confidentialite" className="text-white-50 text-decoration-none footer-link">Politique de Confidentialité</Link></li>
-                            <li className="mb-2"><Link to="/cgu" className="text-white-50 text-decoration-none footer-link">CGU</Link></li>
+                            <li className="mb-2"><Link to="/mentions-legales" className="text-white-50 text-decoration-none footerLink">Mentions Légales</Link></li>
+                            <li className="mb-2"><Link to="/politique-confidentialite" className="text-white-50 text-decoration-none footerLink">Politique de Confidentialité</Link></li>
+                            <li className="mb-2"><Link to="/cgu" className="text-white-50 text-decoration-none footerLink">CGU</Link></li>
                         </ul>
                     </Col>
                 </Row>

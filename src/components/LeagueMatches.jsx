@@ -74,7 +74,7 @@ const LeagueMatches = ({ leagueId, selectedDate, refreshKey }) => {
             default:
                 // Pour les matchs à venir, on affiche l'heure
                 const time = new Date(match.utcDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-                return <Badge className="badge-undersport">{time}</Badge>;
+                return <Badge className="badgeUndersport">{time}</Badge>;
         }
     };
 
