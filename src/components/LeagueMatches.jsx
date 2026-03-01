@@ -18,7 +18,16 @@ const LeagueMatches = ({ leagueId, selectedDate, refreshKey }) => {
                     api.get(`/external/live/${leagueId}`)
                 ]);
 
-                const dateMatches = dateResult.status === 'fulfilled' ? (dateResult.value.data?.matches || []) : [];
+                // Gestion d'erreur plus fine pour éviter le "Silencieux" si Rate-Limit
+                if (dateResult.status === 'rejected') {
+                    console.error(`API Error for ${leagueId}:`, dateResult.reason);
+                    const isRateLimit = dateResult.reason?.response?.status === 429;
+                    setError(isRateLimit ? "Limite de requêtes atteinte. Patientez 60 sec." : "Erreur API.");
+                    setLoading(false);
+                    return;
+                }
+
+                const dateMatches = dateResult.value.data?.matches || [];
                 const liveMatches = liveResult.status === 'fulfilled' ? (liveResult.value.data?.matches || []) : [];
 
                 // Fusion par Map pour que les données du direct écrasent les données de calendrier
@@ -32,12 +41,9 @@ const LeagueMatches = ({ leagueId, selectedDate, refreshKey }) => {
 
                 const merged = Array.from(mergedMap.values());
 
-                // Filtre FINAL : On garde ce qui match la date OU ce qui est en direct/récemment fini
-                // (Cela permet de voir le direct même si l'API a un décalage de date)
-                const filtered = merged.filter(m =>
-                    m.utcDate.split('T')[0] === selectedDate ||
-                    ['IN_PLAY', 'PAUSED', 'LIVE', 'FINISHED'].includes(m.status)
-                );
+                // Filtre STRICT : Un match n'appartient qu'à sa date (UTC)
+                // Cela évite de polluer les jours précédents avec les scores d'aujourd'hui
+                const filtered = merged.filter(m => m.utcDate.split('T')[0] === selectedDate);
 
                 // Tri par date
                 filtered.sort((a, b) => new Date(a.utcDate) - new Date(b.utcDate));
@@ -68,7 +74,7 @@ const LeagueMatches = ({ leagueId, selectedDate, refreshKey }) => {
             default:
                 // Pour les matchs à venir, on affiche l'heure
                 const time = new Date(match.utcDate).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-                return <Badge bg="primary">{time}</Badge>;
+                return <Badge className="badge-undersport">{time}</Badge>;
         }
     };
 

@@ -21,27 +21,27 @@ const HeroArticle = ({ article }) => {
             {/* Ajout des guillemets dans l'URL pour éviter les bugs CSS */}
             <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}>
                 <div className="heroOverlay">
-                    <div style={{ marginBottom: '15px' }}>
-                        <Badge bg="primary" className="me-2">À LA UNE</Badge>
-                        {tags.map((tag, i) => (
-                            <Badge key={i} bg="dark" className="me-1">{tag.trim()}</Badge>
-                        ))}
-                        {article.championshipName && <Badge bg="info">{article.championshipName}</Badge>}
+                    <div className="hero-meta">
+                        À LA UNE {tags.length > 0 && `• ${tags[0].toUpperCase()}`}
                     </div>
-
 
                     <h1>{article.title}</h1>
 
-                    {/* évite le crash si content est null */}
                     <p className="heroSummary">
                         {article.content ? article.content.substring(0, 150) + "..." : "Lire la suite..."}
                     </p>
 
-                    <div className="hero-meta">
-                        Par {article.firstName} {article.lastName} | Le {new Date(article.publicationDate).toLocaleDateString()}
+                    <div className="d-flex align-items-center gap-3 mb-4">
+                        <span className="text-white-50 small">
+                            Par <span className="text-white fw-bold">{article.firstName} {article.lastName}</span>
+                        </span>
+                        <span className="text-white-50 small">|</span>
+                        <span className="text-white-50 small">
+                            {new Date(article.publicationDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}
+                        </span>
                     </div>
 
-                    <Link to={`/article/${article.articleId}`} className="heroBtn">Lire l'article</Link>
+                    <Link to={`/article/${article.articleId}`} className="btn btn-primary btn-lg">Lire l'article</Link>
                 </div>
             </div>
         </div>

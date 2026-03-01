@@ -15,15 +15,14 @@ const NavBar = () => {
   };
 
   return <>
-    <Navbar expand="lg" className="bg-dark" data-bs-theme="dark">
+    <Navbar expand="lg" className="custom-navbar px-3" variant="dark" sticky="top">
       <Container>
-        <Navbar.Brand as={Link} to="/">UnderSport 🏀</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">UNDER<span>SPORT</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto align-items-center">
             <Nav.Link as={Link} to="/">Accueil</Nav.Link>
             <Nav.Link as={Link} to="/matchs">Matchs</Nav.Link>
-            <Nav.Link as={Link} to="/sports">Sports</Nav.Link>
             <Nav.Link as={Link} to="/legends">Légendes</Nav.Link>
 
             {isConnected && (role === "admin" || role === "journaliste") && (
@@ -31,14 +30,12 @@ const NavBar = () => {
             )}
 
             {isConnected ? (
-              // CAS A : CONNECTÉ
-              <Nav.Link onClick={handleLogout} className="nav-link btn-link auth-link">
-                Se déconnecter
+              <Nav.Link onClick={handleLogout} className="auth-button">
+                Déconnexion
               </Nav.Link>
             ) : (
-              // CAS B : PAS CONNECTÉ
-              <Nav.Link as={Link} to="/login" className="nav-link auth-link">
-                Se connecter / S'inscrire
+              <Nav.Link as={Link} to="/login" className="auth-button">
+                Connexion / Inscription
               </Nav.Link>
             )}
 

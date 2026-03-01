@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // <--- L'outil magique pour lire l'URL
+import { useParams, Link } from "react-router-dom";
 import articlesService from "../services/articlesService";
-import { Container, Badge } from "react-bootstrap"; // Un peu de style
+import { Container, Badge } from "react-bootstrap";
 
 const ArticlePage = () => {
-    // récupère l'ID qui est dans l'URL (ex: /article/42 -> id = 42)
     const { id } = useParams();
-
     const [article, setArticle] = useState(null);
 
     const fetchOneArticle = async () => {
@@ -18,68 +16,56 @@ const ArticlePage = () => {
         }
     };
     useEffect(() => {
-
         fetchOneArticle();
-    }, [id]); // relance si l'ID change
+    }, [id]);
 
-    // Si ça charge encore, affiche un petit texte
-    if (!article) return <p>Chargement...</p>;
+    if (!article) return <div className="vh-100 d-flex align-items-center justify-content-center text-primary fw-bold fs-3">Chargement...</div>;
 
-    // Construction de l'URL de l'image (comme sur la Home)
     const API_URL = import.meta.env.VITE_URL_API;
     const SERVER_URL = API_URL ? API_URL.replace('/api', '') : '';
-
-    // Construction de l'URL de l'image
     const imageUrl = article.picture
         ? `${SERVER_URL}${article.picture}`
-        : "https://placehold.co/1200x600/1a1a1a/white?text=A+la+Une";
+        : "https://placehold.co/1200x600/1a1a1a/white?text=Article";
 
     return <>
-        <Container className="mt-5">
-            {/* En-tête de l'article */}
-            <div className="text-center mb-5">
-                <Badge bg="primary" className="mb-3 fs-6 px-3 py-2">
-                    {article.championshipName}
-                </Badge>
-
-
-
-            </div>
-
-            {/* Grande Image */}
-            {/* La grande "boîte" qui fige la hauteur à 450px */}
-            <div className="heroCard mb-5">
-
-                {/* L'image de fond (qui prendra 100% des 450px) */}
-                <div className="heroImage" style={{ backgroundImage: `url(${imageUrl})` }}></div>
-
-                {/* Le calque noir transparent au dessus */}
+        <Container className="py-5">
+            {/* Grande Image Hero */}
+            <div className="heroCard mb-5" style={{ height: '550px' }}>
+                <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}></div>
                 <div className="heroOverlay">
+                    <div className="hero-meta">
+                        {article.sportName || "Sport"} {article.championshipName && `• ${article.championshipName.toUpperCase()}`}
+                    </div>
 
-                    <Badge bg="primary" className="mb-3 fs-6 px-3 py-2">
-                        {article.championshipName}
-                    </Badge>
-
-                    <h1 className="text-white fw-bold mb-3" style={{ fontSize: '3rem', textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>
+                    <h1 style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
                         {article.title}
                     </h1>
 
-                    <p className="text-light fs-5 mb-0">
-                        Par {article.firstName} {article.lastName} | Le {new Date(article.publicationDate).toLocaleDateString()}
-                    </p>
-
+                    <div className="d-flex align-items-center gap-3 mt-3">
+                        <img
+                            src={`https://ui-avatars.com/api/?name=${article.firstName}+${article.lastName}&background=8A5CF5&color=fff&rounded=true`}
+                            alt="Avatar"
+                            style={{ width: '40px', height: '40px', border: '2px solid white' }}
+                        />
+                        <div className="d-flex flex-column">
+                            <span className="text-white fw-bold small">{article.firstName} {article.lastName}</span>
+                            <span className="text-white-50 x-small" style={{ fontSize: '0.75rem' }}>
+                                Publié le {new Date(article.publicationDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8">
-                    <div className="articleBody" dangerouslySetInnerHTML={{ __html: article.content }}>
+                    <div className="articleBody shadow-sm p-4 p-md-5 bg-white rounded-4" dangerouslySetInnerHTML={{ __html: article.content }}>
                     </div>
 
-                    {/* Button */}
                     <div className="text-center mt-5">
-                        <a href="/" className="cardBtn">
-                            Retour aux articles
-                        </a>
+                        <Link to="/" className="btn btn-outline-primary px-5">
+                            ← Retour aux articles
+                        </Link>
                     </div>
                 </div>
             </div>

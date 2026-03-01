@@ -24,6 +24,19 @@ const MatchsPage = () => {
         setSelectedDate(new Date().toISOString().split('T')[0]);
     };
 
+    // Helper pour formater les dates des boutons (ex: 28/02)
+    const getFormattedNavDate = (offset) => {
+        const d = new Date(selectedDate);
+        d.setDate(d.getDate() + offset);
+        return d.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit' });
+    };
+
+    // Helper pour la date centrale (ex: Dimanche 1 Mars)
+    const getFullDisplayDate = (dateStr) => {
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        return new Date(dateStr).toLocaleDateString('fr-FR', options);
+    };
+
     return (
         <Container className="py-5" style={{ maxWidth: "1200px" }}>
 
@@ -35,7 +48,7 @@ const MatchsPage = () => {
                 >
                     <div className="heroOverlay d-flex justify-content-center align-items-center text-center">
                         <Badge bg="primary" className="mb-3 px-3 py-2 fs-6 shadow-sm text-uppercase">
-                            OMNISPORT • SAISON 2025/2026
+                            UNDERSPORT • SAISON 2025/2026
                         </Badge>
                         <h1 className="text-white fw-bold mb-0 text-uppercase" style={{ fontSize: '3.5rem', textShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
                             CENTRE DE <span style={{ color: 'var(--primary-color)' }}>MATCHS</span>
@@ -44,14 +57,20 @@ const MatchsPage = () => {
                 </div>
             </div>
             <div className="d-flex justify-content-center align-items-center gap-3 mb-4">
-                <button onClick={() => changeDate(-1)} className="btn btn-outline-primary shadow-sm">⬅️ Hier</button>
+                <button onClick={() => changeDate(-1)} className="btn btn-outline-primary shadow-sm px-3">
+                    ⬅️ {getFormattedNavDate(-1)}
+                </button>
 
-                <div className="text-center px-3">
-                    <div className="fw-bold fs-4" style={{ color: 'var(--sidebar-bg)' }}>{selectedDate}</div>
-                    <button onClick={resetDate} className="btn btn-sm btn-link text-decoration-none text-muted">Revenir à la date du jour</button>
+                <div className="text-center px-4">
+                    <div className="fw-bold fs-4 text-capitalize" style={{ color: 'var(--sidebar-bg)' }}>
+                        {getFullDisplayDate(selectedDate)}
+                    </div>
+                    <button onClick={resetDate} className="btn btn-sm btn-link text-decoration-none text-muted">Aujourd'hui</button>
                 </div>
 
-                <button onClick={() => changeDate(1)} className="btn btn-outline-primary shadow-sm">Demain ➡️</button>
+                <button onClick={() => changeDate(1)} className="btn btn-outline-primary shadow-sm px-3">
+                    {getFormattedNavDate(1)} ➡️
+                </button>
             </div>
 
             {/*  accordéons imbriqués */}
