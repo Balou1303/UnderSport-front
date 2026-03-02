@@ -1,9 +1,17 @@
 import { Container, Badge } from 'react-bootstrap';
-import ChampionshipsAccordions from '../components/MatchsAccordions';
+import MatchsAccordions from '../components/MatchsAccordions';
 import { useState, useEffect } from 'react';
 
 const MatchsPage = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+    // Helper pour avoir YYYY-MM-DD en local (évite les décalages ISO/UTC)
+    const getLocalDateString = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    };
+
+    const [selectedDate, setSelectedDate] = useState(getLocalDateString(new Date()));
     const [refreshKey, setRefreshKey] = useState(0);
 
     // Auto-refresh toutes les 60 secondes pour les scores en direct
@@ -17,11 +25,11 @@ const MatchsPage = () => {
     const changeDate = (days) => {
         const d = new Date(selectedDate);
         d.setDate(d.getDate() + days);
-        setSelectedDate(d.toISOString().split('T')[0]);
+        setSelectedDate(getLocalDateString(d));
     };
 
     const resetDate = () => {
-        setSelectedDate(new Date().toISOString().split('T')[0]);
+        setSelectedDate(getLocalDateString(new Date()));
     };
 
     // Helper pour formater les dates des boutons (ex: 28/02)
@@ -33,8 +41,10 @@ const MatchsPage = () => {
 
     // Helper pour la date centrale (ex: Dimanche 1 Mars)
     const getFullDisplayDate = (dateStr) => {
+        const [year, month, day] = dateStr.split('-');
+        const d = new Date(year, month - 1, day);
         const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-        return new Date(dateStr).toLocaleDateString('fr-FR', options);
+        return d.toLocaleDateString('fr-FR', options);
     };
 
     return (
@@ -74,7 +84,7 @@ const MatchsPage = () => {
             </div>
 
             {/*  accordéons imbriqués */}
-            <ChampionshipsAccordions selectedDate={selectedDate} refreshKey={refreshKey} />
+            <MatchsAccordions selectedDate={selectedDate} refreshKey={refreshKey} />
 
         </Container>
     );

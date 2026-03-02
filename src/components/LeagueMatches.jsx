@@ -66,9 +66,10 @@ const LeagueMatches = ({ leagueId, selectedDate, refreshKey }) => {
     const renderStatus = (match) => {
         switch (match.status) {
             case 'IN_PLAY':
-            case 'PAUSED':
             case 'LIVE':
                 return <Badge bg="danger" className="pulse-animation">DIRECT</Badge>;
+            case 'PAUSED':
+                return <Badge bg="warning" text="dark">MI-TEMPS</Badge>;
             case 'FINISHED':
                 return <Badge bg="secondary">TERMINÉ</Badge>;
             default:
@@ -102,7 +103,50 @@ const LeagueMatches = ({ leagueId, selectedDate, refreshKey }) => {
                                     <span>{match.score.fullTime.home} - {match.score.fullTime.away}</span>
                                 )}
                             </div>
+                            {/* Statut (Badge) */}
                             {renderStatus(match)}
+
+                            {/* Temps de jeu (Réel ou Estimé) */}
+                            {(match.status === 'IN_PLAY' || match.status === 'LIVE' || match.status === 'PAUSED') && (
+                                <div className="small text-danger fw-bold mt-1">
+                                    {(() => {
+                                        // 1. Si l'API fournit déjà la minute (Rare en version gratuite)
+                                        if (match.minute) return `${match.minute}'`;
+                                        if (match.score?.time) return `${match.score.time}'`;
+
+                                        // 2. Sinon, on estime basé sur utcDate (Plan gratuit API)
+                                        if (match.status === 'PAUSED') return null;
+
+                                        const start = new Date(match.utcDate);
+                                        const now = new Date();
+                                        const diffMs = now - start;
+                                        const diffMinsTotal = Math.floor(diffMs / 60000);
+
+                                        // Paramètres de réalisme
+                                        const KICKOFF_DELAY = 5; // Un match commence souvent à H+5
+                                        const HALF_TIME_BREAK = 20; // Pause + temps additionnel 1ère mi-temps
+
+                                        const activeMins = diffMinsTotal - KICKOFF_DELAY;
+
+                                        if (activeMins < 0) return null;
+
+                                        // 1ère Mi-temps
+                                        if (activeMins <= 45) return `${activeMins}' (est.)`;
+
+                                        // Temps additionnel 1ère mi-temps (on affiche 45+)
+                                        if (activeMins > 45 && activeMins <= 50) return "45+' (est.)";
+
+                                        // Pendant la pause
+                                        if (activeMins > 50 && activeMins <= 65) return null;
+
+                                        // 2ème Mi-temps
+                                        const estSecondHalf = activeMins - HALF_TIME_BREAK;
+                                        const displayMin = Math.min(90, estSecondHalf);
+                                        const extra = estSecondHalf > 90 ? `+${estSecondHalf - 90}` : '';
+                                        return `${displayMin}${extra}' (est.)`;
+                                    })()}
+                                </div>
+                            )}
                         </div>
 
                         {/* Equipe Extérieur */}
