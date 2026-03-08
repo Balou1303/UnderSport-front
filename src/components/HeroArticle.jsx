@@ -27,10 +27,6 @@ const HeroArticle = ({ article }) => {
 
                 <h1 className="text-white">{article.title}</h1>
 
-                <p className="heroSummary">
-                    {article.content ? article.content.substring(0, 150) + "..." : "Lire la suite..."}
-                </p>
-
                 <div className="d-flex align-items-center gap-2 mb-3">
                     <span className="text-white-50 small">
                         Par <span className="text-white fw-bold">{article.firstName} {article.lastName}</span>

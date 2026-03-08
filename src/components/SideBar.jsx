@@ -84,6 +84,15 @@ const SideBar = () => {
                     </li>
                 )}
 
+                {/* Encyclopédie */}
+                {role === "admin" && (
+                    <li className="nav-item mb-2">
+                        <Link to="/admin/encyclopedia" className={`navLink ${isActive('/admin/encyclopedia')}`}>
+                            📖 Gestion Encyclopédie
+                        </Link>
+                    </li>
+                )}
+
                 {/* Rôles */}
                 {role === "admin" && (
                     <li className="nav-item mb-2">

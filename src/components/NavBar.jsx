@@ -23,6 +23,7 @@ const NavBar = () => {
           <Nav className="ms-auto align-items-center">
             <Nav.Link as={Link} to="/" className="navLink">Accueil</Nav.Link>
             <Nav.Link as={Link} to="/matchs" className="navLink">Matchs</Nav.Link>
+            <Nav.Link as={Link} to="/encyclopedia" className="navLink">Encyclopédie</Nav.Link>
             <Nav.Link as={Link} to="/legends" className="navLink">Légendes</Nav.Link>
 
             {isConnected && (role === "admin" || role === "journaliste") && (

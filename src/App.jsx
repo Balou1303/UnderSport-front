@@ -26,6 +26,14 @@ import EditLegendPage from './pages/EditLegendPage';
 import LegendDetailsPage from './pages/LegendDetailsPage';
 import DashboardAchievements from './pages/DashboardAchievements';
 import MatchsPage from './pages/MatchsPage';
+import EncyclopediaPage from './pages/EncyclopediaPage';
+import SportEncyclopediaPage from './pages/SportEncyclopediaPage';
+import LexiconPage from './pages/LexiconPage';
+import DashboardEncyclopedia from './pages/DashboardEncyclopedia';
+import AddRulePage from './pages/AddRulePage';
+import AddLexiconPage from './pages/AddLexiconPage';
+import EditRulePage from './pages/EditRulePage';
+import EditLexiconPage from './pages/EditLexiconPage';
 
 function App() {
   return <>
@@ -46,6 +54,9 @@ function App() {
             <Route path="/legends" element={<LegendsPage />} />
             <Route path="/legends/:id" element={<LegendDetailsPage />} />
             <Route path="/matchs" element={<MatchsPage />} />
+            <Route path="/encyclopedia" element={<EncyclopediaPage />} />
+            <Route path="/encyclopedia/sport/:id" element={<SportEncyclopediaPage />} />
+            <Route path="/encyclopedia/lexicon" element={<LexiconPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
           </Route>
@@ -72,6 +83,11 @@ function App() {
             <Route path="legends/add" element={<AddLegendPage />} />
             <Route path="legends/edit/:id" element={<EditLegendPage />} />
             <Route path="achievements" element={<DashboardAchievements />} />
+            <Route path="encyclopedia" element={<DashboardEncyclopedia />} />
+            <Route path="encyclopedia/rules/add" element={<AddRulePage />} />
+            <Route path="encyclopedia/rules/edit/:id" element={<EditRulePage />} />
+            <Route path="encyclopedia/lexicon/add" element={<AddLexiconPage />} />
+            <Route path="encyclopedia/lexicon/edit/:id" element={<EditLexiconPage />} />
           </Route>
 
         </Routes>
