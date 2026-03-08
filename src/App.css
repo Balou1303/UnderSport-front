@@ -1,14 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
+
 :root {
     /* Le Violet UnderSport */
     --primary-color: #8A5CF5;
     --primary-hover: #734bd6;
 
-    /* Couleurs du Back Office */
-    --sidebar-bg: #111827;
-    /* Le fameux noir bleuté */
-    --sidebar-text: #9ca3af;
+    /* Couleurs du site */
+    --bg-color: #f1f5f9;
+    /* Gris bleuté très clair */
+    --card-bg: #ffffff;
+    --sidebar-bg: #0f172a;
+    /* Bleu nuit profond */
+    --sidebar-text: #94a3b8;
     --sidebar-active: #ffffff;
-    --sidebar-active-bg: rgba(138, 92, 245, 0.2);
+    --sidebar-active-bg: rgba(138, 92, 245, 0.15);
+
+    /* Shadows Premium */
+    --soft-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    --medium-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    --hover-shadow: 0 20px 40px rgba(138, 92, 245, 0.2);
+
+    /* Transitions */
+    --transition-fast: all 0.2s ease-in-out;
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color) !important;
 }
 
 /* Style Bootstrap */
@@ -17,88 +39,179 @@
 .btn-primary {
     background-color: var(--primary-color) !important;
     border-color: var(--primary-color) !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    padding: 10px 24px !important;
+    transition: var(--transition-fast) !important;
+    box-shadow: 0 4px 12px rgba(138, 92, 245, 0.25) !important;
 }
 
 .btn-primary:hover {
     background-color: var(--primary-hover) !important;
     border-color: var(--primary-hover) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(138, 92, 245, 0.35) !important;
 }
 
-/* Cible UNIQUEMENT les liens qui ont la classe "auth-link" (Connexion/Déconnexion) */
-.navbar-nav .nav-link.auth-link {
-    color: white !important;
-    font-weight: bold !important;
-    border-radius: 5px;
-    margin-left: 10px;
-    transition: all 0.3s;
-}
-
-/* Au survol de ce bouton spécifique */
-.navbar-nav .nav-link.auth-link:hover {
-    background-color: white !important;
+/* Boutons "Outline" violets */
+.btn-outline-primary {
     color: var(--primary-color) !important;
-    /* Le texte devient violet sur fond blanc */
+    border-color: var(--primary-color) !important;
+    background-color: transparent !important;
+}
+
+.btn-outline-primary:hover {
+    color: white !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* NavBar Premium */
+.customNavbar {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 0 !important;
+    transition: var(--transition-smooth);
+}
+
+.navbarBrand {
+    font-weight: 800 !important;
+    letter-spacing: -1px;
+    font-size: 1.5rem !important;
+    color: white !important;
+}
+
+.navbarBrand span {
+    color: var(--primary-color);
+}
+
+.navLink {
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    transition: var(--transition-fast) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.navLink:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Bouton Connexion Spécifique */
+.authButton {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border-radius: 30px !important;
+    padding: 8px 20px !important;
+    font-weight: 700 !important;
+    margin-left: 20px !important;
+    box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3) !important;
+}
+
+.authButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(138, 92, 245, 0.4) !important;
+    background-color: var(--primary-hover) !important;
 }
 
 /* SideBar*/
 
 /* Le fond sombre de la sidebar */
-.custom-sidebar {
+.customSidebar {
     background-color: var(--sidebar-bg) !important;
     color: var(--sidebar-text);
 }
 
-/* Les liens dans la sidebar (gris par défaut) */
-.custom-sidebar .nav-link {
+/* Les liens dans la sidebar */
+.customSidebar .navLink {
+    display: block !important;
+    padding: 12px 20px !important;
     color: var(--sidebar-text) !important;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
 }
 
 /* Les liens dans la sidebar (blanc au survol) */
-.custom-sidebar .nav-link:hover {
+.customSidebar .navLink:hover {
     color: white !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* L'onglet actif (fond violet transparent) */
-.custom-sidebar .nav-link.active {
+.customSidebar .navLink.active {
     background-color: var(--sidebar-active-bg) !important;
     color: var(--sidebar-active) !important;
     border-left: 4px solid var(--primary-color);
+    font-weight: 700 !important;
 }
 
 
-/* Cards */
-
-.article-card {
+/* Cards Articles Premium Fix */
+.articleCard {
     display: flex;
-    flex-direction: row;
-    width: 48%;
-    height: 250px;
-    border: 1px solid #ccc;
-    border-radius: 16px;
+    flex-direction: column;
+    width: 100%;
+    border: none !important;
+    border-radius: 24px !important;
     overflow: hidden;
     background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    box-shadow: var(--soft-shadow);
+    transition: var(--transition-smooth);
+    margin-bottom: 2rem;
+    position: relative;
+    height: 100%;
 }
 
 .cardPicture {
-    width: 40%;
-    height: 100%;
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
 }
 
 .cardPicture img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.articleCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--medium-shadow);
+}
+
+.articleCard:hover .cardPicture img {
+    transform: scale(1.05);
 }
 
 .cardBody {
-    width: 60%;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-grow: 1;
+    z-index: 2;
+    background: white;
+}
+
+/* On repasse en horizontal uniquement sur très grand écran si besoin, 
+   mais restons en vertical pour la stabilité esthétique demandée */
+@media (min-width: 1200px) {
+    .articleCard {
+        flex-direction: row;
+        height: 280px;
+    }
+
+    .cardPicture {
+        width: 45%;
+        height: 100%;
+    }
+
+    .cardBody {
+        width: 55%;
+    }
 }
 
 .cardBody h2 {
@@ -109,62 +222,215 @@
     overflow: hidden;
 }
 
-.article-card .badge {
+.articleCard .badge {
     cursor: pointer;
     transition: all 0.2s;
     filter: brightness(1.2);
 }
 
-.article-card .badge:hover {
+.articleCard .badge:hover {
     transform: scale(1.1);
     filter: brightness(1.2);
 }
 
-/* Hero Section */
-.hero-card {
-    width: 100%;
-    height: 450px;
-    margin-bottom: 40px;
-    border-radius: 20px;
+/* Legend Card */
+
+.legendCard {
+    display: flex;
+    flex-direction: column;
+    height: 380px;
+    border-radius: 16px;
+    background-color: white;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    position: relative;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
 }
 
-.hero-image {
+.legendCard:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 25px var(--primary-color);
+}
+
+.legendCardPicture {
+    width: 100%;
+    height: 250px;
+    border-bottom: 4px solid var(--primary-color);
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.legendCardPicture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.legendCardPlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6c757d;
+    font-size: 1.25rem;
+}
+
+.legendCardBody {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: white;
+}
+
+.legendCardBody h2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+}
+
+.legendFirstname {
+    font-size: 1.25rem;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.legendLastname {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.legendBadges {
+    margin-top: 0.5rem;
+}
+
+.legendBadge {
+    background-color: #111827 !important;
+    font-size: 0.9rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 50rem !important;
+}
+
+/* Hero Section */
+.heroCard {
+    display: block;
+    /* Important car c'est un Link maintenant */
+    width: 100%;
+    min-height: 500px;
+    height: auto;
+    margin-bottom: 50px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--medium-shadow);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .heroCard {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        border-radius: 20px;
+        background-color: #0f172a;
+    }
+}
+
+.heroImage {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-position: center top;
-    position: relative;
+    position: absolute;
+    inset: 0;
+    /* Remplace top/left/etc pour plus de robustesse */
+    transition: var(--transition-smooth);
 }
 
-.hero-overlay {
+@media (max-width: 768px) {
+    .heroImage {
+        position: relative;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+}
+
+.heroCard:hover .heroImage {
+    transform: scale(1.02);
+}
+
+.heroOverlay {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 60px 40px 40px 40px;
-    background: linear-gradient(to bottom,
-            rgba(0, 0, 0, 0.2) 0%,
-            rgba(0, 0, 0, 0.5) 60%,
-            rgba(0, 0, 0, 0.95) 100%);
+    padding: clamp(1.5rem, 5vw, 4rem);
+    background: linear-gradient(to top,
+            rgba(15, 23, 42, 0.98) 0%,
+            rgba(15, 23, 42, 0.7) 40%,
+            rgba(15, 23, 42, 0.3) 70%,
+            transparent 100%);
     color: white;
 }
 
-.hero-summary {
-    font-size: 1.1rem;
-    color: #ddd;
-    max-width: 700px;
-    text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.8);
+@media (max-width: 768px) {
+    .heroOverlay {
+        position: relative;
+        inset: auto;
+        background: #0f172a;
+        padding: 20px 15px;
+        /* Réduction du padding */
+        z-index: 1;
+    }
 }
 
-.hero-btn {
+.heroOverlay h1 {
+    font-size: clamp(1.8rem, 8vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 0.75rem;
+    /* Réduction du margin h1 */
+    letter-spacing: -1.5px;
+}
+
+.heroSummary {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: #cbd5e1;
+    max-width: 800px;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    /* Réduction du margin summary */
+}
+
+@media (max-width: 768px) {
+    .heroSummary {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+.heroMeta {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.heroBtn {
     background-color: #8A5CF5;
     color: white;
     border: none;
@@ -177,7 +443,7 @@
     margin-top: 20px;
 }
 
-.hero-btn:hover {
+.heroBtn:hover {
     transform: scale(1.05);
     background-color: #7040d5;
     color: white;
@@ -185,7 +451,7 @@
     box-shadow: 0 5px 15px rgba(138, 92, 245, 0.4);
 }
 
-.card-btn {
+.cardBtn {
     background-color: #8A5CF5;
     color: white;
     border: none;
@@ -199,7 +465,7 @@
     margin-top: 10px;
 }
 
-.card-btn:hover {
+.cardBtn:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(138, 92, 245, 0.3);
     cursor: pointer;
@@ -208,50 +474,45 @@
 }
 
 /* --- Style de lecture "Magazine" (Corps d'article) --- */
-.article-body {
+.articleBody {
     font-size: 1.15rem;
-    /* Taille confortable pour les yeux */
     line-height: 1.8;
-    /* Espace généreux entre les lignes */
-    color: #374151;
-    /* Gris foncé, moins agressif que le noir pur */
+    color: #1e293b;
     margin-bottom: 3rem;
-    font-family: 'Georgia', serif;
-    /* Jolie police de journal pour contraster avec ta typo moderne */
+    font-family: 'Outfit', sans-serif;
+    text-align: left !important;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    -moz-hyphens: none !important;
+    -ms-hyphens: none !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    text-rendering: optimizeLegibility;
 }
 
-/* Pare-feu contre les copier/coller (efface les fonds noirs de code ou ChatGPT) */
-.article-body * {
+/* Pare-feu contre les copier/coller (efface les fonds noirs) */
+.articleBody * {
     background-color: transparent !important;
-    color: #374151 !important;
-    /* Force le texte en gris foncé */
+    color: inherit !important;
     white-space: normal !important;
-    /* CASSE absolument les lignes sans fin */
-    word-wrap: break-word !important;
-    /* Coupe les mots s'ils sont trop longs */
-    font-family: inherit !important;
-    /* Empêche les polices moches de s'imposer */
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+    -moz-hyphens: none !important;
+    -ms-hyphens: none !important;
+    text-align: left !important;
 }
 
-/* La Lettrine : on cible UNIQUEMENT le premier paragraphe, pas les titres ! */
-.article-body>p:first-of-type::first-letter {
-    font-size: 6.0rem;
-    /* Énorme lettre */
-    font-weight: bold;
-    color: var(--primary-color);
-    /* violet UnderSport */
-    float: left;
-    /* Permet au texte suivant d'enrouler la lettre */
-    line-height: 1;
-    /* Resserre la lettre */
-    margin-right: 10px;
-    /* Espace entre la lettrine et le reste du mot */
-}
+
 
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .article-card {
+    .articleCard {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -267,7 +528,7 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .article-card:hover {
+    .articleCard:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         /* Ombre plus forte au survol */
@@ -305,18 +566,408 @@
     }
 
     /* --- Ajustements du Hero sur mobile --- */
-    .hero-card {
+    .heroCard {
         height: 250px;
         /* On réduit la hauteur pour l'iPhone */
         border-radius: 10px;
     }
 
-    .hero-overlay h1 {
+    .heroOverlay h1 {
         font-size: 1.8rem !important;
     }
 
-    .hero-overlay p {
+    .heroOverlay p {
         font-size: 1rem !important;
     }
 
+}
+
+/* --- MATCH CENTER PREMIUM --- */
+
+.accordion-item {
+    border: none !important;
+    margin-bottom: 12px;
+    background: transparent !important;
+}
+
+.accordion-header .accordion-button {
+    background-color: white !important;
+    color: var(--sidebar-bg) !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    box-shadow: var(--soft-shadow) !important;
+    border: 1px solid #edf2f7 !important;
+    font-size: 1.1rem;
+    padding: 18px 25px;
+}
+
+.accordion-header .accordion-button:not(.collapsed) {
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    color: var(--primary-color) !important;
+    box-shadow: none !important;
+}
+
+.accordion-body {
+    background-color: white !important;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border: 1px solid #edf2f7;
+    border-top: none;
+    padding: 20px;
+}
+
+/* Les cartes de match dans le body */
+.matchCard {
+    background-color: white;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    margin-bottom: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) !important;
+    border: 1px solid #f1f5f9 !important;
+}
+
+.matchCard:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* --- FOOTER PUBLIC --- */
+
+/* Le tableau de classement stylisé */
+.standingsTable {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    /* Espace entre les lignes pour un effet "carte" */
+    width: 100%;
+}
+
+.standingsTable thead th {
+    border: none;
+    color: #6c757d;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+}
+
+.standingsTable tbody tr {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.standingsTable tbody tr td {
+    border-top: 1px solid #f3f4f6;
+    border-bottom: 1px solid #f3f4f6;
+    padding: 12px 10px;
+}
+
+.standingsTable tbody tr td:first-child {
+    border-left: 1px solid #f3f4f6;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.standingsTable tbody tr td:last-child {
+    border-right: 1px solid #f3f4f6;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.standingsTable tbody tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(138, 92, 245, 0.15);
+    /* Ombre aux couleurs UnderSport */
+    z-index: 2;
+    position: relative;
+    background-color: #fcfbfe;
+}
+
+/* Les cartes des derniers / prochains matchs */
+.matchCard {
+    background-color: white;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.matchCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(138, 92, 245, 0.2);
+    border-color: var(--primary-color);
+}
+
+.matchScore {
+    background-color: var(--sidebar-bg);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 1.1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge violet UnderSport */
+.badgeUndersport {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* --- MODULE LÉGENDES PREMIUM --- */
+
+.legendCardPremium {
+    background-color: white;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: var(--soft-shadow);
+    transition: var(--transition-smooth);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+}
+
+.legendCardPremium:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--hover-shadow);
+    border-color: var(--primary-color);
+}
+
+.legendImgWrapper {
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    position: relative;
+    background-color: #f1f5f9;
+}
+
+.legendImgWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    transition: var(--transition-smooth);
+}
+
+.legendCardPremium:hover .legendImgWrapper img {
+    transform: scale(1.08);
+}
+
+.legendInfo {
+    padding: 25px;
+    text-align: center;
+    background: white;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.legendFirstnamePremium {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.legendLastnamePremium {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--sidebar-bg);
+    letter-spacing: -1px;
+    line-height: 1.1;
+}
+
+.legendSportTag {
+    display: inline-block;
+    background-color: #f1f5f9;
+    color: #475569;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 15px;
+    letter-spacing: 1px;
+}
+
+/* Detail Page Premium */
+.legendDetailHero {
+    background-color: var(--sidebar-bg);
+    border-radius: 40px;
+    padding: 50px;
+    color: white;
+    box-shadow: var(--medium-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+}
+
+.legendDetailHero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(138, 92, 245, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.legendDetailPhoto {
+    border-radius: 24px;
+    border: 6px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-height: 550px;
+    object-fit: cover;
+    object-position: top;
+}
+
+.bioCard {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 30px;
+}
+
+.achievementCard {
+    background: white !important;
+    border-radius: 24px !important;
+    border: 1px solid #f1f5f9 !important;
+    box-shadow: var(--soft-shadow) !important;
+    transition: var(--transition-fast) !important;
+}
+
+.achievementCard:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: var(--medium-shadow) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Encyclopedia*/
+
+.glassCard {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    box-shadow: var(--soft-shadow) !important;
+    transition: var(--transition-smooth);
+}
+
+.glassCard:hover {
+    background: rgba(255, 255, 255, 0.85) !important;
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.sportEncyclopediaCard {
+    border-radius: 24px !important;
+}
+
+.sportImageWrapper {
+    height: 200px;
+    background: linear-gradient(135deg, var(--sidebar-bg) 0%, var(--primary-color) 100%);
+    position: relative;
+}
+
+.sportCardOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.4);
+    transition: var(--transition-smooth);
+}
+
+.sportEncyclopediaCard:hover .sportCardOverlay {
+    background: rgba(138, 92, 245, 0.3);
+}
+
+.letterSpacing1 {
+    letter-spacing: 1px;
+}
+
+/* Alphabet Index */
+.alphabetIndex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 20px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--soft-shadow);
+    position: sticky;
+    top: 90px;
+    z-index: 10;
+    margin-bottom: 30px;
+}
+
+.alphabetLetter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--sidebar-bg);
+    font-weight: 700;
+    transition: var(--transition-fast);
+    background: #f1f5f9;
+}
+
+.alphabetLetter:hover,
+.alphabetLetter.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.lexiconTermCard {
+    border-radius: 16px !important;
+    margin-bottom: 20px;
+    border: 1px solid #f1f5f9 !important;
+}
+
+.lexiconTermCard .card-title {
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+/* Tabs styling for Sport Detail */
+.encyclopediaTabs {
+    border: none !important;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.encyclopediaTabs .nav-link {
+    border: none !important;
+    color: var(--sidebar-text);
+    font-weight: 600;
+    padding: 10px 30px;
+    border-radius: 30px;
+    margin: 0 5px;
+    transition: var(--transition-fast);
+}
+
+.encyclopediaTabs .nav-link.active {
+    background: var(--primary-color) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(138, 92, 245, 0.25);
 }

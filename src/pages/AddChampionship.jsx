@@ -58,7 +58,7 @@ const AddChampionship = () => {
         fetchSports();
     }, []);
 
-    return (
+    return <>
         <div className="container p-4">
             <h1 className="mb-4">Nouveau Championnat</h1>
 
@@ -110,7 +110,7 @@ const AddChampionship = () => {
                 <button type="submit" className="btn btn-primary">Créer</button>
             </form>
         </div>
-    );
+    </>;
 };
 
 export default AddChampionship;

@@ -14,30 +14,29 @@ const NavBar = () => {
     navigate('/login')
   };
 
-  return (
-    <Navbar expand="lg" className="bg-dark" data-bs-theme="dark">
+  return <>
+    <Navbar expand="lg" className="customNavbar px-3" variant="dark" sticky="top">
       <Container>
-        <Navbar.Brand as={Link} to="/">UnderSport 🏀</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/" className="navbarBrand">UNDER<span>SPORT</span></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/">Accueil</Nav.Link>
-            <Nav.Link as={Link} to="/sports">Sports</Nav.Link>
-            <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+          <Nav className="ms-auto align-items-center">
+            <Nav.Link as={Link} to="/" className="navLink">Accueil</Nav.Link>
+            <Nav.Link as={Link} to="/matchs" className="navLink">Matchs</Nav.Link>
+            <Nav.Link as={Link} to="/encyclopedia" className="navLink">Encyclopédie</Nav.Link>
+            <Nav.Link as={Link} to="/legends" className="navLink">Légendes</Nav.Link>
 
             {isConnected && (role === "admin" || role === "journaliste") && (
-              <Nav.Link as={Link} to={role === "admin" ? "/admin" : "/admin/articles"}>Dashboard</Nav.Link>
+              <Nav.Link as={Link} to={role === "admin" ? "/admin" : "/admin/articles"} className="navLink">Dashboard</Nav.Link>
             )}
 
             {isConnected ? (
-              // CAS A : CONNECTÉ
-              <Nav.Link onClick={handleLogout} className="nav-link btn-link auth-link">
-                Se déconnecter
+              <Nav.Link onClick={handleLogout} className="authButton">
+                Déconnexion
               </Nav.Link>
             ) : (
-              // CAS B : PAS CONNECTÉ
-              <Nav.Link as={Link} to="/login" className="nav-link auth-link">
-                Se connecter
+              <Nav.Link as={Link} to="/login" className="authButton">
+                Connexion / Inscription
               </Nav.Link>
             )}
 
@@ -45,7 +44,7 @@ const NavBar = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  );
+  </>;
 }
 
 export default NavBar;

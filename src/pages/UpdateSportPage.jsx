@@ -41,7 +41,7 @@ const UpdateSportPage = () => {
         fetchSport();
     }, []);
 
-    return (
+    return <>
         <div className="p-4">
             <h1>Modifier le sport</h1>
 
@@ -58,19 +58,31 @@ const UpdateSportPage = () => {
                         required
                     />
                 </div>
+                <div className="mb-3">
+                    <label htmlFor="rulesDescription" className="form-label">Description générale des règles</label>
+                    <textarea
+                        id="rulesDescription"
+                        name="rulesDescription"
+                        className="form-control"
+                        rows="5"
+                        value={sport.rulesDescription || ""}
+                        onChange={handleChange}
+                        placeholder="Une brève introduction aux règles de ce sport..."
+                    ></textarea>
+                </div>
                 <div className="d-flex gap-3 mt-3">
-                <button type="submit" className="btn btn-primary">Valider</button>
-                <button
-                    type="button"
-                    onClick={() => navigate("/admin/sports")}
-                    className="btn btn-secondary"
+                    <button type="submit" className="btn btn-primary">Valider</button>
+                    <button
+                        type="button"
+                        onClick={() => navigate("/admin/sports")}
+                        className="btn btn-secondary"
                     >
-                    Retour
-                </button>
-                    </div>
+                        Retour
+                    </button>
+                </div>
             </form>
         </div>
-    );
+    </>;
 };
 
 export default UpdateSportPage;

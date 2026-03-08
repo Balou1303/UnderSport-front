@@ -20,7 +20,7 @@ const SideBar = () => {
     };
 
     return <>
-        <div className="d-flex flex-column flex-shrink-0 p-3 custom-sidebar" style={{ width: "280px", minHeight: "100vh" }}>
+        <div className="d-flex flex-column flex-shrink-0 p-3 customSidebar" style={{ width: "280px", minHeight: "100vh" }}>
 
             <span className="fs-4 mb-3 fw-bold text-white">Dashboard</span>
 
@@ -34,7 +34,7 @@ const SideBar = () => {
 
                 {/* Statistiques */}
                 <li className="nav-item mb-2">
-                    <Link to="/admin" className={`nav-link ${isActive('/admin')}`}>
+                    <Link to="/admin" className={`navLink ${isActive('/admin')}`}>
                         📊 Vue d'ensemble
                     </Link>
                 </li>
@@ -42,7 +42,7 @@ const SideBar = () => {
                 {/* Articles */}
                 {(role === "admin" || role === "journaliste") && (
                     <li className="nav-item mb-2">
-                        <Link to="/admin/articles" className={`nav-link ${isActive('/admin/articles')}`}>
+                        <Link to="/admin/articles" className={`navLink ${isActive('/admin/articles')}`}>
                             📝 Gestion Articles
                         </Link>
                     </li>
@@ -51,16 +51,44 @@ const SideBar = () => {
                 {/* Sports */}
                 {role === "admin" && (
                     <li className="nav-item mb-2">
-                        <Link to="/admin/sports" className={`nav-link ${isActive('/admin/sports')}`}>
+                        <Link to="/admin/sports" className={`navLink ${isActive('/admin/sports')}`}>
                             🏀 Gestion Sports
                         </Link>
                     </li>
                 )}
 
+                {/* Championnats */}
                 {role === "admin" && (
                     <li className="nav-item mb-2">
-                        <Link to="/admin/championships" className={`nav-link ${isActive('/admin/championships')}`}>
+                        <Link to="/admin/championships" className={`navLink ${isActive('/admin/championships')}`}>
                             🏅 Gestion Championnats
+                        </Link>
+                    </li>
+                )}
+
+                {/* Légendes */}
+                {role === "admin" && (
+                    <li className="nav-item mb-2">
+                        <Link to="/admin/legends" className={`navLink ${isActive('/admin/legends')}`}>
+                            🌟 Gestion Légendes
+                        </Link>
+                    </li>
+                )}
+
+                {/* Palmarès */}
+                {role === "admin" && (
+                    <li className="nav-item mb-2">
+                        <Link to="/admin/achievements" className={`navLink ${isActive('/admin/achievements')}`}>
+                            🏆 Gestion Palmarès
+                        </Link>
+                    </li>
+                )}
+
+                {/* Encyclopédie */}
+                {role === "admin" && (
+                    <li className="nav-item mb-2">
+                        <Link to="/admin/encyclopedia" className={`navLink ${isActive('/admin/encyclopedia')}`}>
+                            📖 Gestion Encyclopédie
                         </Link>
                     </li>
                 )}
@@ -68,7 +96,7 @@ const SideBar = () => {
                 {/* Rôles */}
                 {role === "admin" && (
                     <li className="nav-item mb-2">
-                        <Link to="/admin/users" className={`nav-link ${isActive('/admin/users')}`}>
+                        <Link to="/admin/users" className={`navLink ${isActive('/admin/users')}`}>
                             👥 Gestion Rôles
                         </Link>
                     </li>

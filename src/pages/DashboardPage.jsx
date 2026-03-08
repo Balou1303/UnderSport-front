@@ -22,7 +22,7 @@ const DashboardPage = () => {
         fetchStats();
     }, []);
 
-    return (
+    return <>
         <div className="p-4">
             <h2 className="mb-4">Tableau de Bord </h2>
 
@@ -58,7 +58,7 @@ const DashboardPage = () => {
                 </Col>
             </Row>
         </div>
-    );
+    </>;
 };
 
 export default DashboardPage;
