@@ -42,8 +42,8 @@ const LoginPage = () => {
     }
 
     return <>
-        <Container className="mt-5" style={{ maxWidth: '400px' }}>
-            <h1 className="mb-4 text-center">Connexion</h1>
+        <Container className="mt-5 py-5 glassCard rounded-4 border" style={{ maxWidth: '550px' }}>
+            <h1 className="mb-4 text-center fw-bold">Connexion <span className="textPrimary">UnderSport</span></h1>
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">

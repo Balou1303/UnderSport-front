@@ -30,28 +30,28 @@ const ArticlePage = () => {
     return <>
         <Container className="py-5">
             {/* Grande Image Hero */}
-            <div className="heroCard mb-5" style={{ height: '550px' }}>
+            <div className="heroCard mb-5">
                 <div className="heroImage" style={{ backgroundImage: `url("${imageUrl}")` }}></div>
                 <div className="heroOverlay">
-                    <div className="heroMeta">
-                        {article.sportName || "Sport"} {article.championshipName && `• ${article.championshipName.toUpperCase()}`}
-                    </div>
+                    <div className="heroContent">
+                        <div className="heroMeta">
+                            {article.sportName || "Sport"} {article.championshipName && `• ${article.championshipName.toUpperCase()}`}
+                        </div>
 
-                    <h1 style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
-                        {article.title}
-                    </h1>
+                        <h1>{article.title}</h1>
 
-                    <div className="d-flex align-items-center gap-3 mt-3">
-                        <img
-                            src={`https://ui-avatars.com/api/?name=${article.firstName}+${article.lastName}&background=8A5CF5&color=fff&rounded=true`}
-                            alt="Avatar"
-                            style={{ width: '40px', height: '40px', border: '2px solid white' }}
-                        />
-                        <div className="d-flex flex-column">
-                            <span className="text-white fw-bold small">{article.firstName} {article.lastName}</span>
-                            <span className="text-white-50 x-small" style={{ fontSize: '0.75rem' }}>
-                                Publié le {new Date(article.publicationDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                            </span>
+                        <div className="d-flex align-items-center gap-3 mt-4">
+                            <img
+                                src={`https://ui-avatars.com/api/?name=${article.firstName}+${article.lastName}&background=8A5CF5&color=fff&rounded=true`}
+                                alt="Avatar"
+                                style={{ width: '45px', height: '45px', border: '2px solid var(--primaryColor)' }}
+                            />
+                            <div className="d-flex flex-column">
+                                <span className="text-white fw-bold">{article.firstName} {article.lastName}</span>
+                                <span className="textMuted small">
+                                    Publié le {new Date(article.publicationDate).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@ const ArticlePage = () => {
             <div className="row justify-content-center">
                 <div className="col-12 col-lg-8">
                     <div
-                        className="articleBody shadow-sm p-4 p-md-5 bg-white rounded-4"
+                        className="articleBody glassCard p-4 p-md-5 rounded-4"
                         dangerouslySetInnerHTML={{
                             __html: article.content
                                 ? article.content

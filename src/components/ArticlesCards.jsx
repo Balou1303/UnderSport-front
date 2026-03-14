@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 const ArticlesCards = ({ article }) => {
     // Utilisation de la variable d'environnement pour l'image
     const API_URL = import.meta.env.VITE_URL_API;
-    //  On crée l'URL "Racine" du serveur (ex: http://localhost:3000)
-    // Astuce : On enlève le "/api" de la fin s'il est présent pour avoir juste la racine
+    
+    //  crée l'URL "Racine" du serveur (ex: http://localhost:3000)
+    // enlève le "/api" de la fin s'il est présent pour avoir juste la racine
     const SERVER_URL = API_URL.replace('/api', '');
     const imageUrl = article.picture
         ? `${SERVER_URL}${article.picture}`
@@ -14,7 +15,7 @@ const ArticlesCards = ({ article }) => {
     return <>
         <div className="articleCard">
             <div className="cardPicture">
-                <img src={imageUrl} alt={article.title} className="card-img-fixed" />
+                <img src={imageUrl} alt={`Couverture de l'article : ${article.title}`} className="card-img-fixed" />
             </div>
 
             <div className="cardBody">
@@ -36,7 +37,7 @@ const ArticlesCards = ({ article }) => {
                     <span className="text-muted small">
                         {new Date(article.publicationDate).toLocaleDateString('fr-FR')}
                     </span>
-                    <Link to={`/article/${article.articleId}`} className="btn btn-primary btn-sm">Lire l'article</Link>
+                    <Link to={`/article/${article.articleId}`} className="cardBtn">Lire l'article</Link>
                 </div>
             </div>
         </div>

@@ -19,10 +19,10 @@ const Footer = () => {
                     <Col md={6} lg={3}>
                         <h5 className="fw-bold mb-3 text-uppercase text-white">Navigation</h5>
                         <ul className="list-unstyled">
-                            <li className="mb-2"><Link to="/" className="text-white-50 text-decoration-none footerLink">Accueil</Link></li>
-                            <li className="mb-2"><Link to="/sports" className="text-white-50 text-decoration-none footerLink">Tous les Sports</Link></li>
-                            <li className="mb-2"><Link to="/contact" className="text-white-50 text-decoration-none footerLink">Contact</Link></li>
-                            <li className="mb-2"><Link to="/login" className="text-white-50 text-decoration-none footerLink">Espace Rédacteur</Link></li>
+                            <li className="mb-2"><Link to="/" className="text-white-50 text-decoration-none footerLink" aria-label="Retour à l'accueil">Accueil</Link></li>
+                            <li className="mb-2"><Link to="/sports" className="text-white-50 text-decoration-none footerLink" aria-label="Découvrir tous les sports">Tous les Sports</Link></li>
+                            <li className="mb-2"><Link to="/contact" className="text-white-50 text-decoration-none footerLink" aria-label="Nous contacter">Contact</Link></li>
+                            <li className="mb-2"><Link to="/login" className="text-white-50 text-decoration-none footerLink" aria-label="Accès espace rédacteur">Espace Rédacteur</Link></li>
                         </ul>
                     </Col>
 

@@ -34,6 +34,7 @@ import AddRulePage from './pages/AddRulePage';
 import AddLexiconPage from './pages/AddLexiconPage';
 import EditRulePage from './pages/EditRulePage';
 import EditLexiconPage from './pages/EditLexiconPage';
+import EditUserPage from './pages/EditUserPage';
 
 function App() {
   return <>
@@ -59,6 +60,7 @@ function App() {
             <Route path="/encyclopedia/lexicon" element={<LexiconPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
+            <Route path="editUser" element={<EditUserPage />} />
           </Route>
 
 

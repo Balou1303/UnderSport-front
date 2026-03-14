@@ -85,6 +85,7 @@ const DashboardEncyclopedia = () => {
                         <Form.Select
                             value={selectedSportId}
                             onChange={(e) => setSelectedSportId(e.target.value)}
+                            className="bg-dark text-white border-secondary"
                         >
                             <option value="all">Tous les sports</option>
                             {sports.map(sport => (
@@ -97,7 +98,7 @@ const DashboardEncyclopedia = () => {
 
             <Tabs defaultActiveKey="rules" className="mb-4">
                 <Tab eventKey="rules" title={`Règles (${filteredRules.length})`}>
-                    <Table striped bordered hover responsive>
+                    <Table variant="dark" hover responsive className="mt-3">
                         <thead>
                             <tr>
                                 <th>Sport</th>
@@ -114,14 +115,14 @@ const DashboardEncyclopedia = () => {
                                     <td>{rule.description.substring(0, 100)}...</td>
                                     <td>
                                         <div className="d-flex gap-2">
-                                            <Button variant="warning" size="sm" 
-                                        onClick={() => navigate(`/admin/encyclopedia/rules/edit/${rule.ruleId}`)}
-                                        title="Modifier">
-                                             ✏️
-                                        </Button>
-                                            <Button variant="danger" size="sm" 
-                                            onClick={() => handleDeleteRule(rule.ruleId)}
-                                            title="Supprimer">
+                                            <Button variant="warning" size="sm"
+                                                onClick={() => navigate(`/admin/encyclopedia/rules/edit/${rule.ruleId}`)}
+                                                title="Modifier">
+                                                ✏️
+                                            </Button>
+                                            <Button variant="danger" size="sm"
+                                                onClick={() => handleDeleteRule(rule.ruleId)}
+                                                title="Supprimer">
                                                 🗑️
                                             </Button>
                                         </div>
@@ -132,7 +133,7 @@ const DashboardEncyclopedia = () => {
                     </Table>
                 </Tab>
                 <Tab eventKey="lexicon" title={`Lexique (${filteredLexicons.length})`}>
-                    <Table striped bordered hover responsive>
+                    <Table variant="dark" hover responsive className="mt-3">
                         <thead>
                             <tr>
                                 <th>Sport</th>
@@ -149,14 +150,14 @@ const DashboardEncyclopedia = () => {
                                     <td>{lex.description.substring(0, 100)}...</td>
                                     <td>
                                         <div className="d-flex gap-2">
-                                            <Button variant="warning" size="sm" 
-                                            onClick={() => navigate(`/admin/encyclopedia/lexicon/edit/${lex.lexiconId}`)}
-                                            title="Modifier">
+                                            <Button variant="warning" size="sm"
+                                                onClick={() => navigate(`/admin/encyclopedia/lexicon/edit/${lex.lexiconId}`)}
+                                                title="Modifier">
                                                 ✏️
                                             </Button>
-                                            <Button variant="danger" size="sm" 
-                                            onClick={() => handleDeleteLexicon(lex.lexiconId)}
-                                            title="Supprimer">
+                                            <Button variant="danger" size="sm"
+                                                onClick={() => handleDeleteLexicon(lex.lexiconId)}
+                                                title="Supprimer">
                                                 🗑️
                                             </Button>
                                         </div>

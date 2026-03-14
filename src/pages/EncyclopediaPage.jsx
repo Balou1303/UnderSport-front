@@ -42,12 +42,12 @@ const EncyclopediaPage = () => {
                         <Link to={`/encyclopedia/sport/${sport.sportId}`} className="text-decoration-none">
                             <Card className="sportEncyclopediaCard h-100 border-0 overflow-hidden glassCard">
                                 <div className="sportImageWrapper">
-                                    <div className="sportCardOverlay d-flex align-items-center justify-content-center">
-                                        <h2 className="text-white fw-bold mb-0 text-uppercase">{sport.name}</h2>
+                                    <div className="sportCardOverlay">
+                                        <h2 className="textMain fw-900 mb-0 text-uppercase">{sport.name}</h2>
                                     </div>
                                 </div>
-                                <Card.Body className="text-center py-4 bg-white">
-                                    <span className="text-primary text-uppercase fw-bold letterSpacing1">Découvrir</span>
+                                <Card.Body className="text-center py-4 bg-transparent">
+                                    <span className="textPrimary text-uppercase fw-bold letterSpacing2 fs-6" aria-label={`Découvrir l'encyclopédie du ${sport.name}`}>DÉCOUVRIR</span>
                                 </Card.Body>
                             </Card>
                         </Link>
