@@ -48,9 +48,9 @@ const SportEncyclopediaPage = () => {
             </Link>
 
             <header className="mb-5 text-center">
-                <Badge bg="primary" className="mb-2 text-uppercase letterSpacing1 px-3 py-2">Encyclopédie</Badge>
-                <h1 className="fw-bold display-3 mb-0">{sport.name}</h1>
-                <div className="mt-3 mx-auto" style={{ width: '60px', height: '4px', background: 'var(--primary-color)', borderRadius: '2px' }}></div>
+                <span className="badge bgPrimary mb-2 text-uppercase letterSpacing1 px-3 py-2">Encyclopédie</span>
+                <h1 className="fw-bold display-3 mb-0">L'Encyclopédie <span className="textPrimary">{sport.name}</span></h1>
+                <div className="mt-3 mx-auto" style={{ width: '60px', height: '4px', background: 'var(--primaryColor)', borderRadius: '2px' }}></div>
             </header>
 
             <Tab.Container defaultActiveKey="rules">
@@ -73,7 +73,7 @@ const SportEncyclopediaPage = () => {
                                             <i className="bi bi-info-circle-fill me-2 text-primary"></i>
                                             Introduction aux règles
                                         </h3>
-                                        <p className="text-muted fs-5 mb-0 lh-base italic" style={{ whiteSpace: 'pre-wrap' }}>
+                                        <p className="textMuted fs-5 mb-0 lh-base italic" style={{ whiteSpace: 'pre-wrap' }}>
                                             {sport.rulesDescription}
                                         </p>
                                     </div>
@@ -87,9 +87,9 @@ const SportEncyclopediaPage = () => {
                                                     <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '32px', height: '32px', fontWeight: 'bold' }}>
                                                         {index + 1}
                                                     </div>
-                                                    <Card.Title className="mb-0 fs-4">{rule.name}</Card.Title>
+                                                    <Card.Title className="mb-0 fs-4 textMain">{rule.name}</Card.Title>
                                                 </div>
-                                                <Card.Text className="text-muted fs-5 lh-base" style={{ whiteSpace: 'pre-wrap' }}>
+                                                <Card.Text className="textMuted fs-5 lh-base" style={{ whiteSpace: 'pre-wrap' }}>
                                                     {rule.description}
                                                 </Card.Text>
                                             </Card.Body>
@@ -111,8 +111,8 @@ const SportEncyclopediaPage = () => {
                                     <Col key={term.lexiconId} md={6} lg={4} className="mb-4">
                                         <Card className="h-100 lexiconTermCard glassCard border-0">
                                             <Card.Body>
-                                                <Card.Title className="fs-5 mb-3">{term.name}</Card.Title>
-                                                <Card.Text className="text-muted small" style={{ whiteSpace: 'pre-wrap' }}>
+                                                <Card.Title className="fs-5 mb-3 textMain">{term.name}</Card.Title>
+                                                <Card.Text className="textMuted small" style={{ whiteSpace: 'pre-wrap' }}>
                                                     {term.description}
                                                 </Card.Text>
                                             </Card.Body>

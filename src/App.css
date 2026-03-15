@@ -1,28 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap');
 
 :root {
-    /* Le Violet UnderSport */
-    --primary-color: #8A5CF5;
-    --primary-hover: #734bd6;
-
-    /* Couleurs du site */
-    --bg-color: #f1f5f9;
-    /* Gris bleuté très clair */
-    --card-bg: #ffffff;
-    --sidebar-bg: #0f172a;
+    /* Palette UnderSport Premium Dark */
+    --bgColor: #0F172A;
     /* Bleu nuit profond */
-    --sidebar-text: #94a3b8;
-    --sidebar-active: #ffffff;
-    --sidebar-active-bg: rgba(138, 92, 245, 0.15);
+    --cardBg: #1E293B;
+    /* Surface des cartes */
+    --primaryColor: #9F7AEA;
+    /* Vibrat light violet for higher contrast */
+    --primaryHover: #805AD5;
+    --accentCyan: #22D3EE;
+    /* Cyan électrique */
+    --textMain: #FFFFFF;
+    /* Pure white for max contrast */
+    --textMuted: #CBD5E1;
+    /* Lighter grey for better readability */
 
-    /* Shadows Premium */
-    --soft-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    --medium-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    --hover-shadow: 0 20px 40px rgba(138, 92, 245, 0.2);
-
-    /* Transitions */
-    --transition-fast: all 0.2s ease-in-out;
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Shadows & Transitions */
+    --softShadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --hoverShadow: 0 15px 35px rgba(138, 92, 245, 0.25);
+    --transitionSmooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transitionFast: all 0.2s ease;
 }
 
 * {
@@ -30,144 +28,186 @@
 }
 
 body {
-    background-color: var(--bg-color) !important;
+    background-color: var(--bgColor) !important;
+    color: var(--textMain) !important;
+    min-height: 100vh;
 }
 
-/* Style Bootstrap */
+/* --- UTILS & BOOTSTRAP OVERRIDES --- */
 
-/* Boutons violets partout */
-.btn-primary {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    border-radius: 10px !important;
-    font-weight: 600 !important;
-    padding: 10px 24px !important;
-    transition: var(--transition-fast) !important;
-    box-shadow: 0 4px 12px rgba(138, 92, 245, 0.25) !important;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-hover) !important;
-    border-color: var(--primary-hover) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 20px rgba(138, 92, 245, 0.35) !important;
-}
-
-/* Boutons "Outline" violets */
-.btn-outline-primary {
-    color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
-    background-color: transparent !important;
-}
-
-.btn-outline-primary:hover {
+.btn-primary,
+.btnPrimary {
+    background: linear-gradient(135deg, var(--primaryColor) 0%, #7040d5 100%) !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    padding: 12px 28px !important;
+    box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3) !important;
+    transition: var(--transitionFast) !important;
     color: white !important;
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color) !important;
 }
 
-/* NavBar Premium */
+.btn-primary:hover,
+.btnPrimary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(138, 92, 245, 0.5) !important;
+    filter: brightness(1.1);
+}
+
+.btn-outline-primary,
+.btnOutlinePrimary {
+    color: var(--primaryColor) !important;
+    border: 2px solid var(--primaryColor) !important;
+    background-color: transparent !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+}
+
+.btn-outline-primary:hover,
+.btnOutlinePrimary:hover {
+    background-color: var(--primaryColor) !important;
+    color: white !important;
+    box-shadow: 0 0 20px rgba(138, 92, 245, 0.3) !important;
+}
+
+.textMain,
+.text-main {
+    color: var(--textMain) !important;
+}
+
+.textMuted,
+.text-muted,
+.text-light {
+    color: var(--textMuted) !important;
+}
+
+.textPrimary,
+.text-primary {
+    color: var(--primaryColor) !important;
+}
+
+.bgPrimary,
+.bg-primary {
+    background-color: var(--primaryColor) !important;
+}
+
+.bgDark,
+.bg-dark {
+    background-color: #0B0F1A !important;
+}
+
+.bgInfo,
+.bg-info {
+    background-color: var(--accentCyan) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--textMain) !important;
+    font-weight: 800;
+}
+
+/* --- NAVIGATION --- */
+
 .customNavbar {
-    background-color: rgba(15, 23, 42, 0.9) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding: 15px 0 !important;
-    transition: var(--transition-smooth);
+    transition: var(--transitionSmooth);
 }
 
 .navbarBrand {
     font-weight: 800 !important;
     letter-spacing: -1px;
-    font-size: 1.5rem !important;
+    font-size: 1.6rem !important;
     color: white !important;
 }
 
 .navbarBrand span {
-    color: var(--primary-color);
+    color: var(--primaryColor);
 }
 
 .navLink {
-    text-decoration: none !important;
-    font-weight: 500 !important;
-    transition: var(--transition-fast) !important;
-    color: rgba(255, 255, 255, 0.8) !important;
+    color: var(--textMuted) !important;
+    font-weight: 600 !important;
+    transition: var(--transitionFast) !important;
+    padding: 8px 15px !important;
 }
 
-.navLink:hover {
-    color: var(--primary-color) !important;
-}
-
-/* Bouton Connexion Spécifique */
-.authButton {
-    background-color: var(--primary-color) !important;
+.navLink:hover,
+.navLink.active {
     color: white !important;
-    border-radius: 30px !important;
-    padding: 8px 20px !important;
+}
+
+.authButton {
+    background: linear-gradient(135deg, var(--primaryColor), #7040d5) !important;
+    color: white !important;
+    border-radius: 50px !important;
+    padding: 10px 25px !important;
     font-weight: 700 !important;
     margin-left: 20px !important;
     box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3) !important;
+    border: none !important;
+    text-decoration: none !important;
+    display: inline-block;
 }
 
-.authButton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(138, 92, 245, 0.4) !important;
-    background-color: var(--primary-hover) !important;
-}
+/* --- SIDEBAR --- */
 
-/* SideBar*/
-
-/* Le fond sombre de la sidebar */
 .customSidebar {
-    background-color: var(--sidebar-bg) !important;
-    color: var(--sidebar-text);
+    background-color: #0B0F1A !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--textMuted);
 }
 
-/* Les liens dans la sidebar */
 .customSidebar .navLink {
-    display: block !important;
-    padding: 12px 20px !important;
-    color: var(--sidebar-text) !important;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    transition: all 0.2s ease;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    padding: 14px 24px !important;
 }
 
-/* Les liens dans la sidebar (blanc au survol) */
 .customSidebar .navLink:hover {
-    color: white !important;
     background-color: rgba(255, 255, 255, 0.05) !important;
+    color: white !important;
 }
 
-/* L'onglet actif (fond violet transparent) */
 .customSidebar .navLink.active {
-    background-color: var(--sidebar-active-bg) !important;
-    color: var(--sidebar-active) !important;
-    border-left: 4px solid var(--primary-color);
+    background-color: rgba(138, 92, 245, 0.15) !important;
+    color: white !important;
+    border-left: 4px solid var(--primaryColor);
     font-weight: 700 !important;
 }
 
+/* --- CARDS & GRIDS --- */
 
-/* Cards Articles Premium Fix */
 .articleCard {
+    background-color: var(--cardBg);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transitionSmooth);
+    height: 100%;
     display: flex;
     flex-direction: column;
-    width: 100%;
-    border: none !important;
-    border-radius: 24px !important;
-    overflow: hidden;
-    background-color: white;
-    box-shadow: var(--soft-shadow);
-    transition: var(--transition-smooth);
-    margin-bottom: 2rem;
-    position: relative;
-    height: 100%;
+    box-shadow: var(--softShadow);
+}
+
+.articleCard:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--hoverShadow);
+    border-color: rgba(138, 92, 245, 0.3);
 }
 
 .cardPicture {
     width: 100%;
-    height: 220px;
-    position: relative;
+    height: 280px;
+    /* Increased height */
     overflow: hidden;
 }
 
@@ -175,192 +215,64 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: var(--transition-smooth);
-}
-
-.articleCard:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--medium-shadow);
+    object-position: top;
+    /* Better for sports/people */
+    transition: transform 0.6s ease;
 }
 
 .articleCard:hover .cardPicture img {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .cardBody {
     padding: 24px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    z-index: 2;
-    background: white;
-}
-
-/* On repasse en horizontal uniquement sur très grand écran si besoin, 
-   mais restons en vertical pour la stabilité esthétique demandée */
-@media (min-width: 1200px) {
-    .articleCard {
-        flex-direction: row;
-        height: 280px;
-    }
-
-    .cardPicture {
-        width: 45%;
-        height: 100%;
-    }
-
-    .cardBody {
-        width: 55%;
-    }
 }
 
 .cardBody h2 {
-    font-size: 1.2rem;
-    margin: 0;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.articleCard .badge {
-    cursor: pointer;
-    transition: all 0.2s;
-    filter: brightness(1.2);
-}
-
-.articleCard .badge:hover {
-    transform: scale(1.1);
-    filter: brightness(1.2);
-}
-
-/* Legend Card */
-
-.legendCard {
-    display: flex;
-    flex-direction: column;
-    height: 380px;
-    border-radius: 16px;
-    background-color: white;
-    overflow: hidden;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: none;
-}
-
-.legendCard:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 25px var(--primary-color);
-}
-
-.legendCardPicture {
-    width: 100%;
-    height: 250px;
-    border-bottom: 4px solid var(--primary-color);
-    background-color: #f8f9fa;
-    overflow: hidden;
-}
-
-.legendCardPicture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-}
-
-.legendCardPlaceholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #6c757d;
     font-size: 1.25rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
 }
 
-.legendCardBody {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-    background-color: white;
-}
-
-.legendCardBody h2 {
-    display: flex;
-    flex-direction: column;
+.cardBtn {
+    background: linear-gradient(to right, var(--primaryColor), var(--primaryHover)) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 22px !important;
+    border-radius: 50px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    display: inline-block;
+    transition: var(--transitionFast) !important;
+    margin-top: auto;
     text-align: center;
-    margin: 0 0 0.5rem 0;
-    line-height: 1.2;
 }
 
-.legendFirstname {
-    font-size: 1.25rem;
-    color: #6c757d;
-    font-weight: 400;
-}
+/* --- HERO SECTION --- */
 
-.legendLastname {
-    font-size: 1.6rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.legendBadges {
-    margin-top: 0.5rem;
-}
-
-.legendBadge {
-    background-color: #111827 !important;
-    font-size: 0.9rem !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 50rem !important;
-}
-
-/* Hero Section */
 .heroCard {
-    display: block;
-    /* Important car c'est un Link maintenant */
-    width: 100%;
-    min-height: 500px;
-    height: auto;
-    margin-bottom: 50px;
     border-radius: 30px;
     overflow: hidden;
-    box-shadow: var(--medium-shadow);
     position: relative;
+    min-height: 600px;
+    /* Increased height */
+    background-color: #0b0f1a;
     border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-@media (max-width: 768px) {
-    .heroCard {
-        min-height: auto;
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 30px;
-        border-radius: 20px;
-        background-color: #0f172a;
-    }
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    display: block;
+    /* Ensure Link behaves as block */
 }
 
 .heroImage {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
     position: absolute;
     inset: 0;
-    /* Remplace top/left/etc pour plus de robustesse */
-    transition: var(--transition-smooth);
-}
-
-@media (max-width: 768px) {
-    .heroImage {
-        position: relative;
-        height: auto;
-        aspect-ratio: 16 / 9;
-    }
+    background-size: cover;
+    background-position: center top;
+    /* Show tops of heads */
+    transition: var(--transitionSmooth);
 }
 
 .heroCard:hover .heroImage {
@@ -371,603 +283,360 @@ body {
     position: absolute;
     inset: 0;
     z-index: 2;
+    background: linear-gradient(to top, rgba(15, 23, 42, 1) 0%, rgba(15, 23, 42, 0.5) 40%, transparent 100%);
+    padding: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: flex-start;
-    padding: clamp(1.5rem, 5vw, 4rem);
-    background: linear-gradient(to top,
-            rgba(15, 23, 42, 0.98) 0%,
-            rgba(15, 23, 42, 0.7) 40%,
-            rgba(15, 23, 42, 0.3) 70%,
-            transparent 100%);
-    color: white;
-}
-
-@media (max-width: 768px) {
-    .heroOverlay {
-        position: relative;
-        inset: auto;
-        background: #0f172a;
-        padding: 20px 15px;
-        /* Réduction du padding */
-        z-index: 1;
-    }
-}
-
-.heroOverlay h1 {
-    font-size: clamp(1.8rem, 8vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 0.75rem;
-    /* Réduction du margin h1 */
-    letter-spacing: -1.5px;
-}
-
-.heroSummary {
-    font-size: clamp(1rem, 2.5vw, 1.25rem);
-    color: #cbd5e1;
-    max-width: 800px;
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    /* Réduction du margin summary */
-}
-
-@media (max-width: 768px) {
-    .heroSummary {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
 }
 
 .heroMeta {
-    font-size: 0.9rem;
+    color: var(--primaryColor);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--primary-color);
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.heroBtn {
-    background-color: #8A5CF5;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    transition: all 0.2s;
-    padding: 10px 25px;
-    margin-top: 20px;
-}
-
-.heroBtn:hover {
-    transform: scale(1.05);
-    background-color: #7040d5;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(138, 92, 245, 0.4);
-}
-
-.cardBtn {
-    background-color: #8A5CF5;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-    margin-top: 10px;
-}
-
-.cardBtn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(138, 92, 245, 0.3);
-    cursor: pointer;
-    filter: brightness(1.1);
-    color: white;
-}
-
-/* --- Style de lecture "Magazine" (Corps d'article) --- */
-.articleBody {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #1e293b;
-    margin-bottom: 3rem;
-    font-family: 'Outfit', sans-serif;
-    text-align: left !important;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    hyphens: none !important;
-    -webkit-hyphens: none !important;
-    -moz-hyphens: none !important;
-    -ms-hyphens: none !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-    text-rendering: optimizeLegibility;
-}
-
-/* Pare-feu contre les copier/coller (efface les fonds noirs) */
-.articleBody * {
-    background-color: transparent !important;
-    color: inherit !important;
-    white-space: normal !important;
-    overflow-wrap: break-word !important;
-    word-break: normal !important;
-    hyphens: none !important;
-    -webkit-hyphens: none !important;
-    -moz-hyphens: none !important;
-    -ms-hyphens: none !important;
-    text-align: left !important;
-}
-
-
-
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .articleCard {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        /*  prend toute la place de la colonne Bootstrap */
-        height: 100%;
-        /* Pour que toutes les cartes aient la même hauteur */
-        border: 1px solid #e5e7eb;
-        /* Bordure plus douce */
-        border-radius: 12px;
-        overflow: hidden;
-        background-color: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .articleCard:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        /* Ombre plus forte au survol */
-    }
-
-    .cardPicture {
-        width: 100%;
-        height: 200px;
-    }
-
-    .cardPicture img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        /* Coupe proprement l'image */
-    }
-
-    .cardBody {
-        width: 100%;
-        /* Le corps prend toute la largeur aussi */
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        /* Remplit le vide si la carte est grande */
-        justify-content: space-between;
-        /* Pousse le bouton en bas */
-    }
-
-    .cardBody h2 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-        color: #1f2937;
-    }
-
-    /* --- Ajustements du Hero sur mobile --- */
-    .heroCard {
-        height: 250px;
-        /* On réduit la hauteur pour l'iPhone */
-        border-radius: 10px;
-    }
-
-    .heroOverlay h1 {
-        font-size: 1.8rem !important;
-    }
-
-    .heroOverlay p {
-        font-size: 1rem !important;
-    }
-
-}
-
-/* --- MATCH CENTER PREMIUM --- */
-
-.accordion-item {
-    border: none !important;
-    margin-bottom: 12px;
-    background: transparent !important;
-}
-
-.accordion-header .accordion-button {
-    background-color: white !important;
-    color: var(--sidebar-bg) !important;
-    border-radius: 12px !important;
-    font-weight: 700 !important;
-    box-shadow: var(--soft-shadow) !important;
-    border: 1px solid #edf2f7 !important;
-    font-size: 1.1rem;
-    padding: 18px 25px;
-}
-
-.accordion-header .accordion-button:not(.collapsed) {
-    border-bottom-left-radius: 0px !important;
-    border-bottom-right-radius: 0px !important;
-    color: var(--primary-color) !important;
-    box-shadow: none !important;
-}
-
-.accordion-body {
-    background-color: white !important;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    border: 1px solid #edf2f7;
-    border-top: none;
-    padding: 20px;
-}
-
-/* Les cartes de match dans le body */
-.matchCard {
-    background-color: white;
-    border-radius: 16px !important;
-    padding: 20px !important;
-    margin-bottom: 15px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02) !important;
-    border: 1px solid #f1f5f9 !important;
-}
-
-.matchCard:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--hover-shadow) !important;
-    border-color: var(--primary-color) !important;
-}
-
-/* --- FOOTER PUBLIC --- */
-
-/* Le tableau de classement stylisé */
-.standingsTable {
-    border-collapse: separate;
-    border-spacing: 0 8px;
-    /* Espace entre les lignes pour un effet "carte" */
-    width: 100%;
-}
-
-.standingsTable thead th {
-    border: none;
-    color: #6c757d;
+    font-weight: 800;
+    letter-spacing: 2px;
     font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-.standingsTable tbody tr {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-    border-radius: 8px;
-    transition: all 0.2s ease;
+.heroContent h1 {
+    font-size: clamp(2rem, 5vw, 4rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 20px !important;
+    font-weight: 900 !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-.standingsTable tbody tr td {
-    border-top: 1px solid #f3f4f6;
-    border-bottom: 1px solid #f3f4f6;
-    padding: 12px 10px;
+.heroSummary {
+    color: var(--textMuted);
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin-bottom: 30px;
 }
 
-.standingsTable tbody tr td:first-child {
-    border-left: 1px solid #f3f4f6;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.standingsTable tbody tr td:last-child {
-    border-right: 1px solid #f3f4f6;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-.standingsTable tbody tr:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 10px rgba(138, 92, 245, 0.15);
-    /* Ombre aux couleurs UnderSport */
-    z-index: 2;
-    position: relative;
-    background-color: #fcfbfe;
-}
-
-/* Les cartes des derniers / prochains matchs */
-.matchCard {
-    background-color: white;
-    border: 1px solid #f3f4f6;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-}
-
-.matchCard:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(138, 92, 245, 0.2);
-    border-color: var(--primary-color);
-}
-
-.matchScore {
-    background-color: var(--sidebar-bg);
-    color: white;
-    border-radius: 6px;
-    padding: 4px 12px;
-    font-size: 1.1rem;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* Badge violet UnderSport */
-.badgeUndersport {
-    background-color: var(--primary-color) !important;
-    color: white !important;
-    border: none !important;
-}
-
-/* --- MODULE LÉGENDES PREMIUM --- */
+/* --- LEGENDS --- */
 
 .legendCardPremium {
-    background-color: white;
+    background-color: var(--cardBg);
     border-radius: 28px;
     overflow: hidden;
-    box-shadow: var(--soft-shadow);
-    transition: var(--transition-smooth);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none !important;
+    transition: var(--transitionSmooth);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .legendCardPremium:hover {
     transform: translateY(-12px);
-    box-shadow: var(--hover-shadow);
-    border-color: var(--primary-color);
+    box-shadow: var(--hoverShadow);
+    border-color: var(--primaryColor);
 }
 
 .legendImgWrapper {
-    width: 100%;
     height: 380px;
+    background-color: #0B0F1A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-    position: relative;
-    background-color: #f1f5f9;
 }
 
 .legendImgWrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
-    transition: var(--transition-smooth);
-}
-
-.legendCardPremium:hover .legendImgWrapper img {
-    transform: scale(1.08);
+    object-position: center;
 }
 
 .legendInfo {
     padding: 25px;
     text-align: center;
-    background: white;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .legendFirstnamePremium {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--primary-color);
+    color: var(--primaryColor);
     text-transform: uppercase;
     letter-spacing: 3px;
     font-weight: 700;
-    margin-bottom: 4px;
+    font-size: 0.85rem;
 }
 
 .legendLastnamePremium {
-    display: block;
-    font-size: 1.7rem;
-    font-weight: 800;
-    color: var(--sidebar-bg);
+    font-size: 1.8rem;
+    font-weight: 900;
     letter-spacing: -1px;
-    line-height: 1.1;
 }
 
 .legendSportTag {
-    display: inline-block;
-    background-color: #f1f5f9;
-    color: #475569;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.7rem;
-    font-weight: 700;
+    background-color: rgba(138, 92, 245, 0.1);
+    color: var(--primaryColor);
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
     text-transform: uppercase;
-    margin-top: 15px;
-    letter-spacing: 1px;
 }
 
-/* Detail Page Premium */
-.legendDetailHero {
-    background-color: var(--sidebar-bg);
-    border-radius: 40px;
-    padding: 50px;
-    color: white;
-    box-shadow: var(--medium-shadow);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    overflow: hidden;
-    position: relative;
-    margin-top: 20px;
-}
-
-.legendDetailHero::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(138, 92, 245, 0.1) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-.legendDetailPhoto {
-    border-radius: 24px;
-    border: 6px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-    width: 100%;
-    max-height: 550px;
-    object-fit: cover;
-    object-position: top;
-}
-
-.bioCard {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 30px;
-}
-
-.achievementCard {
-    background: white !important;
-    border-radius: 24px !important;
-    border: 1px solid #f1f5f9 !important;
-    box-shadow: var(--soft-shadow) !important;
-    transition: var(--transition-fast) !important;
-}
-
-.achievementCard:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: var(--medium-shadow) !important;
-    border-color: var(--primary-color) !important;
-}
-
-/* Encyclopedia*/
+/* --- ENCYCLOPEDIA --- */
 
 .glassCard {
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: var(--soft-shadow) !important;
-    transition: var(--transition-smooth);
-}
-
-.glassCard:hover {
-    background: rgba(255, 255, 255, 0.85) !important;
-    transform: translateY(-10px);
-    box-shadow: var(--hover-shadow) !important;
-    border-color: var(--primary-color) !important;
-}
-
-.sportEncyclopediaCard {
-    border-radius: 24px !important;
+    background: rgba(30, 41, 59, 0.85) !important;
+    /* Denser background for readability */
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--textMain) !important;
 }
 
 .sportImageWrapper {
-    height: 200px;
-    background: linear-gradient(135deg, var(--sidebar-bg) 0%, var(--primary-color) 100%);
+    height: 250px;
+    background: linear-gradient(135deg, #0f172a, var(--primaryColor));
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sportCardOverlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, 0.4);
-    transition: var(--transition-smooth);
+    background: rgba(15, 23, 42, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
-.sportEncyclopediaCard:hover .sportCardOverlay {
-    background: rgba(138, 92, 245, 0.3);
+.sportCardOverlay h2 {
+    font-size: 2.2rem !important;
+    letter-spacing: 2px !important;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
-.letterSpacing1 {
-    letter-spacing: 1px;
-}
-
-/* Alphabet Index */
 .alphabetIndex {
+    background: var(--cardBg);
+    padding: 15px;
+    border-radius: 16px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     justify-content: center;
-    padding: 20px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: var(--soft-shadow);
-    position: sticky;
-    top: 90px;
-    z-index: 10;
-    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .alphabetLetter {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: var(--sidebar-bg);
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--textMuted);
+    border-radius: 10px;
     font-weight: 700;
-    transition: var(--transition-fast);
-    background: #f1f5f9;
 }
 
-.alphabetLetter:hover,
-.alphabetLetter.active {
-    background: var(--primary-color);
+.alphabetLetter.active,
+.alphabetLetter:hover {
+    background-color: var(--primaryColor);
     color: white;
 }
 
-.lexiconTermCard {
-    border-radius: 16px !important;
-    margin-bottom: 20px;
-    border: 1px solid #f1f5f9 !important;
+/* --- MAGAZINE READING STYLE --- */
+
+.articleBody {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--textMain);
+    max-width: 900px;
+    margin: 0 auto 4rem auto;
 }
 
-.lexiconTermCard .card-title {
-    color: var(--primary-color);
-    font-weight: 800;
+.articleBody * {
+    background-color: transparent !important;
+    color: inherit !important;
 }
 
-/* Tabs styling for Sport Detail */
+/* Drop cap removed */
+
+/* --- ADMIN FORMS --- */
+
+.form-control,
+.form-select {
+    background-color: white !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #0F172A !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+}
+
+.form-control::placeholder {
+    color: #64748B !important;
+    opacity: 1;
+    font-weight: 400;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primaryColor) !important;
+    box-shadow: 0 0 0 4px rgba(138, 92, 245, 0.15) !important;
+    background-color: white !important;
+    color: #0F172A !important;
+}
+
+/* Styles pour l'éditeur Quill dans le dashboard */
+.ql-editor {
+    background-color: white !important;
+    color: #0F172A !important;
+    min-height: 250px;
+    font-size: 1rem !important;
+}
+
+/* Force les titres dans l'éditeur à être sombres malgré la règle globale */
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+    color: #0F172A !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.ql-toolbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ql-container {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-color: #CBD5E1 !important;
+}
+
+/* --- ENCYCLOPEDIA TABS --- */
+
 .encyclopediaTabs {
-    border: none !important;
-    margin-bottom: 30px;
-    justify-content: center;
+    background: rgba(30, 41, 59, 0.5);
+    padding: 8px;
+    border-radius: 16px;
+    display: inline-flex;
+    gap: 10px;
 }
 
 .encyclopediaTabs .nav-link {
-    border: none !important;
-    color: var(--sidebar-text);
-    font-weight: 600;
-    padding: 10px 30px;
-    border-radius: 30px;
-    margin: 0 5px;
-    transition: var(--transition-fast);
+    color: var(--textMuted) !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    padding: 10px 25px !important;
+    transition: var(--transitionFast);
 }
 
 .encyclopediaTabs .nav-link.active {
-    background: var(--primary-color) !important;
+    background-color: var(--primaryColor) !important;
     color: white !important;
-    box-shadow: 0 4px 12px rgba(138, 92, 245, 0.25);
+    box-shadow: 0 4px 15px rgba(138, 92, 245, 0.3);
+}
+
+/* --- TABLES --- */
+
+.table {
+    color: var(--textMain) !important;
+}
+
+.table-dark {
+    --bs-table-bg: #1E293B !important;
+    --bs-table-border-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.table th {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--textMuted) !important;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.table td {
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+label {
+    color: var(--textMuted);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.form-text {
+    color: #94A3B8 !important;
+    /* Lighter grey for dark background */
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* Amélioration contraste pour les textes mutés sur fond blanc (cartes) */
+.card .text-muted {
+    color: #475569 !important;
+    font-weight: 600;
+}
+
+/* --- LEGEND DETAILS --- */
+.legendDetailHero {
+    background: rgba(30, 41, 59, 0.4);
+    border-radius: 40px;
+    padding: 4rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+}
+
+.legendDetailPhoto {
+    width: 100%;
+    height: 500px;
+    object-fit: contain;
+    /* Don't crop portraits */
+    object-position: center;
+    border-radius: 20px;
+    filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+}
+
+.bioCard {
+    background: rgba(15, 23, 42, 0.5);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.achievementCard {
+    background: var(--cardBg);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transitionSmooth);
+    box-shadow: var(--softShadow);
+}
+
+.achievementCard:hover {
+    transform: scale(1.02);
+    border-color: var(--primaryColor);
+    box-shadow: var(--hoverShadow);
+}
+
+.achievementCard h5 {
+    color: var(--textMain) !important;
+}
+
+/* --- INTERACTIVE UTILITIES --- */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.leading-tight {
+    line-height: 1.25;
 }

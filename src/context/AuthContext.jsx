@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const [isConnected, setIsConnected] = useState(false);
     const [role, setRole] = useState('USER');
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
 
     // Fonction centrale pour gérer la connexion
     const login = (token) => {
@@ -22,9 +23,10 @@ export const AuthProvider = ({ children }) => {
 
         try {
             const decoded = jwtDecode(token);
-            // On met à jour le State IMMÉDIATEMENT
+            // met à jour le State immédiatement
             if (decoded.exp > Date.now() / 1000) {
                 setIsConnected(true);
+                setUser(decoded);
 
                 if (decoded.idRole === 1) {
                     setRole("admin");
@@ -57,7 +59,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return <>
-        <AuthContext.Provider value={{ isConnected, role, login, logout, loading }}>
+        <AuthContext.Provider value={{ isConnected, role, login, logout, loading, user }}>
             {children}
         </AuthContext.Provider>
     </>;

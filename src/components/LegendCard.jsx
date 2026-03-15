@@ -12,7 +12,7 @@ const LegendCard = ({ legend }) => {
                     {legend.photo ? (
                         <img
                             src={`${SERVER_URL}${legend.photo}`}
-                            alt={`${legend.firstname} ${legend.lastname}`}
+                            alt={`Portrait de la légende : ${legend.firstname} ${legend.lastname}`}
                         />
                     ) : (
                         <div className="d-flex align-items-center justify-content-center h-100 bg-light text-muted">

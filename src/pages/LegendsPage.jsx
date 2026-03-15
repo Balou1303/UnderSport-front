@@ -50,8 +50,8 @@ const LegendsPage = () => {
             {/* Barre de recherche et filtre par sport */}
             <Row className="mb-5 justify-content-center">
                 <Col lg={8}>
-                    <div className="p-4 bg-white rounded-4 shadow-sm border d-flex flex-column flex-md-row gap-3">
-                        <InputGroup className="flex-grow-1 border-0 bg-light rounded-3 overflow-hidden">
+                    <div className="p-4 glassCard rounded-4 border d-flex flex-column flex-md-row gap-3">
+                        <InputGroup className="flex-grow-1 border-0 bg-dark rounded-3 overflow-hidden">
                             <InputGroup.Text className="bg-transparent border-0 ps-3">
                                 🔍
                             </InputGroup.Text>
@@ -60,19 +60,19 @@ const LegendsPage = () => {
                                 placeholder="Rechercher une icône..."
                                 value={searchLegend}
                                 onChange={(e) => setSearchLegend(e.target.value)}
-                                className="bg-transparent border-0 py-2"
+                                className="bg-transparent border-0 py-2 text-white"
                             />
                         </InputGroup>
 
                         <Form.Select
                             value={selectedSport}
                             onChange={(e) => setSelectedSport(e.target.value)}
-                            className="bg-light border-0 rounded-3 py-2 fw-bold"
+                            className="bg-dark border-0 rounded-3 py-2 fw-bold text-white"
                             style={{ minWidth: "180px", cursor: 'pointer' }}
                         >
-                            <option value="">Tous les sports</option>
+                            <option value="" className="bg-dark">Tous les sports</option>
                             {uniqueSports.map(sport => (
-                                <option key={sport} value={sport}>{sport}</option>
+                                <option key={sport} value={sport} className="bg-dark">{sport}</option>
                             ))}
                         </Form.Select>
                     </div>

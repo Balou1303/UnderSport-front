@@ -63,13 +63,13 @@ const LexiconPage = () => {
 
             <Row className="justify-content-center mb-5">
                 <Col md={8} lg={6}>
-                    <InputGroup className="glassCard rounded-pill overflow-hidden border-0 shadow-sm p-1">
+                    <InputGroup className="bg-dark rounded-pill overflow-hidden border border-secondary p-1">
                         <InputGroup.Text className="bg-transparent border-0 ps-4">
-                            <i className="bi bi-search text-primary"></i>
+                            <i className="bi bi-search textPrimary"></i>
                         </InputGroup.Text>
                         <Form.Control
                             placeholder="Rechercher un terme ou une définition..."
-                            className="border-0 bg-transparent py-3 shadow-none"
+                            className="border-0 bg-transparent py-3 shadow-none text-white"
                             value={searchTerm}
                             onChange={(e) => {
                                 setSearchTerm(e.target.value);
@@ -116,8 +116,8 @@ const LexiconPage = () => {
                                         <Col key={item.lexiconId} md={6} lg={4}>
                                             <Card className="h-100 lexiconTermCard glassCard border-0">
                                                 <Card.Body>
-                                                    <Card.Title className="fs-5 mb-3">{item.name}</Card.Title>
-                                                    <Card.Text className="text-muted" style={{ whiteSpace: 'pre-wrap' }}>
+                                                    <Card.Title className="fs-5 mb-3 textMain">{item.name}</Card.Title>
+                                                    <Card.Text className="textMuted" style={{ whiteSpace: 'pre-wrap' }}>
                                                         {item.description}
                                                     </Card.Text>
                                                 </Card.Body>

@@ -3,7 +3,7 @@ import MatchsAccordions from '../components/MatchsAccordions';
 import { useState, useEffect } from 'react';
 
 const MatchsPage = () => {
-    // Helper pour avoir YYYY-MM-DD en local (évite les décalages ISO/UTC)
+    // Helper pour avoir YYYY-MM-DD en local
     const getLocalDateString = (date) => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -51,34 +51,34 @@ const MatchsPage = () => {
         <Container className="py-5" style={{ maxWidth: "1200px" }}>
 
             {/* HERO BANNER SECTION */}
-            <div className="heroCard mb-5" style={{ height: "300px" }}>
+            <div className="heroCard mb-5" style={{ minHeight: "350px" }}>
                 <div
                     className="heroImage"
                     style={{ backgroundImage: `url('https://images.unsplash.com/photo-15dfcbbfedfb4-df427a1fc603?auto=format&fit=crop&q=80&w=2000')` }}
-                >
-                    <div className="heroOverlay d-flex justify-content-center align-items-center text-center">
-                        <Badge bg="primary" className="mb-3 px-3 py-2 fs-6 shadow-sm text-uppercase">
-                            UNDERSPORT • SAISON 2025/2026
-                        </Badge>
-                        <h1 className="text-white fw-bold mb-0 text-uppercase" style={{ fontSize: '3.5rem', textShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
-                            CENTRE DE <span style={{ color: 'var(--primary-color)' }}>MATCHS</span>
-                        </h1>
-                    </div>
+                ></div>
+                <div className="heroOverlay d-flex flex-column justify-content-center align-items-center text-center">
+                    <span className="badge bgPrimary mb-3 px-3 py-2 fs-6 shadow-sm text-uppercase">
+                        UNDERSPORT • SAISON 2025/2026
+                    </span>
+                    <h1 className="text-white fw-bold mb-0 text-uppercase" style={{ fontSize: 'max(2.5rem, 5vw)', textShadow: '0 4px 15px rgba(0,0,0,0.8)' }}>
+                        CENTRE DE <span className="textPrimary">MATCHS</span>
+                    </h1>
                 </div>
             </div>
+
             <div className="d-flex justify-content-center align-items-center gap-3 mb-4">
-                <button onClick={() => changeDate(-1)} className="btn btn-outline-primary shadow-sm px-3">
+                <button onClick={() => changeDate(-1)} className="btn btnOutlinePrimary shadow-sm px-3">
                     ⬅️ {getFormattedNavDate(-1)}
                 </button>
 
                 <div className="text-center px-4">
-                    <div className="fw-bold fs-4 text-capitalize" style={{ color: 'var(--sidebar-bg)' }}>
+                    <div className="fw-bold fs-4 text-capitalize textPrimary">
                         {getFullDisplayDate(selectedDate)}
                     </div>
-                    <button onClick={resetDate} className="btn btn-sm btn-link text-decoration-none text-muted">Aujourd'hui</button>
+                    <button onClick={resetDate} className="btn btn-sm btn-link text-decoration-none textMuted">Aujourd'hui</button>
                 </div>
 
-                <button onClick={() => changeDate(1)} className="btn btn-outline-primary shadow-sm px-3">
+                <button onClick={() => changeDate(1)} className="btn btnOutlinePrimary shadow-sm px-3">
                     {getFormattedNavDate(1)} ➡️
                 </button>
             </div>

@@ -30,14 +30,13 @@ const HomePage = () => {
     return <>
         <div className="container py-5">
 
-            <div className="mb-5">
-                <h6 className="text-uppercase fw-bold text-primary mb-2" style={{ letterSpacing: '2px' }}>Actualités</h6>
-                <h1 className="fw-800 display-4" style={{ letterSpacing: '-2px' }}>À LA <span className="text-primary">UNE</span></h1>
-            </div>
-
             {/* Section "à la une" */}
             {featuredArticle && (
-                <section className="mb-5 pb-4">
+                <section className="mb-5">
+                    <header className="mb-4">
+                        <h6 className="textPrimary text-uppercase fw-bold mb-1" style={{ letterSpacing: '2px' }}>Actualités</h6>
+                        <h1 className="fw-900 display-4 mb-0" style={{ letterSpacing: '-2px' }}>À LA <span className="textPrimary">UNE</span></h1>
+                    </header>
                     <HeroArticle article={featuredArticle} />
                 </section>
             )}
