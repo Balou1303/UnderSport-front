@@ -7,10 +7,8 @@ const AdminLayout = () => {
            
             <SideBar />
 
-            <div style={{ flex: 1, padding: "20px", backgroundColor: "#f8f9fa" }}>
-                
+            <div style={{ flex: 1, padding: "20px", backgroundColor: "#0F172A", minHeight: "100vh" }}>
                 <Outlet /> 
-                
             </div>
         </div>
     </>;

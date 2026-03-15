@@ -17,7 +17,7 @@ const UserAdminRolePage = () => {
         }
     }
 
-    useEffect(() => {   
+    useEffect(() => {
         fetchUsers()
     }, []);
 
@@ -33,7 +33,7 @@ const UserAdminRolePage = () => {
     }
 
     const filteredUsers = userRole.filter(user => {
-        const matchesSearch = 
+        const matchesSearch =
             user.nickname.toLowerCase().includes(search.toLowerCase()) ||
             user.email.toLowerCase().includes(search.toLowerCase());
 
@@ -43,16 +43,16 @@ const UserAdminRolePage = () => {
     });
 
     return <>
-    
+
         <div className="p-4">
             <h2>Gestion des Utilisateurs</h2>
-            
+
             {/* Barre de recherche et filtre */}
             <Row className="mb-4 mt-3">
                 <Col md={8}>
                     <InputGroup>
                         <InputGroup.Text id="search-icon">🔍</InputGroup.Text>
-                        <Form.Control 
+                        <Form.Control
                             type="text"
                             placeholder="Rechercher par pseudo ou email..."
                             value={search}
@@ -61,8 +61,8 @@ const UserAdminRolePage = () => {
                     </InputGroup>
                 </Col>
                 <Col md={4}>
-                    <Form.Select 
-                        value={filter} 
+                    <Form.Select
+                        value={filter}
                         onChange={(e) => setFilter(e.target.value)}
                     >
                         <option value="all">Tous les rôles</option>
@@ -91,7 +91,7 @@ const UserAdminRolePage = () => {
                                 <td>{user.userId}</td>
                                 <td>{user.nickname}</td>
                                 <td>{user.email}</td>
-                                
+
                                 <td>
                                     {user.idRole === 1 && <Badge bg="danger">Admin</Badge>}
                                     {user.idRole === 2 && <Badge bg="secondary">User</Badge>}
@@ -99,7 +99,7 @@ const UserAdminRolePage = () => {
                                 </td>
 
                                 <td>
-                                    <Form.Select 
+                                    <Form.Select
                                         size="sm"
                                         value={user.idRole}
                                         onChange={(e) => handleRoleChange(user.userId, e.target.value)}

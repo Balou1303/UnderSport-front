@@ -54,12 +54,27 @@ const EditLegendPage = () => {
 
     const handleAddAchievement = () => {
         if (!currentAchievement.idAchievement || !currentAchievement.years) {
-            toast.warning("Veuillez sélectionner un palmarès et préciser l'année.");
+            toast.warning("Veuillez sélectionner un palmarès et préciser une ou plusieurs années (ex: 1991, 1992).");
             return;
         }
+
         const ach = availableAchievements.find(a => a.achievementId === parseInt(currentAchievement.idAchievement));
         if (ach) {
-            setNewAchievements([...newAchievements, { ...currentAchievement, label: ach.label }]);
+            // Split par virgule, trim des espaces, filtre les vides
+            const yearsArr = currentAchievement.years.split(',').map(y => y.trim()).filter(y => y !== "");
+
+            if (yearsArr.length === 0) {
+                toast.warning("Veuillez saisir au moins une année valide.");
+                return;
+            }
+
+            const newSelected = yearsArr.map(year => ({
+                idAchievement: currentAchievement.idAchievement,
+                years: year,
+                label: ach.label
+            }));
+
+            setNewAchievements([...newAchievements, ...newSelected]);
             setCurrentAchievement({ idAchievement: "", years: "" });
         }
     };
@@ -231,8 +246,8 @@ const EditLegendPage = () => {
                         </select>
                     </div>
                     <div className="col-md-4">
-                        <label className="form-label">Année</label>
-                        <input type="number" className="form-control" placeholder="Ex: 2022" value={currentAchievement.years} onChange={(e) => setCurrentAchievement({ ...currentAchievement, years: e.target.value })} />
+                        <label className="form-label">Année(s)</label>
+                        <input type="text" className="form-control" placeholder="Ex: 1991, 1992, 1993" value={currentAchievement.years} onChange={(e) => setCurrentAchievement({ ...currentAchievement, years: e.target.value })} />
                     </div>
                     <div className="col-md-3">
                         <button type="button" className="btn btn-outline-primary w-100 fw-bold" onClick={handleAddAchievement}>

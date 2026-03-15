@@ -168,8 +168,8 @@ h6 {
 
 .customSidebar .navLink {
     border-radius: 12px;
-    margin-bottom: 5px;
-    padding: 12px 20px !important;
+    margin-bottom: 10px;
+    padding: 14px 24px !important;
 }
 
 .customSidebar .navLink:hover {
@@ -460,17 +460,58 @@ h6 {
 
 .form-control,
 .form-select {
-    background-color: #0b0f1a !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
+    background-color: white !important;
+    border: 1px solid #CBD5E1 !important;
+    color: #0F172A !important;
     border-radius: 10px !important;
     padding: 12px !important;
+}
+
+.form-control::placeholder {
+    color: #64748B !important;
+    opacity: 1;
+    font-weight: 400;
 }
 
 .form-control:focus,
 .form-select:focus {
     border-color: var(--primaryColor) !important;
     box-shadow: 0 0 0 4px rgba(138, 92, 245, 0.15) !important;
+    background-color: white !important;
+    color: #0F172A !important;
+}
+
+/* Styles pour l'éditeur Quill dans le dashboard */
+.ql-editor {
+    background-color: white !important;
+    color: #0F172A !important;
+    min-height: 250px;
+    font-size: 1rem !important;
+}
+
+/* Force les titres dans l'éditeur à être sombres malgré la règle globale */
+.ql-editor h1,
+.ql-editor h2,
+.ql-editor h3,
+.ql-editor h4,
+.ql-editor h5,
+.ql-editor h6 {
+    color: #0F172A !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+
+.ql-toolbar {
+    background-color: #F8FAFC !important;
+    border-color: #CBD5E1 !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.ql-container {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-color: #CBD5E1 !important;
 }
 
 /* --- ENCYCLOPEDIA TABS --- */
@@ -527,6 +568,19 @@ label {
     margin-bottom: 8px;
 }
 
+.form-text {
+    color: #94A3B8 !important;
+    /* Lighter grey for dark background */
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* Amélioration contraste pour les textes mutés sur fond blanc (cartes) */
+.card .text-muted {
+    color: #475569 !important;
+    font-weight: 600;
+}
+
 /* --- LEGEND DETAILS --- */
 .legendDetailHero {
     background: rgba(30, 41, 59, 0.4);
@@ -571,4 +625,18 @@ label {
 
 .achievementCard h5 {
     color: var(--textMain) !important;
+}
+
+/* --- INTERACTIVE UTILITIES --- */
+.hover-scale {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+.leading-tight {
+    line-height: 1.25;
 }

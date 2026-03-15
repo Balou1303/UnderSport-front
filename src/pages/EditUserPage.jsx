@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import usersService from "../services/usersService";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const EditUserPage = () => {
     const [editUser, setEditUser] = useState();
     const [editPassword, setEditPassword] = useState();
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const fetchEditUser = async () => {
         if (user && user.id) {
@@ -49,6 +51,20 @@ const EditUserPage = () => {
         } catch (error) {
             console.error("Erreur de modification du mot de passe :", error);
             toast.error("Impossible de modifier le mot de passe");
+        }
+    };
+
+    const handleDeleteAccount = async () => {
+        if (window.confirm("Êtes-vous sûr de vouloir supprimer votre compte ?")) {
+            try {
+                await usersService.deleteUser(editUser);
+                toast.success("Compte supprimé avec succès");
+                logout();
+                navigate("/login");
+            } catch (error) {
+                console.error("Erreur de suppression du compte :", error);
+                toast.error("Impossible de supprimer le compte");
+            }
         }
     };
 
@@ -124,6 +140,11 @@ const EditUserPage = () => {
                             </button>
                         </div>
                     </form>
+                    <hr className="my-5" />
+                    <h2>Supprimer mon compte</h2>
+                    <button type="button" className="btn btn-danger mt-3" onClick={handleDeleteAccount}>
+                        Supprimer mon compte
+                    </button>
                 </>
             )}
         </div>
