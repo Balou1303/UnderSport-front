@@ -7,16 +7,16 @@
     --cardBg: #1E293B;
     /* Surface des cartes */
     --primaryColor: #9F7AEA;
-    /* Vibrat light violet for higher contrast */
+    /* Violet clair vibrant pour un meilleur contraste */
     --primaryHover: #805AD5;
     --accentCyan: #22D3EE;
     /* Cyan électrique */
     --textMain: #FFFFFF;
-    /* Pure white for max contrast */
+    /* Blanc pur pour un contraste maximal */
     --textMuted: #CBD5E1;
-    /* Lighter grey for better readability */
+    /* Gris clair pour une meilleure lisibilité */
 
-    /* Shadows & Transitions */
+    /* Ombres et Transitions */
     --softShadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     --hoverShadow: 0 15px 35px rgba(138, 92, 245, 0.25);
     --transitionSmooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -33,7 +33,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- UTILS & BOOTSTRAP OVERRIDES --- */
+/* --- UTILITAIRES ET SURCHARGES BOOTSTRAP --- */
 
 .btn-primary,
 .btnPrimary {

@@ -12,7 +12,7 @@ api.interceptors.response.use(
     },
     (error) => {
         // Intercepte spécifiquement l'erreur "401 Non Autorisé" (Token expiré)
-        if (error.response && error.response.status === 401) {
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
             const currentPath = window.location.pathname;
 
             // Si l'utilisateur est en train d'écrire un contenu long

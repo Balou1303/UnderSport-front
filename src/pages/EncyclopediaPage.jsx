@@ -7,17 +7,17 @@ import { toast } from 'react-toastify';
 const EncyclopediaPage = () => {
     const [sports, setSports] = useState([]);
 
-    useEffect(() => {
-        const fetchSports = async () => {
-            try {
-                const response = await encyclopediaService.getAllSports();
-                setSports(response.data);
-            } catch (error) {
-                console.error("Erreur lors de la récupération des sports:", error);
-                toast.error("Impossible de charger les sports.");
-            }
-        };
+    const fetchSports = async () => {
+        try {
+            const response = await encyclopediaService.getAllSports();
+            setSports(response.data);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des sports:", error);
+            toast.error("Impossible de charger les sports.");
+        }
+    };
 
+    useEffect(() => {
         fetchSports();
     }, []);
 

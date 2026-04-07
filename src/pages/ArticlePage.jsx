@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import articlesService from "../services/articlesService";
-import { Container, Badge } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const ArticlePage = () => {
     const { id } = useParams();

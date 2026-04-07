@@ -98,7 +98,7 @@ const AddArticlePage = () => {
 
     return <>
         <div className="p-4">
-            <h1>Nouvel Article ✍️</h1>
+            <h1>Nouvel Article</h1>
             <form onSubmit={handleSubmit}>
 
                 <div className="mb-3">
@@ -150,7 +150,7 @@ const AddArticlePage = () => {
                             disabled={!article.idSport}
                         >
                             <option value="">
-                                {!article.idSport ? "-- Sélectionnez un sport d'abord --" : "-- Choisir un championnat --"}
+                                {!article.idSport ? "Sélectionnez un sport d'abord" : "Choisir un championnat"}
                             </option>
                             {championships.map(c => (
                                 <option key={c.championshipId} value={c.championshipId}>{c.name}</option>

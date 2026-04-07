@@ -114,7 +114,7 @@ const UserAdminRolePage = () => {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="5" className="text-center">Aucun utilisateur trouvé 😕</td>
+                            <td colSpan="5" className="text-center">Aucun utilisateur trouvé</td>
                         </tr>
                     )}
                 </tbody>
